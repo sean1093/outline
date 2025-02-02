@@ -8,14 +8,14 @@ import Tech from './pages/Tech';
 const App: React.FC = () => {
     return (
         <div style={{ height: '100vh' }}>
-        <Router>
-            <StickyHeader />
-            <Routes>
-                <Route path="/" element={<Outline />} />
-                <Route path="/travel" element={<Travel />} />
-                <Route path="/tech" element={<Tech />} />
-            </Routes>
-        </Router>
+            <Router>
+                <StickyHeader />
+                <Routes>
+                    <Route path="/" element={<Outline />} />
+                    <Route path="/travel" element={<Travel />} />
+                    <Route path="/tech" element={<Tech />} />
+                </Routes>
+            </Router>
         </div>
     );
 };
