@@ -83,63 +83,62 @@ export const hotelPosts = {
 };
 export const travelPosts = {};
 export const barPosts = {
-    "台灣酒吧": [
-      {
-        "title": "KNOCK KNOCK WHO'S THERE?",
-        "link": "/2024/10/knock-knock-whos-there.html"
-      },
-      {
-        "title": "Bar Alter",
-        "link": "/2024/08/bar-alter.html"
-      },
-      {
-        "title": "HI NE NI",
-        "link": "/2024/07/hi-ne-ni-1960.html"
-      },
-      {
-        "title": "Lab",
-        "link": "/2022/03/lab.html"
-      }
+    台灣酒吧: [
+        {
+            title: "KNOCK KNOCK WHO'S THERE?",
+            link: '/2024/10/knock-knock-whos-there.html',
+        },
+        {
+            title: 'Bar Alter',
+            link: '/2024/08/bar-alter.html',
+        },
+        {
+            title: 'HI NE NI',
+            link: '/2024/07/hi-ne-ni-1960.html',
+        },
+        {
+            title: 'Lab',
+            link: '/2022/03/lab.html',
+        },
     ],
-    "日本酒吧": [
-      {
-        "title": "The SG Club",
-        "link": "/2024/10/sg-club-2024-no23.html"
-      },
-      {
-        "title": "Bee's Knees",
-        "link": "/2023/12/bees-knees-Kyoto.html"
-      },
-      {
-        "title": "House of KI NO BI",
-        "link": "/2024/01/house-of-ki-no-bi-house-gin.html"
-      },
-      {
-        "title": "CRAFTROOM (クラフトルーム)",
-        "link": "/2023/12/craftroom-osaka.html"
-      }
+    日本酒吧: [
+        {
+            title: 'The SG Club',
+            link: '/2024/10/sg-club-2024-no23.html',
+        },
+        {
+            title: "Bee's Knees",
+            link: '/2023/12/bees-knees-Kyoto.html',
+        },
+        {
+            title: 'House of KI NO BI',
+            link: '/2024/01/house-of-ki-no-bi-house-gin.html',
+        },
+        {
+            title: 'CRAFTROOM (クラフトルーム)',
+            link: '/2023/12/craftroom-osaka.html',
+        },
     ],
-    "泰國酒吧": [
-      {
-        "title": "Vesper",
-        "link": "/2024/12/vesper-2024-no13.html"
-      },
-      {
-        "title": "BKK Social Club",
-        "link": "/2024/12/bkk-social-club-2024-no7.html"
-      }
+    泰國酒吧: [
+        {
+            title: 'Vesper',
+            link: '/2024/12/vesper-2024-no13.html',
+        },
+        {
+            title: 'BKK Social Club',
+            link: '/2024/12/bkk-social-club-2024-no7.html',
+        },
     ],
-    "馬來西亞酒吧": [
-      {
-        "title": "Bar Surfing in Penang",
-        "link": "/2020/01/bar-surfing-in-penang-manchu-beso-chinchin.html"
-      }
+    馬來西亞酒吧: [
+        {
+            title: 'Bar Surfing in Penang',
+            link: '/2020/01/bar-surfing-in-penang-manchu-beso-chinchin.html',
+        },
     ],
-    "澳洲酒吧": [
-      {
-        "title": "The Flour Factory (ARARA and Tupí)",
-        "link": "/2023/06/the-flour-factory-gin-and-tonic.html"
-      }
+    澳洲酒吧: [
+        {
+            title: 'The Flour Factory (ARARA and Tupí)',
+            link: '/2023/06/the-flour-factory-gin-and-tonic.html',
+        },
     ],
-  }
-  ;
+};
