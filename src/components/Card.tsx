@@ -25,6 +25,7 @@ const Card: React.FC<CardProps> = ({ title, description, emoji, link }) => {
         fontSize: '1.5rem',
         fontWeight: 'bold',
         marginBottom: '8px',
+        color: '#333',
     };
 
     const textStyle: React.CSSProperties = {

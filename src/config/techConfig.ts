@@ -1,4 +1,3 @@
-export const mediumDomain = 'https://medium.com';
 export const blogPosts = {
     軟體開發: [
         { title: '如何寫一份前端的開發設計文件？', link: '/p/6c238998ca25' },
@@ -11,8 +10,6 @@ export const blogPosts = {
             title: '維持團隊開發程式碼品質的好工具 — Git Hooks & Husky',
             link: '/p/b4a0b11d3215',
         },
-        { title: '打造順眼的 Terminal — zsh + zim', link: '/p/f8a9c504ffd' },
-        { title: '前端工程師面試心得', link: '/p/86b62b38a746' },
         {
             title: '語意化版本與 package.json 裡符號的意義',
             link: '/p/3d59cc4e5c60',
@@ -38,49 +35,6 @@ export const blogPosts = {
         {
             title: '該怎麼用 Jest 測試你的 React 專案？ Enzyme or Testing-library？',
             link: '/p/f91e2a96a662',
-        },
-    ],
-    基礎演算法系列: [
-        { title: '基礎演算法系列 — Sort', link: '/p/4a196d37f9f5' },
-        { title: '基礎演算法系列 — Search', link: '/p/74c1b84bd24' },
-        {
-            title: '基礎演算法系列 — Tree 樹狀資料結構',
-            link: '/p/d10fe8ac1ce2',
-        },
-        {
-            title: '基礎演算法系列 — 基礎資料結構 Linked-list 與 Array',
-            link: '/p/553cb926029f',
-        },
-        {
-            title: '基礎演算法系列 — 時間複雜度與空間複雜度',
-            link: '/p/7c816f6fd6fd',
-        },
-        {
-            title: '基礎演算法系列 — Graph 資料結構與 Dijkstra’s Algorithm',
-            link: '/p/6134f62c1fc2',
-        },
-    ],
-    演算法筆記系列: [
-        {
-            title: '演算法筆記系列 — Two Pointer 與 Sliding Window',
-            link: '/p/8742f45f3f55',
-        },
-        {
-            title: '演算法筆記系列 — Dynamic Programming 動態規劃',
-            link: '/p/de980ca4a2d3',
-        },
-        {
-            title: '演算法筆記系列 — Greedy Algorithm 貪婪演算法',
-            link: '/p/236f509200de',
-        },
-        { title: '演算法筆記系列 — Prefix Sum', link: '/p/ed325ffb2906' },
-        {
-            title: '演算法筆記系列 — Backtracking 與排列組合',
-            link: '/p/7105302358a5',
-        },
-        {
-            title: '演算法筆記系列 — Monotonic Stack/Queue',
-            link: '/p/5ad1c35a3dfe',
         },
     ],
     '前端系列文章 - JavaScript, CSS 與前端效能': [
@@ -161,5 +115,13 @@ export const blogPosts = {
             title: '使用 clasp 輕鬆使用 TypeScript 開發 Google Apps Script',
             link: '/p/b93b60e93292',
         },
+    ],
+    其他紀錄: [
+        {
+            title: 'MacBook with M1 Chip 前端開發踩雷紀錄',
+            link: '/p/3779e1b7d916',
+        },
+        { title: '打造順眼的 Terminal — zsh + zim', link: '/p/f8a9c504ffd' },
+        { title: '前端工程師面試心得', link: '/p/86b62b38a746' },
     ],
 };

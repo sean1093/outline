@@ -10,15 +10,21 @@ const Outline: React.FC = () => {
                 <Flex justify="space-around" gap={20}>
                     <Card
                         title="Travel"
-                        description="探索各種旅行筆記與大綱。"
+                        description="探索各種旅行筆記與大綱"
                         emoji="🌍"
                         link="/travel"
                     />
                     <Card
-                        title="Tech"
-                        description="整理技術文章與開發筆記。"
+                        title="Tech Learning"
+                        description="整理技術文章與開發筆記"
                         emoji="💻"
                         link="/tech"
+                    />
+                    <Card
+                        title="Algorithm"
+                        description="學習演算法與資料結構"
+                        emoji="💡"
+                        link="/algorithm"
                     />
                 </Flex>
             </Flex>

@@ -1,6 +1,7 @@
 import Section from '../components/Section';
 import List from '../components/List';
-import { mediumDomain, blogPosts } from '../config/techConfig';
+import { mediumDomain } from '../config/common';
+import { blogPosts } from '../config/techConfig';
 
 const Tech = () => {
     return (

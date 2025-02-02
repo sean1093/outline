@@ -48,6 +48,9 @@ const StickyHeader: React.FC = () => {
                 <span style={linkStyle} onClick={() => navigate('/tech')}>
                     Tech
                 </span>
+                <span style={linkStyle} onClick={() => navigate('/algorithm')}>
+                    Algorithm
+                </span>
             </nav>
         </header>
     );

@@ -7,15 +7,15 @@ type BlogPost = {
 
 type ListProps = {
     domain: string;
-    blogPosts: { [key: string]: BlogPost[] }; // 使用索引簽名型別
+    blogPosts: { [key: string]: BlogPost[] };
 };
 
 const List: React.FC<ListProps> = ({ domain, blogPosts }) => {
     return (
-        <div>
+        <div style={{ width: '100%', height: '100%', overflowY: 'auto' }}>
             {Object.entries(blogPosts).map(([category, posts]) => (
                 <div key={category}>
-                    <h2>{category}</h2> {/* 顯示小標題 */}
+                    <h2>{category}</h2>
                     <ul>
                         {posts.map((post) => (
                             <li key={post.link}>
