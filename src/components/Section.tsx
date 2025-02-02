@@ -6,7 +6,7 @@ type SectionProps = {
 
 const Section: React.FC<SectionProps> = ({ children }) => {
     return (
-        <div style={{ width: '100vw', height: '100vh', paddingTop: '64px' }}>
+        <div style={{ width: '100vw', padding: '0 16px 16px 16px' }}>
             {children}
         </div>
     );

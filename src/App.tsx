@@ -7,6 +7,7 @@ import Tech from './pages/Tech';
 
 const App: React.FC = () => {
     return (
+        <div style={{ height: '100vh' }}>
         <Router>
             <StickyHeader />
             <Routes>
@@ -15,6 +16,7 @@ const App: React.FC = () => {
                 <Route path="/tech" element={<Tech />} />
             </Routes>
         </Router>
+        </div>
     );
 };
 

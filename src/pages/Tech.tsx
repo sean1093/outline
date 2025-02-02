@@ -1,10 +1,11 @@
 import Section from '../components/Section';
+import List from '../components/List';
+import { mediumDomain, blogPosts } from '../config/techConfig';
 
 const Tech = () => {
     return (
         <Section>
-            <h1>Tech Outline</h1>
-            <p>這是科技文章的大綱。</p>
+            <List domain={mediumDomain} blogPosts={blogPosts} />
         </Section>
     );
 };

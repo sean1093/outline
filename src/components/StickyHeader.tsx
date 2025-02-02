@@ -8,6 +8,7 @@ const StickyHeader: React.FC = () => {
         position: 'sticky',
         top: '0',
         boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
+        backgroundColor: '#242424',
         padding: '16px 24px',
         display: 'flex',
         justifyContent: 'space-between',
@@ -25,6 +26,7 @@ const StickyHeader: React.FC = () => {
     const navStyle: React.CSSProperties = {
         display: 'flex',
         gap: '20px',
+        paddingRight: '40px',
     };
 
     const linkStyle: React.CSSProperties = {
