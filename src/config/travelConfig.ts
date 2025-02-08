@@ -1,4 +1,4 @@
-export const hotelPosts = {
+export const hotelPostsTw = {
     台北住宿: [
         {
             title: '台北晶華酒店 Regent Taipei',
@@ -80,6 +80,54 @@ export const hotelPosts = {
         },
     ],
     高雄住宿: [{ title: '住飯店 Hotel dùa', link: '/2023/02/hotel-dua.html' }],
+};
+export const hotelPostsJp = {
+    九州地區住宿: [
+        {
+            title: '小倉 - Hotel Relief Kokura Annex',
+            link: '/2019/12/ark-blue-hotel-annex.html',
+        },
+        {
+            title: '由布院 - Yufuin Lamp no Yado',
+            link: '/2019/12/yufuin-lamp-no-yado.html',
+        },
+        {
+            title: '福岡 - The Lively Hakata Fukuoka',
+            link: '/2019/12/lively-hakata-fuuoka.html',
+        },
+        {
+            title: '福岡 - Hilton Fukuoka Sea Hawk',
+            link: '/2023/12/hilton-fukuoka-sea-hawk.html',
+        },
+    ],
+    關西地區住宿: [
+        {
+            title: '京都 - 京都四條河原町 Forza 飯店',
+            link: '/2024/01/hotel-forza-kyoto-shijo-Kawaramachi.html',
+        },
+        {
+            title: '大阪 - 大阪東急卓越大酒店 Osaka Excel Hotel Tokyu',
+            link: '/2024/02/osaka-excel-hotel-tokyu.html',
+        },
+    ],
+    東北地區住宿: [
+        {
+            title: '仙台 - 仙台一番町大和 Roynet 飯店',
+            link: '/2024/04/daiwa-roynet-hotel-sendai.html',
+        },
+        {
+            title: '仙台 - 仙台大都會飯店 Hotel Metropolitan Sendai',
+            link: '/2024/05/hotel-metropolitan-sendai-jr.html',
+        },
+        {
+            title: '秋田 - 天然温泉 田沢湖レイクリゾート 田澤湖溫泉度假酒店',
+            link: '/2024/04/blog-post.html',
+        },
+        {
+            title: '盛岡 - 多美迎 盛岡 Dormy Inn Morioka',
+            link: '/2024/05/blog-post.html',
+        },
+    ],
 };
 export const travelPosts = {};
 export const barPosts = {
