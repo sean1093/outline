@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Section from '../components/Section';
+import Section, { ListContainer } from '../components/Section';
 import List from '../components/List';
 import Flex from '../components/Flex';
 import { mediumDomain } from '../config/common';
@@ -18,10 +18,12 @@ const Algorithm = () => {
                 </button>
             </Flex>
             <hr />
-            <List
-                domain={mediumDomain}
-                blogPosts={display === 'notes' ? blogPosts : leetCodePosts}
-            />
+            <ListContainer>
+                <List
+                    domain={mediumDomain}
+                    blogPosts={display === 'notes' ? blogPosts : leetCodePosts}
+                />
+            </ListContainer>
         </Section>
     );
 };

@@ -5,15 +5,14 @@ const StickyHeader: React.FC = () => {
     const navigate = useNavigate();
 
     const headerStyle: React.CSSProperties = {
-        position: 'sticky',
+        position: 'fixed',
+        width: '100%',
         top: '0',
-        boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
         backgroundColor: '#242424',
         padding: '16px 24px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        zIndex: 1000,
         borderBottom: '1px solid gray',
     };
 
@@ -25,7 +24,7 @@ const StickyHeader: React.FC = () => {
 
     const navStyle: React.CSSProperties = {
         display: 'flex',
-        gap: '20px',
+        gap: '30px',
         paddingRight: '40px',
     };
 
@@ -43,13 +42,13 @@ const StickyHeader: React.FC = () => {
             </div>
             <nav style={navStyle}>
                 <span style={linkStyle} onClick={() => navigate('/travel')}>
-                    Travel
+                    旅行紀錄
                 </span>
                 <span style={linkStyle} onClick={() => navigate('/tech')}>
-                    Tech
+                    技術筆記
                 </span>
                 <span style={linkStyle} onClick={() => navigate('/algorithm')}>
-                    Algorithm
+                    演算法相關
                 </span>
             </nav>
         </header>
