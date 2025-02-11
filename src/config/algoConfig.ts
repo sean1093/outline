@@ -84,6 +84,7 @@ export const leetCodePosts = {
     'Dynamic Programming': [
         { title: '53. Maximum Subarray', link: '/p/0cf567ebd66f' },
         { title: '70. Climbing Stairs', link: '/p/aea1f920f7ef' },
+        { title: '151. Reverse Words in a String', link: '/p/7cf3e57731a7' },
         { title: '198. House Robber', link: '/p/ffb141c874f1' },
         {
             title: '300. Longest Increasing Subsequence',
