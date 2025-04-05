@@ -129,7 +129,56 @@ export const hotelPostsJp = {
         },
     ],
 };
-export const travelPosts = {};
+export const travelPosts = {
+    '台北景點': [
+        {
+            title: '北投溫泉博物館 Beitou Hot Spring Museum',
+            link: '/2023/01/beitou-hot-spring-museum.html'
+        },
+        {
+            title: '三峽青出於藍染工坊',
+            link: '/2022/02/indigo-dyeing.html'
+        },
+        {
+            title: '新北烏來泰雅巴萊部落村',
+            link: '/2022/01/atayal-tribe.html'
+        },
+        {
+            title: '銀河洞越嶺步道',
+            link: '/2020/10/yinhe-cave-waterfall.html'
+        }
+    ],
+    '宜蘭景點': [
+        {
+            title: '宜蘭斑比山丘',
+            link: '/2021/11/bambi-land.html'
+        },
+        {
+            title: '東澳粉鳥林秘境',
+            link: '/2022/03/fenniaolin.html'
+        },
+        {
+            title: '北關海潮公園',
+            link: '/2021/01/beiguan-tidal-park.html'
+        },
+        {
+            title: '冬山河生態綠舟',
+            link: '/2020/12/dongshan-river-ecoark.html'
+        }
+    ],
+    '花蓮景點': [
+        {
+            title: '太魯閣國家公園景點',
+            link: '/2022/04/taroko.html'
+        }
+    ],
+    '新竹景點': [
+        {
+            title: '寶山水庫',
+            link: '/2023/01/pao-shan-reservoir.html'
+        }
+    ]
+};
 export const barPosts = {
     台灣酒吧: [
         {

@@ -126,6 +126,11 @@ button {
     animation: fadeIn 0.3s ease forwards;
 }
 
+.list-link {
+    color: var(--text-primary);
+    transition: color 0.2s ease;
+}
+
 .list-link:hover {
-    color: var(--primary-color) !important;
+    color: var(--primary-color);
 }

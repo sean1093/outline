@@ -41,11 +41,9 @@ const List: React.FC<ListProps> = ({ domain, blogPosts }) => {
                                         color: 'var(--text-primary)',
                                         textDecoration: 'none',
                                         display: 'block',
-                                        transition: 'color 0.2s ease',
-                                        ':hover': {
-                                            color: 'var(--primary-color)'
-                                        }
+                                        transition: 'color 0.2s ease'
                                     }}
+                                    className="list-link"
                                 >
                                     {post.title}
                                 </a>
