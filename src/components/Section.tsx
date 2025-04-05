@@ -22,11 +22,17 @@ const Section: React.FC<SectionProps> = ({ children, className, style }) => {
                     flex: 1,
                     paddingTop: theme.spacing.xxl,
                     paddingBottom: theme.spacing.xl,
-                    maxWidth: theme.breakpoints.desktop,
+                    maxWidth: '100%',
+                    width: '100%',
                     margin: '0 auto',
                     paddingLeft: theme.spacing.lg,
                     paddingRight: theme.spacing.lg,
-                    width: '100%',
+                    [`@media (min-width: ${theme.breakpoints.mobile})`]: {
+                        maxWidth: '90%',
+                    },
+                    [`@media (min-width: ${theme.breakpoints.tablet})`]: {
+                        maxWidth: '1200px',
+                    },
                 }}
             >
                 {children}
@@ -41,9 +47,9 @@ const ListContainer: React.FC<ListProps> = ({ children, className, style }) => {
         <ul
             className={`fade-in ${className || ''}`}
             style={{
-                display: 'grid',
+                display: 'flex',
+                flexDirection: 'column',
                 gap: theme.spacing.xl,
-                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
                 marginTop: theme.spacing.xl,
                 listStyle: 'none',
                 padding: 0,

@@ -90,6 +90,20 @@ export const blogPosts = {
         { title: 'useRef 怎麼用？', link: '/p/ac1c488ce643' },
         { title: 'useImperativeHandle 怎麼用？', link: '/p/384250b3bfcd' },
     ],
+    'kubernetes 學習筆記': [
+        {
+            title: 'Kubernetes 學習筆記 — 什麼是 Container 與 Image？',
+            link: '/p/ccae4117fe65',
+        },
+        {
+            title: 'Kubernetes 學習筆記 — Container Orchestration 與 Kubernetes 的核心架構簡介',
+            link: '/p/bc72b1c55d8b',
+        },
+        {
+            title: 'Kubernetes 學習筆記 — Pod 是什麼？使用 minikube 來動手建立一個 Pod 吧',
+            link: '/p/03cbb1fa0b56',
+        },
+    ],
     '雲端服務相關 - AWS, GCP': [
         {
             title: 'AWS 學習筆記 — 無伺服器 Serverless 的 Lambda',

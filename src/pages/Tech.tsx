@@ -5,11 +5,11 @@ import { blogPosts } from '../config/techConfig';
 
 const Tech = () => {
     return (
-        <ListContainer>
-            <Section>
+        <Section>
+            <ListContainer>
                 <List domain={mediumDomain} blogPosts={blogPosts} />
-            </Section>
-        </ListContainer>
+            </ListContainer>
+        </Section>
     );
 };
 

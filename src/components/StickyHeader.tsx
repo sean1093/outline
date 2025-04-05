@@ -118,6 +118,13 @@ const StickyHeader: React.FC = () => {
                             Travel
                         </Link>
                         <Link
+                            to="/tech"
+                            style={location.pathname === '/tech' ? activeLinkStyle : linkStyle}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Tech
+                        </Link>
+                        <Link
                             to="/algorithm"
                             style={location.pathname === '/algorithm' ? activeLinkStyle : linkStyle}
                             onClick={() => setIsMenuOpen(false)}
@@ -139,6 +146,12 @@ const StickyHeader: React.FC = () => {
                         style={location.pathname === '/travel' ? activeLinkStyle : linkStyle}
                     >
                         Travel
+                    </Link>
+                    <Link
+                        to="/tech"
+                        style={location.pathname === '/tech' ? activeLinkStyle : linkStyle}
+                    >
+                        Tech
                     </Link>
                     <Link
                         to="/algorithm"
