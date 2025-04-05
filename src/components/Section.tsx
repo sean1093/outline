@@ -1,36 +1,80 @@
 import React from 'react';
+import Footer from './Footer';
+import { SectionProps, ListProps } from '../types/common';
+import { theme } from '../styles/theme';
 
-type SectionProps = {
-    children: React.ReactNode;
-};
-
-type ListProps = {
-    children: React.ReactNode;
-};
-
-const Section: React.FC<SectionProps> = ({ children }) => {
+const Section: React.FC<SectionProps> = ({ children, className, style }) => {
     return (
         <div
+            className={`container ${className || ''}`}
             style={{
-                width: '100vw',
-                paddingTop: '70px',
+                minHeight: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative',
+                paddingBottom: theme.spacing.xxl,
+                ...style,
             }}
         >
-            {children}
+            <div
+                style={{
+                    flex: 1,
+                    paddingTop: theme.spacing.xxl,
+                    paddingBottom: theme.spacing.xl,
+                    maxWidth: theme.breakpoints.desktop,
+                    margin: '0 auto',
+                    paddingLeft: theme.spacing.lg,
+                    paddingRight: theme.spacing.lg,
+                    width: '100%',
+                }}
+            >
+                {children}
+            </div>
+            <Footer />
         </div>
     );
 };
 
-export const ListContainer: React.FC<ListProps> = ({ children }) => {
+const ListContainer: React.FC<ListProps> = ({ children, className, style }) => {
     return (
-        <div
+        <ul
+            className={`fade-in ${className || ''}`}
             style={{
-                paddingLeft: '18px',
+                display: 'grid',
+                gap: theme.spacing.xl,
+                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                marginTop: theme.spacing.xl,
+                listStyle: 'none',
+                padding: 0,
+                margin: 0,
+                ...style,
             }}
         >
-            {children}
-        </div>
+            {React.Children.map(children, (child, index) => (
+                <li 
+                    key={index} 
+                    style={{ 
+                        margin: 0,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: theme.spacing.sm,
+                    }}
+                >
+                    <h3
+                        style={{
+                            ...theme.typography.h3,
+                            color: theme.colors.textPrimary,
+                            margin: 0,
+                        }}
+                    >
+                        {React.isValidElement(child) && child.props.title}
+                    </h3>
+                    {child}
+                </li>
+            ))}
+        </ul>
     );
 };
 
+export { ListContainer };
 export default Section;

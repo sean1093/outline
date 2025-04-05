@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Section, { ListContainer } from '../components/Section';
 import List from '../components/List';
-import Flex from '../components/Flex';
+import SubMenu from '../components/SubMenu';
 
 import { bloggerDomain } from '../config/common';
 import {
@@ -27,15 +27,21 @@ const Travel = () => {
         travel: travelPosts,
         bar: barPosts,
     };
+
+    const menuItems = [
+        { label: '台灣住宿', value: 'hotelTw', icon: '🏨' },
+        { label: '日本住宿', value: 'hotelJp', icon: '🏯' },
+        { label: '旅遊景點', value: 'travel', icon: '🌍' },
+        { label: '酒吧清單', value: 'bar', icon: '🍸' }
+    ];
+
     return (
         <Section>
-            <Flex style={{ padding: '18px', height: '50px' }}>
-                <button onClick={() => setDisplay('hotelTw')}>台灣住宿</button>
-                <button onClick={() => setDisplay('hotelJp')}>日本住宿</button>
-                <button onClick={() => setDisplay('travel')}>旅遊景點</button>
-                <button onClick={() => setDisplay('bar')}>酒吧清單</button>
-            </Flex>
-            <hr />
+            <SubMenu 
+                items={menuItems}
+                activeItem={display}
+                onItemClick={(value) => setDisplay(value as DisplayType)}
+            />
             <ListContainer>
                 <List domain={bloggerDomain} blogPosts={posts[display]} />
             </ListContainer>

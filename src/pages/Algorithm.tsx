@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Section, { ListContainer } from '../components/Section';
 import List from '../components/List';
-import Flex from '../components/Flex';
+import SubMenu from '../components/SubMenu';
 import { mediumDomain } from '../config/common';
 import { blogPosts, leetCodePosts } from '../config/algoConfig';
 
@@ -9,15 +9,19 @@ type DisplayType = 'notes' | 'leetcode';
 
 const Algorithm = () => {
     const [display, setDisplay] = useState<DisplayType>('notes');
+
+    const menuItems = [
+        { label: '演算法筆記', value: 'notes', icon: '📝' },
+        { label: 'LeetCode 解題紀錄', value: 'leetcode', icon: '💻' }
+    ];
+
     return (
         <Section>
-            <Flex style={{ padding: '18px', height: '50px' }}>
-                <button onClick={() => setDisplay('notes')}>演算法筆記</button>
-                <button onClick={() => setDisplay('leetcode')}>
-                    LeetCode 解題紀錄
-                </button>
-            </Flex>
-            <hr />
+            <SubMenu 
+                items={menuItems}
+                activeItem={display}
+                onItemClick={(value) => setDisplay(value as DisplayType)}
+            />
             <ListContainer>
                 <List
                     domain={mediumDomain}
