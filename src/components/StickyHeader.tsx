@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { theme } from '../styles/theme';
 
 const StickyHeader: React.FC = () => {
-    const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const location = useLocation();
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768);
-            if (window.innerWidth > 768) {
+            const newIsMobile = window.innerWidth <= 768;
+            setIsMobile(newIsMobile);
+            if (!newIsMobile) {
                 setIsMenuOpen(false);
             }
         };
@@ -20,169 +22,130 @@ const StickyHeader: React.FC = () => {
 
     const headerStyle: React.CSSProperties = {
         position: 'fixed',
-        width: '100%',
-        top: '0',
-        backgroundColor: 'var(--surface-color)',
-        padding: '16px 24px',
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: theme.colors.surface,
+        padding: `${theme.spacing.sm} ${theme.spacing.lg}`,
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderBottom: '1px solid var(--border-color)',
-        boxShadow: 'var(--shadow-sm)',
         zIndex: 1000,
+        borderBottom: `1px solid ${theme.colors.border}`,
+        boxShadow: theme.shadows.sm,
     };
 
     const titleStyle: React.CSSProperties = {
         fontSize: '1.5rem',
-        cursor: 'pointer',
         fontWeight: 'bold',
-        color: 'var(--text-primary)',
+        color: theme.colors.textPrimary,
+        textDecoration: 'none',
         display: 'flex',
         alignItems: 'center',
-        gap: '8px',
+        gap: theme.spacing.sm,
     };
 
     const navStyle: React.CSSProperties = {
         display: 'flex',
-        gap: '24px',
-        paddingRight: '40px',
-    };
-
-    const mobileNavStyle: React.CSSProperties = {
-        display: isMenuOpen ? 'flex' : 'none',
-        flexDirection: 'column',
-        position: 'absolute',
-        top: '100%',
-        right: '0',
-        backgroundColor: 'var(--surface-color)',
-        padding: '16px',
-        width: '240px',
-        borderLeft: '1px solid var(--border-color)',
-        borderBottom: '1px solid var(--border-color)',
-        boxShadow: 'var(--shadow-md)',
-        zIndex: 1001,
-        borderRadius: '0 0 0 12px',
+        gap: theme.spacing.md,
+        alignItems: 'center',
     };
 
     const linkStyle: React.CSSProperties = {
-        fontSize: '1rem',
-        cursor: 'pointer',
+        color: theme.colors.textPrimary,
         textDecoration: 'none',
-        transition: 'all 0.2s ease',
-        color: 'var(--text-primary)',
-        whiteSpace: 'nowrap',
-        padding: '8px 12px',
-        borderRadius: '8px',
+        padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
+        borderRadius: '4px',
+        transition: 'background-color 0.2s',
     };
 
-    const linkHoverStyle: React.CSSProperties = {
-        backgroundColor: 'var(--background-color)',
-        color: 'var(--primary-color)',
+    const activeLinkStyle: React.CSSProperties = {
+        ...linkStyle,
+        backgroundColor: theme.colors.primary,
+        color: 'white',
     };
 
-    const mobileLinkStyle: React.CSSProperties = {
-        padding: '12px 16px',
-        display: 'block',
-        width: '100%',
-        textAlign: 'left',
-        borderBottom: '1px solid var(--border-color)',
+    const mobileNavStyle: React.CSSProperties = {
+        position: 'fixed',
+        top: '60px',
+        left: 0,
+        right: 0,
+        backgroundColor: theme.colors.surface,
+        padding: theme.spacing.md,
+        display: isMenuOpen ? 'flex' : 'none',
+        flexDirection: 'column',
+        gap: theme.spacing.md,
+        borderBottom: `1px solid ${theme.colors.border}`,
+        boxShadow: theme.shadows.sm,
     };
 
     const menuButtonStyle: React.CSSProperties = {
         display: isMobile ? 'block' : 'none',
         background: 'none',
         border: 'none',
-        color: 'var(--text-primary)',
+        color: theme.colors.textPrimary,
         fontSize: '1.5rem',
         cursor: 'pointer',
-        padding: '8px',
-        borderRadius: '8px',
-        transition: 'all 0.2s ease',
-    };
-
-    const menuButtonHoverStyle: React.CSSProperties = {
-        backgroundColor: 'var(--background-color)',
+        padding: theme.spacing.xs,
     };
 
     return (
         <header style={headerStyle}>
-            <div style={titleStyle} onClick={() => navigate('/')}>
-                <span>📝</span>
-                Sean's Notes
-            </div>
-            {isMobile && (
-                <button 
-                    style={menuButtonStyle}
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    onMouseEnter={(e) => Object.assign(e.currentTarget.style, menuButtonHoverStyle)}
-                    onMouseLeave={(e) => Object.assign(e.currentTarget.style, menuButtonStyle)}
-                >
-                    {isMenuOpen ? '✕' : '☰'}
-                </button>
-            )}
-            {!isMobile && (
+            <Link to="/" style={titleStyle}>
+                <span>📚</span> Sean's Notes
+            </Link>
+            {isMobile ? (
+                <>
+                    <button
+                        style={menuButtonStyle}
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    >
+                        {isMenuOpen ? '✕' : '☰'}
+                    </button>
+                    <nav style={mobileNavStyle}>
+                        <Link
+                            to="/"
+                            style={location.pathname === '/' ? activeLinkStyle : linkStyle}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Home
+                        </Link>
+                        <Link
+                            to="/travel"
+                            style={location.pathname === '/travel' ? activeLinkStyle : linkStyle}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Travel
+                        </Link>
+                        <Link
+                            to="/algorithm"
+                            style={location.pathname === '/algorithm' ? activeLinkStyle : linkStyle}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Algorithm
+                        </Link>
+                    </nav>
+                </>
+            ) : (
                 <nav style={navStyle}>
-                    <span 
-                        style={linkStyle}
-                        onClick={() => navigate('/travel')}
-                        onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
-                        onMouseLeave={(e) => Object.assign(e.currentTarget.style, linkStyle)}
+                    <Link
+                        to="/"
+                        style={location.pathname === '/' ? activeLinkStyle : linkStyle}
                     >
-                        旅行紀錄
-                    </span>
-                    <span 
-                        style={linkStyle}
-                        onClick={() => navigate('/tech')}
-                        onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
-                        onMouseLeave={(e) => Object.assign(e.currentTarget.style, linkStyle)}
+                        Home
+                    </Link>
+                    <Link
+                        to="/travel"
+                        style={location.pathname === '/travel' ? activeLinkStyle : linkStyle}
                     >
-                        技術筆記
-                    </span>
-                    <span 
-                        style={linkStyle}
-                        onClick={() => navigate('/algorithm')}
-                        onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
-                        onMouseLeave={(e) => Object.assign(e.currentTarget.style, linkStyle)}
+                        Travel
+                    </Link>
+                    <Link
+                        to="/algorithm"
+                        style={location.pathname === '/algorithm' ? activeLinkStyle : linkStyle}
                     >
-                        演算法
-                    </span>
-                </nav>
-            )}
-            {isMobile && isMenuOpen && (
-                <nav style={mobileNavStyle}>
-                    <span 
-                        style={{...linkStyle, ...mobileLinkStyle}}
-                        onClick={() => {
-                            navigate('/travel');
-                            setIsMenuOpen(false);
-                        }}
-                        onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
-                        onMouseLeave={(e) => Object.assign(e.currentTarget.style, {...linkStyle, ...mobileLinkStyle})}
-                    >
-                        旅行紀錄
-                    </span>
-                    <span 
-                        style={{...linkStyle, ...mobileLinkStyle}}
-                        onClick={() => {
-                            navigate('/tech');
-                            setIsMenuOpen(false);
-                        }}
-                        onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
-                        onMouseLeave={(e) => Object.assign(e.currentTarget.style, {...linkStyle, ...mobileLinkStyle})}
-                    >
-                        技術筆記
-                    </span>
-                    <span 
-                        style={{...linkStyle, ...mobileLinkStyle}}
-                        onClick={() => {
-                            navigate('/algorithm');
-                            setIsMenuOpen(false);
-                        }}
-                        onMouseEnter={(e) => Object.assign(e.currentTarget.style, linkHoverStyle)}
-                        onMouseLeave={(e) => Object.assign(e.currentTarget.style, {...linkStyle, ...mobileLinkStyle})}
-                    >
-                        演算法
-                    </span>
+                        Algorithm
+                    </Link>
                 </nav>
             )}
         </header>

@@ -13,6 +13,7 @@ const Section: React.FC<SectionProps> = ({ children, className, style }) => {
                 flexDirection: 'column',
                 position: 'relative',
                 paddingBottom: theme.spacing.xxl,
+                paddingTop: '80px',
                 ...style,
             }}
         >
