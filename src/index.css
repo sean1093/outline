@@ -125,3 +125,7 @@ button {
 .fade-in {
     animation: fadeIn 0.3s ease forwards;
 }
+
+.list-link:hover {
+    color: var(--primary-color) !important;
+}
