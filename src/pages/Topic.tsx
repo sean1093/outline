@@ -115,21 +115,27 @@ const Topic = () => {
             >
                 {results.length} 篇
                 {topic === 'travel' && (
-                    <button
-                        onClick={() =>
-                            setParam('lang', lang === 'en' ? null : 'en')
-                        }
-                        style={{
-                            marginLeft: theme.spacing.md,
-                            border: 'none',
-                            background: 'none',
-                            color: theme.colors.primary,
-                            cursor: 'pointer',
-                            ...theme.typography.small,
-                        }}
-                    >
-                        {lang === 'en' ? '看中文版' : '看英文版 (4)'}
-                    </button>
+                    <>
+                        {/* Textual separator, not just a margin: without it the
+                            line reads "130 篇看英文版 (4)" to a screen reader. */}
+                        {' · '}
+                        <button
+                            onClick={() =>
+                                setParam('lang', lang === 'en' ? null : 'en')
+                            }
+                            style={{
+                                border: 'none',
+                                background: 'none',
+                                color: theme.colors.primary,
+                                cursor: 'pointer',
+                                ...theme.typography.small,
+                            }}
+                        >
+                            {lang === 'en'
+                                ? '看中文版'
+                                : `看英文版 (${filterPosts({ topic: 'travel', lang: 'en' }).length})`}
+                        </button>
+                    </>
                 )}
             </p>
 

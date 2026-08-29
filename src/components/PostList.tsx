@@ -66,7 +66,10 @@ const PostList: React.FC<{ posts: Post[] }> = ({ posts }) => {
                             style={{
                                 ...theme.typography.body,
                                 fontWeight: '600',
-                                color: theme.colors.textPrimary,
+                                // No `color` here on purpose: `.list-link` in
+                                // index.css sets the identical resting colour,
+                                // and an inline one would outrank
+                                // `.list-link:hover`.
                                 textDecoration: 'none',
                             }}
                         >

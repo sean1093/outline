@@ -53,6 +53,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ items, activeItem, onItemClick }) => 
                     {items.map((item) => (
                         <button
                             key={item.value}
+                            aria-pressed={activeItem === item.value}
                             onClick={() => onItemClick(item.value)}
                             style={{
                                 padding: '6px 12px',

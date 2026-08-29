@@ -15,6 +15,11 @@ concurrency:
 jobs:
     sync:
         runs-on: ubuntu-latest
+        # fetchBlogger paginates in an unbounded loop and neither fetcher passes
+        # an abort signal, so a hung upstream would otherwise hold a runner for
+        # the 6-hour default — and cancel-in-progress: false queues tomorrow's
+        # run behind it.
+        timeout-minutes: 15
         steps:
             - uses: actions/checkout@v4
 
