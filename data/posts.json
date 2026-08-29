@@ -466,6 +466,91 @@
         ]
     },
     {
+        "id": "p/03cbb1fa0b56",
+        "source": "medium",
+        "title": "Kubernetes 學習筆記 — Pod 是什麼？使用 minikube 來動手建立一個 Pod 吧",
+        "url": "https://medium.com/p/03cbb1fa0b56",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "k8s",
+            "kubernetes",
+            "kubernetes-pods",
+            "containers"
+        ],
+        "date": "2025-04-05T08:17:01.315Z",
+        "summary": "什麼是 Pod？",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*L1GaJCoONPSQtsHy"
+    },
+    {
+        "id": "p/bc72b1c55d8b",
+        "source": "medium",
+        "title": "Kubernetes 學習筆記 — Container Orchestration 與 Kubernetes 的核心架構簡介",
+        "url": "https://medium.com/p/bc72b1c55d8b",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "k8s",
+            "kubernetes",
+            "containers",
+            "container-orchestration"
+        ],
+        "date": "2025-03-23T08:04:40.098Z",
+        "summary": "在了解了基本的 Container 概念後，那為什麼我們會需要用到 Kubernetes 呢？接著就會先提到一個名詞 — Container Orchestration (容器編排)。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*MJksi7u4qsnvBb1L"
+    },
+    {
+        "id": "p/ccae4117fe65",
+        "source": "medium",
+        "title": "Kubernetes 學習筆記 — 什麼是 Container 與 Image？",
+        "url": "https://medium.com/p/ccae4117fe65",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "k8s",
+            "kubernetes",
+            "docker",
+            "containers"
+        ],
+        "date": "2025-02-23T14:15:16.834Z",
+        "summary": "首先，在學習 K8S (Kubernetes) 相關知識之前，我覺得要先了解一下，在軟體開發為什麼需要容器化 (Containerization)，以及一些基本的概念如 container、image、docker 是什麼，這篇筆記用來記錄與複習一下容器化相關的概念。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*GQb9csFw-uhtzK7b"
+    },
+    {
+        "id": "p/7cf3e57731a7",
+        "source": "medium",
+        "title": "151. Reverse Words in a String",
+        "url": "https://medium.com/p/7cf3e57731a7",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "leetcode",
+            "math",
+            "leetcode-medium",
+            "演算法"
+        ],
+        "date": "2025-02-11T14:44:00.586Z",
+        "summary": "238. Product of Array Except Self",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/7c816f6fd6fd",
+        "source": "medium",
+        "title": "基礎演算法系列 — 時間複雜度與空間複雜度",
+        "url": "https://medium.com/p/7c816f6fd6fd",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "time-complexity",
+            "space-complexity",
+            "演算法",
+            "recursion"
+        ],
+        "date": "2025-02-01T11:54:41.525Z",
+        "summary": "在我們設計與討論演算法題目的時候，常常會提到兩個重要的複雜度指標：時間複雜度和空間複雜度，或是有時候在面試的時候，也會被問這個演算法的時間複雜度是多少。那究竟什麼是時間複雜度與空間複雜度，以及要怎麼衡量呢？",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*YSZV7_OgM9y87S6C.jpg"
+    },
+    {
         "id": "/2025/01/ascott-embassy-sathorn-bangkok.html",
         "source": "blogger",
         "title": "曼谷住宿 |  曼谷沙通雅詩閣大使酒店 Ascott Embassy Sathorn Bangkok | 五星級公寓式酒店 | 無邊際高空泳池",
@@ -483,6 +568,57 @@
             13.7226966,
             100.5356843
         ]
+    },
+    {
+        "id": "p/b82cdc1dedfa",
+        "source": "medium",
+        "title": "[CSS] 為什麼常常設定了 z-index 卻沒有效果呢？了解 Stacking Context 與畫面佈局的運作原理",
+        "url": "https://medium.com/p/b82cdc1dedfa",
+        "topic": "tech",
+        "tags": [
+            "frontend",
+            "css",
+            "z-index",
+            "stacking-context",
+            "前端筆記"
+        ],
+        "date": "2025-01-25T14:30:46.914Z",
+        "summary": "在處理畫面上元件的呈現的時候，有時候會遇到一個情況，明明設定了比較大的 z-index，為什麼這個元件在顯示的時候，還是被其他元件蓋住，就算設定了 z-index: 999999999 也沒有用處，到底是為什麼呢？",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*mrKbWW_S-gLknYB_Xfwn-Q.jpeg"
+    },
+    {
+        "id": "p/5bc7be208eac",
+        "source": "medium",
+        "title": "11. Container With Most Water",
+        "url": "https://medium.com/p/5bc7be208eac",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "leetcode",
+            "two-pointers",
+            "greedy",
+            "演算法"
+        ],
+        "date": "2025-01-22T01:32:32.095Z",
+        "summary": "11. Container With Most Water",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/724c08265de3",
+        "source": "medium",
+        "title": "gRPC 是什麼? gRPC、GraphQL 與 REST 的比較與選擇",
+        "url": "https://medium.com/p/724c08265de3",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "grpc",
+            "graphql",
+            "rest-api",
+            "api-development"
+        ],
+        "date": "2025-01-12T09:15:42.705Z",
+        "summary": "在現代應用程式開發中，API 是系統間溝通的橋樑，而選擇合適的 API 架構，對於性能、開發效率和擴展性是相當重要的。利用這篇文章筆記一下，也記錄 gRPC、GraphQL 和 REST 的比較。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*Y8sF8C4RWES8TnDh"
     },
     {
         "id": "/2025/01/karaarom-hotel-bts-thong-lor-station-7.html",
@@ -504,6 +640,74 @@
         ]
     },
     {
+        "id": "p/82ada2871045",
+        "source": "medium",
+        "title": "OWASP Top10 是什麼？ Web 應用程式開發上需要注意哪些事項？",
+        "url": "https://medium.com/p/82ada2871045",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "owasp",
+            "owasp-top-10",
+            "web-security",
+            "資訊安全"
+        ],
+        "date": "2025-01-04T00:53:25.816Z",
+        "summary": "最近因為在工作上因應產品的稽核需求，團隊內的大家都要去完成一些跟資安領與相關的課程，一直以來都是大概知道，但是沒很認真去記下來，這次趁著都要花時間上課的機會複習一下，也把這些內容筆記記錄下來。其中，第一個主題就是 OWASP Top 10。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*CbOfDVN7vCDg-oWB"
+    },
+    {
+        "id": "p/b39b92938c39",
+        "source": "medium",
+        "title": "了解 Browser History API 的操作與實作筆記",
+        "url": "https://medium.com/p/b39b92938c39",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "front-end-development",
+            "browser-history",
+            "web-api-development",
+            "前端"
+        ],
+        "date": "2024-12-25T13:25:47.759Z",
+        "summary": "平常使用瀏覽器操作網頁的時候，有沒有想過很常在使用的上一頁、下一頁這個功能，在Web APIs 中怎麼使用，以及實際邏輯該怎麼實作呢？這個概念除了是基本的前端知識外，也是一題不錯的面試考題。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*VHjbPLIHxNdNRCDP"
+    },
+    {
+        "id": "p/3d59cc4e5c60",
+        "source": "medium",
+        "title": "語意化版本與 package.json 裡符號的意義",
+        "url": "https://medium.com/p/3d59cc4e5c60",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "version-control",
+            "npm",
+            "packagejson",
+            "軟體開發"
+        ],
+        "date": "2024-12-22T09:21:08.694Z",
+        "summary": "在軟體開發的世界中，版本號 是溝通與協作的重要工具，不論是對外發布的 Open source 專案，或是公司的產品專案，隨著專案成長，如果沒有一套明確的版本號規則，可能會逐漸產生一些問題：",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*9R4N-mtPly5EhVHv"
+    },
+    {
+        "id": "p/e2270d0ea5fd",
+        "source": "medium",
+        "title": "130. Surrounded Regions",
+        "url": "https://medium.com/p/e2270d0ea5fd",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "leetcode",
+            "dfs",
+            "union-find",
+            "演算法"
+        ],
+        "date": "2024-12-15T13:46:35.944Z",
+        "summary": "130. Surrounded Regions",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
         "id": "/2024/12/vesper-2024-no13.html",
         "source": "blogger",
         "title": "曼谷酒吧 | Vesper | 低調奢華英倫風 | 連續九年入圍亞洲五十 | 2024 亞洲五十大酒吧 No.13",
@@ -523,6 +727,40 @@
         ]
     },
     {
+        "id": "p/a0699bad625a",
+        "source": "medium",
+        "title": "[JavaScript] 理解 Scope 與 Closure 來實作一個簡單的 useState",
+        "url": "https://medium.com/p/a0699bad625a",
+        "topic": "tech",
+        "tags": [
+            "frontend",
+            "software-development",
+            "closure",
+            "scopes",
+            "usestate"
+        ],
+        "date": "2024-12-08T08:11:12.132Z",
+        "summary": "Closure 是一種在眾多程式語言中支援的一項功能(or 特性)，如 Python, Go, JavaScript 等等多種語言都有這種特性。它允許函式記住並存取其外部作用域中的變數，幫助語言實現多種特性，如狀態封裝、Callback Function 等功能，在…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*X3czManaGmitU60o.jpg"
+    },
+    {
+        "id": "p/a33ecda76e1d",
+        "source": "medium",
+        "title": "1346. Check If N and Its Double Exist",
+        "url": "https://medium.com/p/a33ecda76e1d",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "hash-table",
+            "hashset",
+            "leetcode",
+            "search"
+        ],
+        "date": "2024-12-01T07:22:53.748Z",
+        "summary": "1346. Check If N and Its Double Exist",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
         "id": "/2024/12/bkk-social-club-2024-no7.html",
         "source": "blogger",
         "title": "曼谷酒吧 | BKK Social Club | 位於四季酒店內奢華高級酒吧 | 2024 亞洲五十大酒吧 No.7",
@@ -540,6 +778,23 @@
             13.7117702,
             100.5101179
         ]
+    },
+    {
+        "id": "p/196ddd83efd8",
+        "source": "medium",
+        "title": "15. 3Sum",
+        "url": "https://medium.com/p/196ddd83efd8",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "leetcode",
+            "two-pointers",
+            "3sum",
+            "演算法"
+        ],
+        "date": "2024-11-09T13:55:00.178Z",
+        "summary": "15. 3Sum",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
     },
     {
         "id": "/2024/10/sg-club-2024-no23.html",
@@ -580,6 +835,193 @@
         ]
     },
     {
+        "id": "p/f160358db4d1",
+        "source": "medium",
+        "title": "300. Longest Increasing Subsequence",
+        "url": "https://medium.com/p/f160358db4d1",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "subsequence",
+            "dynamic-programming",
+            "binary-search",
+            "演算法"
+        ],
+        "date": "2024-10-06T08:53:09.098Z",
+        "summary": "300. Longest Increasing Subsequence",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/058649ad9cd1",
+        "source": "medium",
+        "title": "[JavaScript] Debounce 與 Throttle 是什麼？常見前端面試考題",
+        "url": "https://medium.com/p/058649ad9cd1",
+        "topic": "algo",
+        "tags": [
+            "frontend",
+            "javascript",
+            "debounce",
+            "throttling",
+            "leetcode"
+        ],
+        "date": "2024-10-03T09:44:11.656Z",
+        "summary": "在前端開發的時候，常常會因為使用者的操作，頻繁的觸發 event，特別是在處理捲動（scroll）、縮放（resize）或輸入（input）等情況下，會需要限制頻繁執行的事件，來避免性能問題或不必要的資源消耗。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*qlRwnn3dvjW30dI7pSAKlg.png"
+    },
+    {
+        "id": "p/b5f576c7bb83",
+        "source": "medium",
+        "title": "9. Palindrome Number",
+        "url": "https://medium.com/p/b5f576c7bb83",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "leetcode",
+            "palindrome",
+            "palindrome-number",
+            "演算法"
+        ],
+        "date": "2024-10-01T00:57:07.766Z",
+        "summary": "9. Palindrome Number",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/9e0833181cc7",
+        "source": "medium",
+        "title": "79. Word Search",
+        "url": "https://medium.com/p/9e0833181cc7",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "backtracking",
+            "dfs",
+            "word-search",
+            "leetcode"
+        ],
+        "date": "2024-09-15T06:57:06.722Z",
+        "summary": "79. Word Search",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/639908d1049e",
+        "source": "medium",
+        "title": "200. Number of Islands",
+        "url": "https://medium.com/p/639908d1049e",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "leetcode",
+            "dfs",
+            "union-find",
+            "演算法"
+        ],
+        "date": "2024-09-13T14:36:58.585Z",
+        "summary": "200. Number of Islands",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/7105302358a5",
+        "source": "medium",
+        "title": "演算法筆記系列 — Backtracking 與排列組合",
+        "url": "https://medium.com/p/7105302358a5",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "backtracking",
+            "combination",
+            "permutations",
+            "leetcode"
+        ],
+        "date": "2024-09-08T05:22:15.857Z",
+        "summary": "Backtracking（回溯法），是一個使用遞迴來解決問題的一種方法，常常用來處理「需要找所有可能解」的問題，常見的問題如大家高中數學都會學習到的，排列（Permutation）與組合（Combination），或是以前在學校演算法課程中，都會學習到的經典八皇后問題，都是使用……",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*xdUDU-O6E9cEBak8.jpg"
+    },
+    {
+        "id": "p/ed325ffb2906",
+        "source": "medium",
+        "title": "演算法筆記系列 — Prefix Sum",
+        "url": "https://medium.com/p/ed325ffb2906",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "prefix-sum",
+            "leetcode",
+            "dynamic-programming",
+            "演算法"
+        ],
+        "date": "2024-09-04T00:39:32.633Z",
+        "summary": "在處理陣列相關問題時，我們有時候會遇到要計算特定範圍內的數字總和，如果每次都從頭開始計算，很明顯的效率不高，且常常不會是題目可以接受的時間複雜度。為了解決這個問題，前綴和 (Prefix Sum) 可以幫助我們在常數時間內計算任意區間的總和，大幅提升運算效率。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*4-Nul3xE0-kYQ2Zz.jpg"
+    },
+    {
+        "id": "p/d9b368442a10",
+        "source": "medium",
+        "title": "33. Search in Rotated Sorted Array",
+        "url": "https://medium.com/p/d9b368442a10",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "search",
+            "binary-search",
+            "two-pointers",
+            "leetcode"
+        ],
+        "date": "2024-08-27T00:18:06.802Z",
+        "summary": "33. Search in Rotated Sorted Array",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/76a37fe92e83",
+        "source": "medium",
+        "title": "122. Best Time to Buy and Sell Stock II",
+        "url": "https://medium.com/p/76a37fe92e83",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "greedy-algorithms",
+            "dynamic-programming",
+            "leetcode",
+            "演算法"
+        ],
+        "date": "2024-08-20T00:30:54.646Z",
+        "summary": "122. Best Time to Buy and Sell Stock II",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/236f509200de",
+        "source": "medium",
+        "title": "演算法筆記系列 — Greedy Algorithm 貪婪演算法",
+        "url": "https://medium.com/p/236f509200de",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "greedy-algorithms",
+            "leetcode",
+            "演算法",
+            "貪婪演算法"
+        ],
+        "date": "2024-08-15T00:18:41.970Z",
+        "summary": "貪婪演算法（Greedy…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*iFD914RVIKZ8QDU-89jaZw.png"
+    },
+    {
+        "id": "p/ffb141c874f1",
+        "source": "medium",
+        "title": "198. House Robber",
+        "url": "https://medium.com/p/ffb141c874f1",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "leetcode",
+            "dynamic-programming",
+            "house-robber",
+            "演算法"
+        ],
+        "date": "2024-08-13T00:19:24.632Z",
+        "summary": "198. House Robber",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
         "id": "/2024/08/bar-alter.html",
         "source": "blogger",
         "title": "台南酒吧 | Bar Alter | 隱藏在台南路橋下的酒吧 | 每一杯酒都是一道菜",
@@ -597,6 +1039,23 @@
             22.9884847,
             120.2122678
         ]
+    },
+    {
+        "id": "p/0cf567ebd66f",
+        "source": "medium",
+        "title": "53. Maximum Subarray",
+        "url": "https://medium.com/p/0cf567ebd66f",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "leetcode",
+            "dynamic-programming",
+            "maximum-subarray",
+            "演算法"
+        ],
+        "date": "2024-07-29T00:31:05.228Z",
+        "summary": "53. Maximum Subarray",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
     },
     {
         "id": "/2024/07/hi-ne-ni-1960.html",
@@ -618,6 +1077,40 @@
         ]
     },
     {
+        "id": "p/384250b3bfcd",
+        "source": "medium",
+        "title": "useImperativeHandle 怎麼用？",
+        "url": "https://medium.com/p/384250b3bfcd",
+        "topic": "tech",
+        "tags": [
+            "react",
+            "frontend",
+            "front-end-development",
+            "前端",
+            "前端筆記"
+        ],
+        "date": "2024-07-27T02:58:24.102Z",
+        "summary": "useImperativeHandle 是什麼？",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*Dafaz4Vl8aOI6PYP.jpg"
+    },
+    {
+        "id": "p/d84dffc35f98",
+        "source": "medium",
+        "title": "你怎麼做 Code Review 呢？以前端開發為例",
+        "url": "https://medium.com/p/d84dffc35f98",
+        "topic": "tech",
+        "tags": [
+            "frontend",
+            "software-development",
+            "code-review",
+            "front-end-development",
+            "software-engineering"
+        ],
+        "date": "2024-07-24T01:36:39.053Z",
+        "summary": "怎麼做 code review？相信是工程師們，以及每個多人合作的研發團隊都會面臨到的問題，就算是同一間公司，因為每個團隊關注的點都不一樣，大家執行的方式可能也都不盡相同。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*ttgUsv-UiNaEgSdQ.jpg"
+    },
+    {
         "id": "/2024/07/chiayi-maison-de-chine-hotel.html",
         "source": "blogger",
         "title": "嘉義住宿 | 嘉義兆品酒店 Chiayi Maison de Chine Hotel | 雲朗觀光集團旗下品牌 | 鄰近火車站與文化路夜市",
@@ -637,6 +1130,91 @@
         ]
     },
     {
+        "id": "p/aea1f920f7ef",
+        "source": "medium",
+        "title": "70. Climbing Stairs",
+        "url": "https://medium.com/p/aea1f920f7ef",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "dynamic-programming",
+            "fibonacci",
+            "leetcode",
+            "演算法"
+        ],
+        "date": "2024-06-25T00:13:05.926Z",
+        "summary": "70. Climbing Stairs",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/4bd19c0c8c59",
+        "source": "medium",
+        "title": "1448. Count Good Nodes in Binary Tree",
+        "url": "https://medium.com/p/4bd19c0c8c59",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "trees",
+            "dfs",
+            "depth-first-search",
+            "leetcode"
+        ],
+        "date": "2024-06-19T12:49:43.406Z",
+        "summary": "1448. Count Good Nodes in Binary Tree",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/885e3f080476",
+        "source": "medium",
+        "title": "443. String Compression",
+        "url": "https://medium.com/p/885e3f080476",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "leetcode",
+            "two-pointers",
+            "string-compression",
+            "演算法"
+        ],
+        "date": "2024-06-16T09:21:53.013Z",
+        "summary": "443. String Compression",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/80cdbb7753b7",
+        "source": "medium",
+        "title": "[JavaScript] Promise 用法與常見的練習題型",
+        "url": "https://medium.com/p/80cdbb7753b7",
+        "topic": "algo",
+        "tags": [
+            "frontend",
+            "javascript",
+            "promises",
+            "leetcode",
+            "前端"
+        ],
+        "date": "2024-06-15T04:04:04.537Z",
+        "summary": "Promise 是一個表示非同步運算的最終完成或失敗的物件，從 ES6 之後開始出現，主要為了解決在非同步操作時，會出現大量 callback 造成的問題，是現今前端開發不可不知道的一個概念，也常常是面試的熱門考題之一。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*4zWI4xmUZYp7ax9B"
+    },
+    {
+        "id": "p/b0fca217bdd8",
+        "source": "medium",
+        "title": "345. Reverse Vowels of a String",
+        "url": "https://medium.com/p/b0fca217bdd8",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "two-pointers",
+            "stack",
+            "sliding-windows",
+            "leetcode"
+        ],
+        "date": "2024-06-14T00:44:59.778Z",
+        "summary": "345. Reverse Vowels of a String",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
         "id": "/2024/06/in-joy-hotel-2023.html",
         "source": "blogger",
         "title": "台中住宿 | 享得道行旅 In Joy Hotel | 逢甲商圈附近的新旅店 | 逢甲夜市步行五分鐘 | 2023 年開始營運",
@@ -654,6 +1232,74 @@
             24.1755169,
             120.6503162
         ]
+    },
+    {
+        "id": "p/6431d3e8fc9c",
+        "source": "medium",
+        "title": "3. Longest Substring Without Repeating Characters",
+        "url": "https://medium.com/p/6431d3e8fc9c",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "sliding-windows",
+            "longest-substring",
+            "leetcode",
+            "sliding-window-algorithm"
+        ],
+        "date": "2024-06-04T01:00:06.597Z",
+        "summary": "3. Longest Substring Without Repeating Characters",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/38ba9c523edd",
+        "source": "medium",
+        "title": "1004. Max Consecutive Ones III",
+        "url": "https://medium.com/p/38ba9c523edd",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "sliding-windows",
+            "sliding-window-algorithm",
+            "leetcode",
+            "演算法"
+        ],
+        "date": "2024-06-02T12:37:00.950Z",
+        "summary": "1004. Max Consecutive Ones III",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/771b9eec46ac",
+        "source": "medium",
+        "title": "1456. Maximum Number of Vowels in a Substring of Given Length",
+        "url": "https://medium.com/p/771b9eec46ac",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "sliding-windows",
+            "sliding-window-algorithm",
+            "leetcode",
+            "演算法"
+        ],
+        "date": "2024-06-01T06:57:17.573Z",
+        "summary": "1456. Maximum Number of Vowels in a Substring of Given Length",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*DENauUixUf2DS-VfgKCXlA.png"
+    },
+    {
+        "id": "p/acef3b4e1149",
+        "source": "medium",
+        "title": "1679. Max Number of K-Sum Pairs",
+        "url": "https://medium.com/p/acef3b4e1149",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "two-pointers",
+            "hash-table",
+            "leetcode",
+            "演算法"
+        ],
+        "date": "2024-06-01T05:59:14.889Z",
+        "summary": "1679. Max Number of K-Sum Pairs",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*YYSLrEERPBTzqj_m.png"
     },
     {
         "id": "/2024/05/hotel-metropolitan-sendai-jr.html",
@@ -873,6 +1519,23 @@
             35.0050258,
             135.764723
         ]
+    },
+    {
+        "id": "p/6c238998ca25",
+        "source": "medium",
+        "title": "如何寫一份前端的開發設計文件？",
+        "url": "https://medium.com/p/6c238998ca25",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "frontend",
+            "軟體開發",
+            "前端開發",
+            "frontend-development"
+        ],
+        "date": "2024-02-13T08:18:55.104Z",
+        "summary": "軟體設計文件 (Software Design Document)，在軟體開發的領域來說，大家都知道是不可或缺的東西，但常常礙於現實(時程、團隊…等等)，也會很難做到的一件事。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*4EQk-bHMV9XFWopv.jpg"
     },
     {
         "id": "/2024/02/ogawa-coffee-nishiki.html",
@@ -1331,6 +1994,23 @@
         ]
     },
     {
+        "id": "p/760756ebb2e5",
+        "source": "medium",
+        "title": "91 Unit Testing 單元測試實戰操練營 — 心得與學習筆記",
+        "url": "https://medium.com/p/760756ebb2e5",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "unit-testing",
+            "testing",
+            "單元測試",
+            "軟體開發"
+        ],
+        "date": "2023-06-04T02:51:01.926Z",
+        "summary": "這次因為公司內部訓練，有機會請了 91 老師來幫我們上一堂關於 Unit Testing 的實戰課程，整堂課收穫很多，除了讓我重新認識寫 Unit Testing 這件事之外，對於許多軟體開發實務上也有蠻多收穫！",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*8GHblY7ASWnQarMv.jpg"
+    },
+    {
         "id": "/2023/05/heirisson-island.html",
         "source": "blogger",
         "title": "澳洲自由行 | 珀斯市區景點篇 | 赫裡森島 Heirisson Island | 城市中的袋鼠島 | 野生放養袋鼠",
@@ -1424,6 +2104,23 @@
             -38.4898703,
             145.2038278
         ]
+    },
+    {
+        "id": "p/8271fe74df39",
+        "source": "medium",
+        "title": "[CSS] 如何在滾動視窗時固定某一個畫面的元素",
+        "url": "https://medium.com/p/8271fe74df39",
+        "topic": "tech",
+        "tags": [
+            "css",
+            "frontend",
+            "engineering",
+            "css3",
+            "前端"
+        ],
+        "date": "2023-04-22T07:01:57.359Z",
+        "summary": "在前端開發的時候，有時候會遇到一個需求，想要在滾動畫面到某一個元素的時候，就固定這個元素到頂端，以便於提供更好的 UX 或是提高使用者對於這個特定元素的關注。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*qqeiYSniAGSxFUrh.jpg"
     },
     {
         "id": "/2023/04/the-great-ocean-road.html",
@@ -1692,6 +2389,23 @@
         ]
     },
     {
+        "id": "p/3d50b581222b",
+        "source": "medium",
+        "title": "AWS 學習筆記 — 利用 Lambda 與 S3 來完成上傳圖片的服務吧！(使用 Golang 與 S3 presigned URL)",
+        "url": "https://medium.com/p/3d50b581222b",
+        "topic": "tech",
+        "tags": [
+            "lambda",
+            "presigned-url",
+            "aws-lambda",
+            "s3-bucket",
+            "software-development"
+        ],
+        "date": "2022-12-13T13:20:01.981Z",
+        "summary": "前一陣子玩了一下 Lambda 的開發，對於 Lambda function 與 API 在 AWS 上有了基本的認識，但這對於實際工作上開發可能還有一段路。因此，就來實際做一些小功能，透過實作來接觸與學習更多的 AWS 服務。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*gF5tqyG_76umRj1WrM8xXA.png"
+    },
+    {
         "id": "/2022/12/regent-taipei.html",
         "source": "blogger",
         "title": "台北住宿 | 台北晶華酒店 Regent Taipei | 中山北路上的老字號五星級飯店 | 19坪精緻套房",
@@ -1729,6 +2443,91 @@
             121.524288
         ],
         "lang": "en"
+    },
+    {
+        "id": "p/a2590f140d85",
+        "source": "medium",
+        "title": "什麼是 SLI、SLO與 SLA 呢？",
+        "url": "https://medium.com/p/a2590f140d85",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "software-engineering",
+            "service-level-agreement",
+            "learning",
+            "sre"
+        ],
+        "date": "2022-08-07T04:17:10.009Z",
+        "summary": "一直以來都有聽過這幾個名詞 SLI、SLO 與 SLA，雖然這些概念用文字描述很簡單，可能幾行字都描述完，但都沒有很清楚去理解它們代表的意義，或是看完過一陣子就忘了。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*ETNApl7cPB45JM1i.jpg"
+    },
+    {
+        "id": "p/9a03caa210f3",
+        "source": "medium",
+        "title": "AWS 學習筆記 — 使用 Serverless Framework 來快速 deploy 你的 lambda function",
+        "url": "https://medium.com/p/9a03caa210f3",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "aws",
+            "aws-lambda",
+            "serverless-framework",
+            "serverless"
+        ],
+        "date": "2022-07-03T09:43:10.668Z",
+        "summary": "在學習了如何手動在 AWS Console 上製作一個可以透過呼叫的 HTTP Serverless API 後，一般開發上應該還是會需要使用 cli 的方式部署會比較方便。而現在主流的雲端平台不外乎就是 AWS、GCP 或是 Azure 等等，每家在 deploy 你的…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*2qAvadZPwPpZR3RZ.png"
+    },
+    {
+        "id": "p/ac1c488ce643",
+        "source": "medium",
+        "title": "useRef 怎麼用？",
+        "url": "https://medium.com/p/ac1c488ce643",
+        "topic": "tech",
+        "tags": [
+            "frontend",
+            "front-end-development",
+            "react",
+            "react-hook",
+            "前端筆記"
+        ],
+        "date": "2022-07-01T14:37:50.402Z",
+        "summary": "在我們開發 react 的時候，通常都會建議大家不要去直接對 DOM 操作，透過改變 state 來觸發 UI 畫面的改變，或是希望所有動作都是 immutable，不要產生任何無法預期的 side…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*OEnBDEV6e6dtuqfk.jpg"
+    },
+    {
+        "id": "p/bf5b351b7d56",
+        "source": "medium",
+        "title": "AWS 學習筆記 — 無伺服器 Serverless 的 Lambda",
+        "url": "https://medium.com/p/bf5b351b7d56",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "software-engineering",
+            "aws",
+            "aws-lambda",
+            "serverless"
+        ],
+        "date": "2022-06-04T09:09:10.367Z",
+        "summary": "AWS lambda 是無伺服器(Serverless)、事件推動的運算服務，相信已經被非常廣泛的運用在各種產品與服務上了。Serverless 是一種 Function as a Service (FaaS)…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*zv3jkIPIJe8wNBT0HLptZw.png"
+    },
+    {
+        "id": "p/5ad1c35a3dfe",
+        "source": "medium",
+        "title": "演算法筆記系列 — Monotonic Stack/Queue",
+        "url": "https://medium.com/p/5ad1c35a3dfe",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "演算法",
+            "leetcode",
+            "monotonic-queue",
+            "monotonic-stack"
+        ],
+        "date": "2022-06-03T14:02:59.684Z",
+        "summary": "在資料結構中， Stack/Queue 是一般來說比較廣為人知的基礎資料結構，而你知道還有一種變化型的 Monotonic Stack/Queue 嗎？這個資料結構也是在寫 leetcode…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*vzex-bDB60HDOD5O.jpg"
     },
     {
         "id": "/2022/04/taroko.html",
@@ -1864,6 +2663,23 @@
         ]
     },
     {
+        "id": "p/aa2712663daa",
+        "source": "medium",
+        "title": "使用 Google Apps Script 連結 Google Sheet 與 Firebase database 吧！",
+        "url": "https://medium.com/p/aa2712663daa",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "firebase",
+            "google-apps-script",
+            "google-sheets",
+            "前端"
+        ],
+        "date": "2022-01-22T13:33:13.638Z",
+        "summary": "兩年半前在玩 line bot 的時候，有使用過 Google Apps Script 與 Google Sheet 的搭配，最近剛好有需求要把 Google Sheet 裡面的資料，處理過後同步到 Firebase 的 realtime database，發現 Google…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*wsG6hoZ2iIjOp62J.png"
+    },
+    {
         "id": "/2022/01/andante-school.html",
         "source": "blogger",
         "title": "宜蘭住宿 | 慢學院  Andante School | 南澳包棟民宿 | 體驗寧靜的慢活生活",
@@ -1881,6 +2697,23 @@
             24.4454852,
             121.7773302
         ]
+    },
+    {
+        "id": "p/46c5816c5dc0",
+        "source": "medium",
+        "title": "簡述 Flux 與 Redux 來理解資料流與狀態管理",
+        "url": "https://medium.com/p/46c5816c5dc0",
+        "topic": "tech",
+        "tags": [
+            "frontend",
+            "front-end-development",
+            "react",
+            "redux",
+            "前端"
+        ],
+        "date": "2021-12-13T15:00:57.951Z",
+        "summary": "前幾篇提到元件的生命週期，也提了一下基本的 state 與 props 使用方式，基本上應該是能夠獨立建立簡單的 react了！但是在實務上，你的 react app 通常不會這麼的單純與簡單，當元件的階層一多了，勢必在狀態的管理會越來越困難。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*TyGgkegES5iOyKf5"
     },
     {
         "id": "/2021/12/thelinhotel.html",
@@ -1979,6 +2812,210 @@
         "lang": "en"
     },
     {
+        "id": "p/6134f62c1fc2",
+        "source": "medium",
+        "title": "基礎演算法系列 — Graph 資料結構與 Dijkstra’s Algorithm",
+        "url": "https://medium.com/p/6134f62c1fc2",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "graph",
+            "dijkstra",
+            "演算法",
+            "學習"
+        ],
+        "date": "2021-09-18T11:34:31.106Z",
+        "summary": "Graph，在資料結構中也是一個基礎且非常重要的一個資料結構，用於表示物體與物體之間存在某種關係的結構。定義中，會由點(物體)與線(物體間的關係)，來描繪出一個 Graph，如下圖就是一個簡單的 Graph：",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*Qa9M3cUysTf4mOWP"
+    },
+    {
+        "id": "p/de980ca4a2d3",
+        "source": "medium",
+        "title": "演算法筆記系列 — Dynamic Programming 動態規劃",
+        "url": "https://medium.com/p/de980ca4a2d3",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "dynamic-programming",
+            "leetcode",
+            "學習",
+            "learning"
+        ],
+        "date": "2021-09-17T13:57:55.168Z",
+        "summary": "Dynamic Programming 動態規劃，通常會簡稱作為 DP，是一個在解題很常用的一種解題方式，原理是透過把原問題分解為相對簡單的子問題的方式，來求解複雜問題的方法。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*kxsB4E8j-c7oyRDm"
+    },
+    {
+        "id": "p/8742f45f3f55",
+        "source": "medium",
+        "title": "演算法筆記系列 — Two Pointer 與 Sliding Window",
+        "url": "https://medium.com/p/8742f45f3f55",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "演算法",
+            "leetcode",
+            "two-pointers",
+            "學習"
+        ],
+        "date": "2021-08-25T01:20:13.649Z",
+        "summary": "Two Pointer 與 Sliding Window 都是蠻常聽到的一種解題常用的技巧，也可以說是演算法的解題 pattern。而 Two Pointer 又可以分為左右指標與快慢指標兩種，Sliding Window 則可以算是廣義的左右指標中的一種。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*Ngcp3a6bDuOWVwKa"
+    },
+    {
+        "id": "p/b3eea3d0296c",
+        "source": "medium",
+        "title": "加速網站效能 — 來理解圖片的優化吧！",
+        "url": "https://medium.com/p/b3eea3d0296c",
+        "topic": "tech",
+        "tags": [
+            "frontend",
+            "frontend-development",
+            "前端",
+            "web-performance",
+            "web-development"
+        ],
+        "date": "2021-08-20T13:54:00.898Z",
+        "summary": "在開發 side project 時，其實沒有特別注重效能這塊，在開發完到了一個階段後，才回頭來看看效能與SEO能夠有哪些進步的空間。先來看看原本怎麼做，一般傳統的做法，我們都會把頁面上要用的圖片，跟 source code 放在 repo…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*bp9eAo7DAHZCQ3E8"
+    },
+    {
+        "id": "p/9d12bf4f329f",
+        "source": "medium",
+        "title": "加速網站效能 — 如何 Preload Google Fonts？",
+        "url": "https://medium.com/p/9d12bf4f329f",
+        "topic": "tech",
+        "tags": [
+            "frontend",
+            "frontend-development",
+            "前端",
+            "google-fonts",
+            "web-performance"
+        ],
+        "date": "2021-08-07T08:30:07.522Z",
+        "summary": "最近在看關於網頁的 performance tuning 相關的議題，在 Lighthouse Report 上有看到說在下載 Google Fonts 得部分花了一些時間，雖然 Report 中有提到，這個不會直接影響到 performance…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*K0GWWGrsmh1LrDoO.png"
+    },
+    {
+        "id": "p/553cb926029f",
+        "source": "medium",
+        "title": "基礎演算法系列 — 基礎資料結構 Linked-list 與 Array",
+        "url": "https://medium.com/p/553cb926029f",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "演算法",
+            "arrays",
+            "linked-lists",
+            "學習"
+        ],
+        "date": "2021-08-01T06:00:21.265Z",
+        "summary": "Linked List 與 Array 是最常拿來比較，也是兩種基本的資料結構，它們都可以用來儲存資料，但是在使用情境不同的情況下，使用 Linked List 或是Array 都會有著各自不同的好處與壞處。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*jg4reQ5MQh57Rt7U"
+    },
+    {
+        "id": "p/d10fe8ac1ce2",
+        "source": "medium",
+        "title": "基礎演算法系列 — Tree 樹狀資料結構",
+        "url": "https://medium.com/p/d10fe8ac1ce2",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "trees",
+            "演算法",
+            "dfs",
+            "fb"
+        ],
+        "date": "2021-07-27T14:02:38.347Z",
+        "summary": "在資料結構中，「Tree」與「Graph」是兩個重要的資料結構，許多實務上系統的應用與開發，底層都跟他們脫不了關係，像是資料儲存、HTML DOM Tree 或甚至是組織架構圖都會用到 Tree 的概念。本篇筆記以 Tree 為主題，紀錄一下常見最基本的幾種…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*zJ_IKOHLRl2AD6hf"
+    },
+    {
+        "id": "p/529a4d70f5a6",
+        "source": "medium",
+        "title": "聊聊元件的生命週期與 Hooks",
+        "url": "https://medium.com/p/529a4d70f5a6",
+        "topic": "tech",
+        "tags": [
+            "react",
+            "frontend",
+            "front-end-development",
+            "前端",
+            "學習"
+        ],
+        "date": "2021-07-18T09:11:18.673Z",
+        "summary": "在能夠建立起一個簡單的 React Todo List 與初步了解了 state 與 props 之後，為了能再稍微了解 React 一點點，元件的生命週期與 Hooks 也是在 React 開發中最基本需要知道的知識之一，這篇筆記主要紀錄跟 React…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*c4QZun0FpjRuTcMx"
+    },
+    {
+        "id": "p/74c1b84bd24",
+        "source": "medium",
+        "title": "基礎演算法系列 — Search",
+        "url": "https://medium.com/p/74c1b84bd24",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "search-algorithm",
+            "演算法",
+            "learning",
+            "學習筆記"
+        ],
+        "date": "2021-07-12T14:07:38.688Z",
+        "summary": "Search 搜尋，這也是演算法之中基礎的基礎，主要想要解決的問題是，在一個已排序或是未排序的序列中，找到目標的元素。其實平常沒在複習，工作上也是直接用 built-in function，除了直觀的 Sequential Search 之外，大概也只記得 Binary…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*fNR9TZGiKqAlTkMD"
+    },
+    {
+        "id": "p/94c2a77ee023",
+        "source": "medium",
+        "title": "建立一個 Todo list 來理解 state 與 props",
+        "url": "https://medium.com/p/94c2a77ee023",
+        "topic": "tech",
+        "tags": [
+            "react",
+            "frontend",
+            "front-end-development",
+            "前端",
+            "學習筆記"
+        ],
+        "date": "2021-06-27T09:52:29.993Z",
+        "summary": "延續上一篇簡單介紹了一下 React 是什麼，也使用了 create-react-app 建立一個可以運行的 React 專案，那接下來就用學習程式語言最常使用的 Todo List 來了解一下 React 一些寫法與機制。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*cKumKBx3pBJroiuz"
+    },
+    {
+        "id": "p/683349a9ec07",
+        "source": "medium",
+        "title": "什麼是 React?",
+        "url": "https://medium.com/p/683349a9ec07",
+        "topic": "tech",
+        "tags": [
+            "reactjs",
+            "frontend",
+            "learning",
+            "front-end-development",
+            "前端"
+        ],
+        "date": "2021-06-24T14:59:13.186Z",
+        "summary": "最近部門內要推行不同領域的技術交流學習，前端學習後端、DevOps或是測試各種領域，後端學習基礎前端開發等等，就順便來把上一次分享最基本的 React 介紹，整理成比較好閱讀的文章版本，已經實際是 React 開發者的人其實可以直接忽略這篇。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*cUqyNUlVDFukhGmhmLjmiw.png"
+    },
+    {
+        "id": "p/4a196d37f9f5",
+        "source": "medium",
+        "title": "基礎演算法系列 — Sort",
+        "url": "https://medium.com/p/4a196d37f9f5",
+        "topic": "algo",
+        "tags": [
+            "algorithms",
+            "sorting-algorithms",
+            "演算法",
+            "排序",
+            "learning"
+        ],
+        "date": "2021-06-21T12:57:43.476Z",
+        "summary": "在演算法學習中，排序大概是最基本的一類演算法了，大學時候的演算法課程可能前幾章就會教到。但是工作以後，排序這種東西除非有特殊需求，不然通常都是用 built-in function…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*vDR5S3E-nYKD_MnVY5mOaw.png"
+    },
+    {
         "id": "/2021/05/oldf-hotel.html",
         "source": "blogger",
         "title": "台中住宿 | 歐非行旅 OldF Hotel | 附設停車場住宿 | 鄰近審計新村",
@@ -1998,6 +3035,22 @@
         ]
     },
     {
+        "id": "p/3779e1b7d916",
+        "source": "medium",
+        "title": "MacBook with M1 Chip 前端開發踩雷紀錄",
+        "url": "https://medium.com/p/3779e1b7d916",
+        "topic": "tech",
+        "tags": [
+            "m1",
+            "apple",
+            "nodejs",
+            "software-development",
+            "software"
+        ],
+        "date": "2021-05-09T08:24:22.932Z",
+        "image": "https://miro.medium.com/v2/resize:fit:640/0*ZHXpnBzuORVM4-Ca.jpg"
+    },
+    {
         "id": "/2021/05/yundong-shan-zhuang.html",
         "source": "blogger",
         "title": "苗栗住宿 | 雲洞山莊 | 隱身在山中的民宿 | 雲海、桐花、螢火蟲",
@@ -2015,6 +3068,40 @@
             24.3886306,
             120.8220722
         ]
+    },
+    {
+        "id": "p/f8a9c504ffd",
+        "source": "medium",
+        "title": "打造順眼的 Terminal — zsh + zim",
+        "url": "https://medium.com/p/f8a9c504ffd",
+        "topic": "tech",
+        "tags": [
+            "software-development",
+            "zsh",
+            "zim",
+            "terminal",
+            "software"
+        ],
+        "date": "2021-04-23T12:59:31.486Z",
+        "summary": "身為一個使用 mac 的開發者，原生的 Terminal 實在有夠醜，通常一開始為了美觀都會去下載一些套件來用(其實根本沒用到什麼功能)，之前一直是用 iTerm2 + Zsh + Oh My Zsh 的這個組合，這次剛好公司換新電腦，來裝了同事推薦的 zim 取代 Oh…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*uASM9gSC-1ApOYvcgaNxhA.png"
+    },
+    {
+        "id": "p/f91e2a96a662",
+        "source": "medium",
+        "title": "該怎麼用 Jest 測試你的 React 專案？ Enzyme or Testing-library？",
+        "url": "https://medium.com/p/f91e2a96a662",
+        "topic": "tech",
+        "tags": [
+            "frontend",
+            "test",
+            "testing",
+            "jest",
+            "react"
+        ],
+        "date": "2021-04-18T12:18:44.124Z",
+        "summary": "測試，在軟體開發一直都是一個很重要，但很容易被忽略的一環。這次想藉這個機會來探討與研究一下關於測試的這個議題 — 我們到底該如何測試我們的 React 專案？",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*HKqipx0ig-0xeJVnw5BYbQ.png"
     },
     {
         "id": "/2021/04/smlthotel.html",
@@ -2170,6 +3257,57 @@
             24.9584884,
             121.5834063
         ]
+    },
+    {
+        "id": "p/41abf06db13d",
+        "source": "medium",
+        "title": "如何部署開發完成的 React App",
+        "url": "https://medium.com/p/41abf06db13d",
+        "topic": "tech",
+        "tags": [
+            "firebase",
+            "react",
+            "front-end-development",
+            "front",
+            "software-development"
+        ],
+        "date": "2020-07-12T03:12:07.658Z",
+        "summary": "身為一個前端開發者，有時候想做一些小東西或是小工具玩玩，一個可以放置靜態網頁的空間絕對是你必備的工具之一。通常大家最常使用，也最常第一個想到的就是免費又有著無限的空間的 Github Page 了。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*uBQGLK7ZX7Xw1Eop8BPAZQ.png"
+    },
+    {
+        "id": "p/86b62b38a746",
+        "source": "medium",
+        "title": "前端工程師面試心得",
+        "url": "https://medium.com/p/86b62b38a746",
+        "topic": "tech",
+        "tags": [
+            "面試",
+            "前端工程師",
+            "interview",
+            "frontend",
+            "前端"
+        ],
+        "date": "2020-06-07T09:20:01.632Z",
+        "summary": "前一陣子我們 team 剛好有缺，要找一個 senior frontend 。雖然之前就陸陸續續有當面試官的機會，但都是去幫別 team support…",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*1KOPsZgBx9AML7Y7wv6iWw.jpeg"
+    },
+    {
+        "id": "p/df2801c9280e",
+        "source": "medium",
+        "title": "[CSS] 好用的排版工具 CSS Flexbox 入門簡介",
+        "url": "https://medium.com/p/df2801c9280e",
+        "topic": "tech",
+        "tags": [
+            "flex",
+            "css",
+            "engineering",
+            "frontend",
+            "ux-design"
+        ],
+        "date": "2020-04-04T02:50:25.006Z",
+        "summary": "一直以來遇到一些排版問題，常常都是把 Flexbox 當作萬靈丹，幾乎可以解決工作上要用的各種排版需求。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*hIfX1U5a2CV5ycVOEfdYAw.png"
     },
     {
         "id": "/2020/02/silks-place-tainan-bar.html",
@@ -2744,5 +3882,73 @@
             32.59,
             130.79999999999995
         ]
+    },
+    {
+        "id": "p/b4a0b11d3215",
+        "source": "medium",
+        "title": "維持團隊開發程式碼品質的好工具 — Git Hooks & Husky",
+        "url": "https://medium.com/p/b4a0b11d3215",
+        "topic": "tech",
+        "tags": [
+            "git",
+            "software-development",
+            "development",
+            "husky",
+            "software-tools"
+        ],
+        "date": "2019-12-01T09:21:11.223Z",
+        "summary": "最近在開發的時候，有用到一些 git hooks，也有遇過要寫很複雜的 git hook script 情況，趁有時間來紀錄一下，順便加強自己對 git hooks 的認識。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*cDbEf8i9Sq3JFZSVoxgyXA.png"
+    },
+    {
+        "id": "p/69b7bb70d065",
+        "source": "medium",
+        "title": "[CSS] overflow 同時設置 visible 與其他屬性衝突問題",
+        "url": "https://medium.com/p/69b7bb70d065",
+        "topic": "tech",
+        "tags": [
+            "css",
+            "development",
+            "engineering",
+            "frontend",
+            "ux-design"
+        ],
+        "date": "2019-10-20T09:22:48.327Z",
+        "summary": "前一陣子在開發過程中，遇到了一個有關 CSS 有趣的問題，趁記憶模糊之前在這裡把它記錄下來。",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*l7On9eHXRdfMMvfjvKOIJg.png"
+    },
+    {
+        "id": "p/b93b60e93292",
+        "source": "medium",
+        "title": "使用 clasp 輕鬆使用 TypeScript 開發 Google Apps Script",
+        "url": "https://medium.com/p/b93b60e93292",
+        "topic": "tech",
+        "tags": [
+            "typescript",
+            "google-apps-script",
+            "google-cloud-platform",
+            "chatbots",
+            "software-development"
+        ],
+        "date": "2019-07-23T13:43:54.224Z",
+        "summary": "# 前言",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*QOJbr0q0PifOBJ-jc9ropg.png"
+    },
+    {
+        "id": "p/8fff7372ff3d",
+        "source": "medium",
+        "title": "兩小時打造簡單 Line Chatbot — 使用 Google Apps Script & Google Sheet API",
+        "url": "https://medium.com/p/8fff7372ff3d",
+        "topic": "tech",
+        "tags": [
+            "chatbots",
+            "google-apps-script",
+            "line-messging-api",
+            "javascript",
+            "software-development"
+        ],
+        "date": "2019-07-04T14:28:08.142Z",
+        "summary": "# 前言",
+        "image": "https://miro.medium.com/v2/resize:fit:640/1*kZnmVuDyGchiA8OH92nbEA.png"
     }
 ]
