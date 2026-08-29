@@ -50,13 +50,16 @@ const Topic = () => {
     const activePlace =
         place !== null && !COUNTRIES.includes(place) ? place : null;
 
-    const results = filterPosts({
-        topic,
-        ...(place === null ? {} : { place }),
-        ...(type === null ? {} : { type }),
-        ...(tag === null ? {} : { tag }),
-        ...(lang === undefined ? {} : { lang }),
-    });
+    const results = filterPosts(
+        topic === 'travel'
+            ? {
+                  topic,
+                  ...(place === null ? {} : { place }),
+                  ...(type === null ? {} : { type }),
+                  ...(lang === undefined ? {} : { lang }),
+              }
+            : { topic, ...(tag === null ? {} : { tag }) }
+    );
 
     return (
         <Section>
