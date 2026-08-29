@@ -101,7 +101,7 @@ export interface Post {
 
 - `id` 是唯一鍵，也是 dedup 依據（解掉 §3 的重複條目問題）。
 - 一篇文章可帶多個 tag，取代原本「一篇只能屬於一個 category」的結構。
-- 205 筆 × ~250B ≈ **50KB 單一 JSON**，隨 bundle 一起送。不需分頁、不需搜尋服務。
+- 215 筆 × ~1.0KB ≈ **212KB 單一 JSON**（實測 2026-08-30：215 筆、216,935 bytes），隨 bundle 一起送（build 後 320KB JS／gzip 137KB）。不需分頁、不需搜尋服務。
 
 ## 7. 分類規則
 
@@ -174,7 +174,7 @@ export interface Post {
 
 `place`／`type`／`tag`／`lang` 全部存在 URL query，可分享、可收藏、可上一頁。過濾一律是 tag 比對，`place=日本` 與 `place=京都` 在資料層沒有差別——兩層只存在於呈現，資料層不做特例。
 
-- 搜尋：前端比對 `title + tags + summary`，大小寫與全半角正規化後 `includes`。205 筆不需任何 library。
+- 搜尋：前端比對 `title + tags + summary`，大小寫與全半角正規化後 `includes`。215 筆不需任何 library（實測 2026-08-30）。
 - Router：`HashRouter` → `BrowserRouter`，`basename="/outline"`（對齊 `vite.config.ts:6` 的 `base`）；gh-pages 的 SPA fallback 用建置後 `cp dist/index.html dist/404.html`，不是 `public/404.html`——後者是靜態複製，拿不到 build 後的資產雜湊，不會生效。
 - 外連：`new URL()` 組出 utm，取代 `List.tsx:37` 的字串拼接。
 - `index.html`：補 `description`、`og:*`、`twitter:card`，換掉 GitHub CDN favicon。
@@ -246,7 +246,7 @@ UI 不寫測試，改用 smoke 驗證（見 §13）。
 
 ## 13. 驗收標準
 
-1. `yarn sync` 產出的 `data/posts.json`：唯一 id ≥ 205，其中 `source: 'blogger'` = 134、`source: 'medium'` ≥ 71。
+1. `yarn sync` 產出的 `data/posts.json`：唯一 id ≥ 205，其中 `source: 'blogger'` = 134、`source: 'medium'` ≥ 71。（實測 2026-08-30：215／215 唯一 id、blogger 134、medium 81）
 2. Blogger 文章 100% 有 `date`、`image`、一個類型 tag；130/134 的地點直接來自 label，其餘 4 篇（`英文版本`）來自 `overrides.json`——**沒有任何一篇缺地點**。
 3. `vitest` 全綠，含 55/55 類型迴歸與地點推導。
 4. `yarn dev` 後以瀏覽器實際確認：首頁列出最新 10 篇且日期遞減正確；`/t/travel?place=京都&type=酒吧` 直接開啟即帶著兩個過濾狀態；點選國家後展開該國地點 chips 且篇數與 §4 實測一致（日本 18／台灣 11／澳洲 3／馬來西亞 1／泰國 1）；點擊外連帶 utm 且不破壞既有 query；搜尋「京都」同時命中 Blogger 與（若有）Medium 文章。
@@ -265,4 +265,4 @@ UI 不寫測試，改用 smoke 驗證（見 §13）。
 - 地圖視圖（`geo` 已在 schema，133/134 有座標，本次不渲染）。
 - 聚合 RSS 輸出。
 - 新來源（YouTube、Substack）。schema 的 `source` 已是開放列舉，屆時只需加一個 fetcher。
-- 全文搜尋（目前欄位比對對 205 筆足夠）。
+- 全文搜尋（目前欄位比對對 215 筆足夠）。
