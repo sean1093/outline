@@ -85,7 +85,7 @@ yarn add -D vitest fast-xml-parser @types/node
         "preview": "vite preview",
         "test": "vitest run",
         "sync": "node scripts/sync.ts",
-        "predeploy": "npm run build && cp dist/index.html dist/404.html",
+        "predeploy": "yarn build && cp dist/index.html dist/404.html",
         "deploy": "gh-pages -d dist",
         "format": "prettier --write ."
     }
@@ -756,7 +756,11 @@ Create `scripts/lib/blogger.ts`:
 
 ```ts
 import type { Post } from '../../src/types/post.ts';
-import { classifyTravelType, LANG_LABEL } from '../../src/lib/classify.ts';
+import {
+    classifyTravelType,
+    deriveTopic,
+    LANG_LABEL,
+} from '../../src/lib/classify.ts';
 
 export const BLOGGER_FEED =
     'https://travel-sean.blogspot.com/feeds/posts/default';
@@ -806,7 +810,7 @@ export function normalizeBlogger(entry: BloggerEntry): Post {
         source: 'blogger',
         title: entry.title.$t,
         url,
-        topic: 'travel',
+        topic: deriveTopic('blogger', entry.title.$t, tags),
         tags: [...new Set(tags)],
         date: new Date(entry.published.$t).toISOString(),
         ...(entry.content ? { summary: summarize(entry.content.$t) } : {}),
@@ -1512,17 +1516,17 @@ describe('facets', () => {
         const counts = Object.fromEntries(
             countryFacets().map((facet) => [facet.value, facet.count])
         );
-        expect(counts['日本']).toBe(50);
-        expect(counts['台灣']).toBe(44);
-        expect(counts['澳洲']).toBe(24);
-        expect(counts['馬來西亞']).toBe(11);
+        expect(counts['日本']).toBeGreaterThanOrEqual(50);
+        expect(counts['台灣']).toBeGreaterThanOrEqual(44);
+        expect(counts['澳洲']).toBeGreaterThanOrEqual(24);
+        expect(counts['馬來西亞']).toBeGreaterThanOrEqual(11);
         expect(counts['泰國']).toBe(4);
     });
 
     it('lists the places of a country', () => {
-        expect(placeFacets('日本')).toHaveLength(18);
-        expect(placeFacets('台灣')).toHaveLength(11);
-        expect(placeFacets('泰國').map((facet) => facet.value)).toEqual(['曼谷']);
+        expect(placeFacets('日本').length).toBeGreaterThanOrEqual(18);
+        expect(placeFacets('台灣').length).toBeGreaterThanOrEqual(11);
+        expect(placeFacets('泰國').map((facet) => facet.value)).toContain('曼谷');
     });
 
     it('resolves the country of a place from the data', () => {
@@ -1554,7 +1558,7 @@ describe('home data', () => {
 
     it('counts all three topics', () => {
         const counts = countsByTopic();
-        expect(counts.travel).toBe(130);
+        expect(counts.travel).toBeGreaterThanOrEqual(130);
         expect(counts.tech + counts.algo).toBeGreaterThanOrEqual(71);
     });
 });
@@ -1587,7 +1591,7 @@ Create `src/lib/posts.ts`:
 
 ```ts
 import type { Post, Topic } from '../types/post.ts';
-import { COUNTRIES, TRAVEL_TYPES } from './classify.ts';
+import { COUNTRIES, splitPlaces, TRAVEL_TYPES } from './classify.ts';
 import data from '../../data/posts.json';
 
 export const posts = data as unknown as Post[];
@@ -1655,10 +1659,8 @@ export function countryFacets(): FacetValue[] {
 
 export function placeFacets(country: string): FacetValue[] {
     return tally(
-        filterPosts({ topic: 'travel', place: country }).flatMap((post) =>
-            post.tags.filter(
-                (tag) => !COUNTRIES.includes(tag) && !TRAVEL_TYPES.includes(tag)
-            )
+        filterPosts({ topic: 'travel', place: country }).flatMap(
+            (post) => splitPlaces(post.tags).places
         )
     );
 }
@@ -1936,7 +1938,13 @@ const App: React.FC = () => {
 export default App;
 ```
 
-`src/pages/Topic.tsx` 在 Task 11 才建立，所以這一步之後 `yarn dev` 會編譯失敗——這是預期的，Task 11 補上。若要在本 task 結束時保持可跑，先建一個只回傳 `null` 的 `Topic.tsx` 佔位，並在 Task 11 完整替換。
+`src/pages/Topic.tsx` 在 Task 11 才建立，但 `src/App.tsx` 現在就 import 它。**這一步必須同時建立佔位檔**，否則這個 task 的 commit 會讓 `yarn build` 壞掉，違反「每個 task 結束都是可獨立驗證的交付」。佔位內容如下，Task 11 會整檔替換：
+
+```tsx
+const Topic = () => null;
+
+export default Topic;
+```
 
 - [ ] **Step 4: 補分享用 meta**
 
@@ -2484,4 +2492,4 @@ git commit -m "docs: record acceptance numbers"
 
 **型別一致性檢查：** `Post`／`Override` 只在 Task 2 定義，後續全部 `import type`；`FacetValue` 只在 Task 9 定義，Task 11 由 `../lib/posts.ts` 匯入；`classifyTravelType(title, labels)`、`deriveTopic(source, title, tags)`、`splitPlaces(tags)`、`mergePosts(existing, incoming, overrides?)`、`filterPosts(filter)` 的簽名在定義與呼叫處一致。`summarize` 由 `scripts/lib/blogger.ts` 匯出並被 `scripts/lib/medium.ts` 重用，不重複實作。
 
-**已知的脆弱點（不是缺口，是需要留意的地方）：** `tests/selectors.test.ts` 斷言真實篇數，你發新文章時它會紅。這是刻意的——它同時擋住「feed 結構變形導致資料silently 變少」。紅了就更新數字，不要放寬成 `toBeGreaterThan`。
+**`tests/selectors.test.ts` 對真實資料的斷言策略（pre-flight 裁決）：** 成長性數字（總篇數、各國家／地點篇數、topic 篇數）用下限斷言，因為 Task 13 的每日 job 會在 sync 之後跑測試——若用精確值，你每發一篇文章 CI 就變紅、部署被擋。結構性不變量維持精確：唯一 id 等於總數、日期遞減排序、英文版 4 篇、`missing date/image/type/country` 皆為 0。這樣既擋得住「feed 變形導致資料 silently 變少」，也不會因為你正常發文而紅燈。fixture 型測試（55/55 分類迴歸、fixture 134 篇）維持精確，因為 fixture 是凍結的。
