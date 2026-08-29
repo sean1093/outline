@@ -33,7 +33,8 @@ const StickyHeader: React.FC = () => {
         alignItems: 'center',
         zIndex: 1000,
         borderBottom: `1px solid ${theme.colors.border}`,
-        boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06)',
+        boxShadow:
+            '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06)',
         transition: 'all 0.3s ease',
     };
 
@@ -108,6 +109,32 @@ const StickyHeader: React.FC = () => {
         height: '44px',
     };
 
+    const NAV_ITEMS = [
+        { to: '/', label: 'Home' },
+        { to: '/t/travel', label: 'Travel' },
+        { to: '/t/tech', label: 'Tech' },
+        { to: '/t/algo', label: 'Algorithm' },
+    ];
+
+    const renderNav = (style: React.CSSProperties) => (
+        <nav style={style}>
+            {NAV_ITEMS.map((item) => (
+                <Link
+                    key={item.to}
+                    to={item.to}
+                    style={
+                        location.pathname === item.to
+                            ? activeLinkStyle
+                            : linkStyle
+                    }
+                    onClick={() => setIsMenuOpen(false)}
+                >
+                    {item.label}
+                </Link>
+            ))}
+        </nav>
+    );
+
     return (
         <header style={headerStyle}>
             <Link to="/" style={titleStyle}>
@@ -121,64 +148,10 @@ const StickyHeader: React.FC = () => {
                     >
                         {isMenuOpen ? '✕' : '☰'}
                     </button>
-                    <nav style={mobileNavStyle}>
-                        <Link
-                            to="/"
-                            style={location.pathname === '/' ? activeLinkStyle : linkStyle}
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            to="/travel"
-                            style={location.pathname === '/travel' ? activeLinkStyle : linkStyle}
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Travel
-                        </Link>
-                        <Link
-                            to="/tech"
-                            style={location.pathname === '/tech' ? activeLinkStyle : linkStyle}
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Tech
-                        </Link>
-                        <Link
-                            to="/algorithm"
-                            style={location.pathname === '/algorithm' ? activeLinkStyle : linkStyle}
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            Algorithm
-                        </Link>
-                    </nav>
+                    {renderNav(mobileNavStyle)}
                 </>
             ) : (
-                <nav style={navStyle}>
-                    <Link
-                        to="/"
-                        style={location.pathname === '/' ? activeLinkStyle : linkStyle}
-                    >
-                        Home
-                    </Link>
-                    <Link
-                        to="/travel"
-                        style={location.pathname === '/travel' ? activeLinkStyle : linkStyle}
-                    >
-                        Travel
-                    </Link>
-                    <Link
-                        to="/tech"
-                        style={location.pathname === '/tech' ? activeLinkStyle : linkStyle}
-                    >
-                        Tech
-                    </Link>
-                    <Link
-                        to="/algorithm"
-                        style={location.pathname === '/algorithm' ? activeLinkStyle : linkStyle}
-                    >
-                        Algorithm
-                    </Link>
-                </nav>
+                renderNav(navStyle)
             )}
         </header>
     );
