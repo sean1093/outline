@@ -29,7 +29,8 @@ const SubMenu: React.FC<SubMenuProps> = ({ items, activeItem, onItemClick }) => 
                 pointerEvents: 'none',
                 zIndex: 1
             }} />
-            <Flex 
+            <Flex
+                justify="flex-start"
                 style={{ 
                     padding: '8px 0',
                     backgroundColor: '#f8f9fa',
