@@ -1147,12 +1147,6 @@ const [bloggerEntries, mediumItems] = await Promise.all([
     fetchMedium(),
 ]);
 
-if (bloggerEntries.length === 0 || mediumItems.length === 0) {
-    throw new Error(
-        `refusing to write: blogger=${bloggerEntries.length} medium=${mediumItems.length}`
-    );
-}
-
 const incoming = [
     ...bloggerEntries.map(normalizeBlogger),
     ...mediumItems.map(normalizeMedium),
@@ -1174,7 +1168,7 @@ const counts = merged.reduce<Record<string, number>>((acc, post) => {
 console.log(`wrote ${merged.length} posts`, counts);
 ```
 
-腳本刻意在 feed 回空時直接 throw 而不寫檔：spec §10 要求任一 feed 異常時保留上一版。
+空 feed 的守衛**不在這裡**，在 `fetchBlogger`／`fetchMedium` 內部（Task 5 fix round 1 的裁決）：一條規則放兩個地方會漂移，而 fetcher 才是知道「這兩個來源的 feed 長什麼樣才算有效」的那一層。這裡不需要自己檢查——任一 fetcher throw，`Promise.all` 就 reject、腳本非零退出、什麼都不會寫，這正是 spec §10 要的「任一 feed 異常時保留上一版」。
 
 - [ ] **Step 3: 第一次真跑**
 
