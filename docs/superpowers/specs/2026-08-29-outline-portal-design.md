@@ -49,8 +49,11 @@
 
 - 全歷史可抓：**134 篇**（單次上限 150，需 `start-index` 分頁；實測一次取滿 134）。
 - 欄位：`published` / `updated` / `category[].term`（label）/ `content` / `media$thumbnail`（134/134）/ `link[rel=alternate]` / `georss$point`（133/134）。
-- 34 個 label **全部是地名**（台北、東京、日本、曼谷、珀斯…）加一個 `英文版本`（4 篇）。
-- 例外：那 4 篇 `英文版本` **只有** `英文版本` 一個 label，沒有任何地名 label。
+- **40 個 label：39 個全部是地名，加一個 `英文版本`（4 篇）。** 地名 label 的覆蓋率足以獨力支撐地點維度：
+  - **130/134 篇有國家層級 label**（日本 50、台灣 44、澳洲 24、馬來西亞 11、泰國 4）。缺的 4 篇正是那 4 篇 `英文版本`，它們**只有** `英文版本` 一個 label。
+  - 只有國家、沒有地點 label 的僅 3 篇，且都是本來就跨城市的總覽文（`酒吧清單`、2 篇 `台灣旅遊`）——不是漏標。
+  - 跨國家文章 1 篇（`酒吧清單`，橫跨 4 國）。
+  - 每個國家底下的地點數：日本 18、台灣 11、澳洲 3、馬來西亞 1、泰國 1。
 - 反向檢查：現有 55 個 config 連結全部存在於 feed，0 死連結。
 
 ## 5. 架構與資料流
@@ -116,13 +119,27 @@ export interface Post {
 
 ### 7.2 `tags`
 
-- Medium：`category[]` 原樣帶入（genai、ai-agent、react…）。
-- Blogger：`category[].term` 原樣帶入（地名）＋ §7.3 推導出的類型。
+- Medium：`category[]` 原樣帶入（genai、ai-agent、react…），單一維度。
+- Blogger：**兩個獨立面向（facet）**——地點（§7.3）與類型（§7.4）。兩者都存在同一個 `tags` 陣列，靠 §7.3／§7.4 的規則各自算出可選值，UI 可組合過濾。
 - `英文版本` 不進 tags，轉成 `lang: 'en'`。
 
-### 7.3 旅遊類型（a → b → c 降級鏈）
+### 7.3 地點（完全由 Blogger label 驅動）
 
-**(a) 來源 label 優先。** Blogger label 若含類型詞（住宿／景點／酒吧／美食…）直接採用。目前 34 個 label 全是地名，所以此層現在不會命中；你日後在 Blogger 補 label，程式無須改動即生效。
+地名 label 已足夠支撐整個地點維度，**沒有任何從標題猜地名的機制**。規則：
+
+| 項目 | 規則 |
+| --- | --- |
+| 國家層級 | 靜態清單 5 筆：`台灣`、`日本`、`泰國`、`澳洲`、`馬來西亞`。這是本設計唯一的靜態地理資料。 |
+| 地點層級 | 其餘所有非 `英文版本` 的 label 一律視為地點，歸屬由**同一篇文章上的國家 label** 決定。新增城市 label 自動生效，程式無須改動。 |
+| 跨國家文章 | 同時出現在每個國家底下（`酒吧清單` 橫跨 4 國，此為正確行為）。 |
+| 只有國家沒有地點 | 歸在該國家的「全部」清單，不進任何地點分組（3 篇總覽文）。 |
+| 4 篇 `英文版本` | 全庫唯一沒有地名 label 者。用 `overrides.json` 補 4 筆 `addTags`（`Sapporo Hotel Review` → `['日本','札幌']`、`Taipei Accommodation` → `['台灣','台北']`、`Yilan Accommodation` → `['台灣','宜蘭']`、`Sun Moon Lake Accommodation` → `['台灣','日月潭']`）。為 4 列資料寫一個英文地名 parser 不划算，而 overrides 機制本來就存在。你也可以直接去 Blogger 補這 4 篇的 label，之後把 overrides 刪掉。 |
+
+**明確不做三層階層（國家 → 都道府縣／州 → 城市）。** label 不含包含關係，而共現無法替代：`北海道`（12 篇）與 `京都`、`仙台`、`大阪`、`小倉`、`由布院`、`福岡` 都共現過，因為跨區總覽文一次貼上多個地名。任何自動推導的階層都會把京都放進北海道底下。唯一乾淨的案例只有 `秋田 ↔ 田澤湖`，不足以撐起一套規則。兩層在實測下完全乾淨：日本 18 個地點、台灣 11、澳洲 3、馬來西亞 1、泰國 1。
+
+### 7.4 旅遊類型（a → b → c 降級鏈）
+
+**(a) 來源 label 優先。** Blogger label 若含類型詞（住宿／景點／酒吧／美食…）直接採用。目前 39 個地名 label 中沒有類型詞，所以此層現在不會命中；你日後在 Blogger 補類型 label，程式無須改動即生效，並自動優先於 (b)。
 
 **(b) 標題前綴推導。** 你的 Blogger 標題有嚴格慣例 `<地區><類型> | <名稱> | …`。取 `|` 分段後的**前兩段**串接，依序比對：
 
@@ -142,18 +159,20 @@ export interface Post {
 
 驗證集另外證明兩件事：只掃第一段會漏 10 篇（類型詞在第二段，如 `關西自由行 | 大阪住宿 | …`）；掃全標題會誤判 1 篇。
 
-**(c) 安全網。** 兩層都沒中 → 不給類型 tag，文章仍可透過地名 tag、搜尋、首頁最新被找到。目前資料不會落到這層，但新標題慣例改變時不會掉資料。
-
-**地名補救。** 4 篇 `英文版本` 沒有地名 label，改由標題前綴取地名（`Sapporo Hotel Review` → Sapporo、`Taipei Accommodation` → 台北），避免它們只剩搜尋可達。
+**(c) 安全網。** 兩層都沒中 → 不給類型 tag，文章仍可透過地點 facet、搜尋、首頁最新被找到。目前資料不會落到這層，但新標題慣例改變時不會掉資料。
 
 ## 8. 站台結構與路由
 
 | 路由 | 內容 |
 | --- | --- |
 | `/` | 跨來源最新 10 篇（標題／日期／來源／縮圖）＋ 三個 topic 入口（附篇數）＋ 搜尋框 |
-| `/t/:topic` | 該 topic 全部文章，依 `date` 遞減；上方 tag 列由該 topic 的資料算出（附篇數） |
-| `/t/:topic?tag=日本` | tag 過濾。**狀態存在 URL**，可分享、可收藏、可上一頁 |
+| `/t/:topic` | 該 topic 全部文章，依 `date` 遞減；過濾列由該 topic 的資料算出（附篇數） |
+| `/t/travel?place=日本` | 地點過濾。travel 的過濾列分兩段：第一段固定 5 個國家，選定後第二段展開該國的地點 chips（日本 18／台灣 11／澳洲 3／馬來西亞 1／泰國 1） |
+| `/t/travel?place=京都&type=酒吧` | 地點與類型是**獨立可組合**的兩個 facet |
+| `/t/tech?tag=react` | tech／algo 只有單一 tag 維度（Medium tags），沿用 `tag` 參數 |
 | `/t/:topic?lang=en` | 只在 Topic 頁提供的語言切換。預設兩頁都只顯示中文；首頁「最新」永遠排除 `lang: 'en'`（那 4 篇是既有中文文章的翻譯，並列只是重複） |
+
+`place`／`type`／`tag`／`lang` 全部存在 URL query，可分享、可收藏、可上一頁。過濾一律是 tag 比對，`place=日本` 與 `place=京都` 在資料層沒有差別——兩層只存在於呈現，資料層不做特例。
 
 - 搜尋：前端比對 `title + tags + summary`，大小寫與全半角正規化後 `includes`。205 筆不需任何 library。
 - Router：`HashRouter` → `BrowserRouter`，`basename="/outline"`（對齊 `vite.config.ts:6` 的 `base`）；gh-pages 需 `public/404.html` 轉址 fallback。
@@ -218,15 +237,16 @@ export interface Post {
 2. **normalize**：以實際抓下來的 feed fixture（各一份）斷言 Blogger entry 與 Medium item 轉出的 `Post` 欄位正確，含 `guid → id` 的推導。
 3. **merge**：feed 缺少既有 id → 仍存在；同 id 重複 → 合併且 tags 聯集去重（對應 `/p/5bc7be208eac` 這個真實案例）。
 4. **deriveTopic**：LeetCode／演算法標題 → `algo`；其餘 Medium → `tech`；Blogger → `travel`。
+5. **地點推導**：帶 `['北海道','日本','札幌']` 的 entry → 國家 `日本`、地點含 `北海道`／`札幌`；只帶 `['台灣']` → 歸在台灣「全部」且不進任何地點分組；帶 4 個國家的 `酒吧清單` → 同時出現在 4 個國家底下；`overrides.addTags` 會與 label 聯集去重。
 
 UI 不寫測試，改用 smoke 驗證（見 §13）。
 
 ## 13. 驗收標準
 
 1. `yarn sync` 產出的 `data/posts.json`：唯一 id ≥ 205，其中 `source: 'blogger'` = 134、`source: 'medium'` ≥ 71。
-2. Blogger 文章 100% 有 `date`、`image`、至少一個地名 tag、一個類型 tag。
-3. `vitest` 全綠，含 55/55 分類迴歸。
-4. `yarn dev` 後以瀏覽器實際確認：首頁列出最新 10 篇且日期遞減正確；`/t/travel?tag=日本` 直接開啟即帶著過濾狀態；點擊外連帶 utm 且不破壞既有 query；搜尋「京都」同時命中 Blogger 與（若有）Medium 文章。
+2. Blogger 文章 100% 有 `date`、`image`、一個類型 tag；130/134 的地點直接來自 label，其餘 4 篇（`英文版本`）來自 `overrides.json`——**沒有任何一篇缺地點**。
+3. `vitest` 全綠，含 55/55 類型迴歸與地點推導。
+4. `yarn dev` 後以瀏覽器實際確認：首頁列出最新 10 篇且日期遞減正確；`/t/travel?place=京都&type=酒吧` 直接開啟即帶著兩個過濾狀態；點選國家後展開該國地點 chips 且篇數與 §4 實測一致（日本 18／台灣 11／澳洲 3／馬來西亞 1／泰國 1）；點擊外連帶 utm 且不破壞既有 query；搜尋「京都」同時命中 Blogger 與（若有）Medium 文章。
 5. GitHub Action 手動 `workflow_dispatch` 跑一次：無新文章時不產生 commit；有新文章時 commit `data/posts.json` 並完成部署。
 6. repo 內不存在 `src/config/*Config.ts` 與舊四頁；`grep` 不到 `HashRouter`。
 
@@ -235,7 +255,7 @@ UI 不寫測試，改用 smoke 驗證（見 §13）。
 - **平台改版**是唯一真風險（Medium 關閉 RSS、Blogger 改 feed 格式）。緩解：資料 commit 進 repo＋append-only merge，最壞是停更而非資料消失；Action 紅燈即通知。
 - **Medium 只有 10 篇視窗**：每日排程對你的發文頻率有極大餘裕（同日發第 11 篇才會漏）。
 - **SEO 留在平台端**：選定「索引站」路線的必然結果。因此預算放在 OG 分享卡與「最新文章」，不做 SSR。
-- **類型推導依賴標題慣例**：目前 100% 準確，但慣例是你自己維持的。降級鏈的 (c) 保證慣例改變時不掉資料，只是少一個 tag；補 Blogger label 可永久脫離對標題的依賴。
+- **類型推導依賴標題慣例**：目前 100% 準確，但慣例是你自己維持的。降級鏈的 (c) 保證慣例改變時不掉資料，只是少一個 tag；補 Blogger 類型 label 可永久脫離對標題的依賴。**地點維度完全沒有這個風險**——100% 來自 label 與 4 筆 overrides，不碰標題。
 
 ## 15. 明確排除、未來可選
 
