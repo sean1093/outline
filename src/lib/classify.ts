@@ -38,3 +38,18 @@ export function deriveTopic(
     if (ALGO_TITLE.test(title)) return 'algo';
     return 'tech';
 }
+
+export function splitPlaces(tags: string[]): {
+    countries: string[];
+    places: string[];
+} {
+    return {
+        countries: tags.filter((tag) => COUNTRIES.includes(tag)),
+        places: tags.filter(
+            (tag) =>
+                !COUNTRIES.includes(tag) &&
+                !TRAVEL_TYPES.includes(tag) &&
+                tag !== LANG_LABEL
+        ),
+    };
+}
