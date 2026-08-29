@@ -1,3 +1,4 @@
+import type { Post } from '../src/types/post.ts';
 import { describe, expect, it } from 'vitest';
 import { withUtm } from '../src/lib/url.ts';
 import {
@@ -108,6 +109,38 @@ describe('facets', () => {
 
     it('caps tech tags to the most common ones', () => {
         expect(tagFacets('tech', 20).length).toBeLessThanOrEqual(20);
+    });
+
+    it('orders countries by descending count', () => {
+        const counts = countryFacets().map((facet) => facet.count);
+        expect(counts).toEqual([...counts].sort((a, b) => b - a));
+    });
+
+    it('counts facets over the visible corpus, not the raw index', () => {
+        const rawTravel = posts.filter((post) => post.topic === 'travel');
+        const visibleTravel = filterPosts({ topic: 'travel' });
+        expect(rawTravel.length).toBeGreaterThan(visibleTravel.length);
+
+        const tagged = (corpus: Post[], tag: string) =>
+            corpus.filter((post) => post.tags.includes(tag)).length;
+
+        const stayVisible = tagged(visibleTravel, '住宿');
+        const stayRaw = tagged(rawTravel, '住宿');
+        expect(stayRaw).toBeGreaterThan(stayVisible);
+        const types = Object.fromEntries(
+            typeFacets().map((facet) => [facet.value, facet.count])
+        );
+        expect(types['住宿']).toBe(stayVisible);
+        expect(types['住宿']).not.toBe(stayRaw);
+
+        const taiwanVisible = tagged(visibleTravel, '台灣');
+        const taiwanRaw = tagged(rawTravel, '台灣');
+        expect(taiwanRaw).toBeGreaterThan(taiwanVisible);
+        const countries = Object.fromEntries(
+            countryFacets().map((facet) => [facet.value, facet.count])
+        );
+        expect(countries['台灣']).toBe(taiwanVisible);
+        expect(countries['台灣']).not.toBe(taiwanRaw);
     });
 });
 
