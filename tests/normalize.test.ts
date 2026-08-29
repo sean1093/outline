@@ -1,12 +1,14 @@
 import { readFileSync } from 'node:fs';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
+    fetchBlogger,
     normalizeBlogger,
     summarize,
     upgradeThumb,
     type BloggerEntry,
 } from '../scripts/lib/blogger.ts';
 import {
+    fetchMedium,
     normalizeMedium,
     parseMediumXml,
     type MediumItem,
@@ -179,5 +181,61 @@ describe('normalizeMedium', () => {
         ]);
         expect(post.title).toBe('2026');
         expect(typeof post.title).toBe('string');
+    });
+});
+
+describe('fetchBlogger', () => {
+    afterEach(() => {
+        vi.unstubAllGlobals();
+    });
+
+    it('rejects when the first page holds no entries', async () => {
+        vi.stubGlobal('fetch', () =>
+            Promise.resolve({
+                ok: true,
+                json: () => Promise.resolve({ feed: {} }),
+            })
+        );
+        await expect(fetchBlogger()).rejects.toThrow(
+            /blogger feed returned 0 entries/
+        );
+    });
+
+    it('keeps paging until a later page comes back empty', async () => {
+        const requested: string[] = [];
+        const pages = [
+            { feed: { entry: [{ id: 'a' }, { id: 'b' }] } },
+            { feed: { entry: [{ id: 'c' }] } },
+            { feed: {} },
+        ];
+        vi.stubGlobal('fetch', (url: string) => {
+            requested.push(url);
+            return Promise.resolve({
+                ok: true,
+                json: () => Promise.resolve(pages[requested.length - 1]),
+            });
+        });
+        await expect(fetchBlogger()).resolves.toHaveLength(3);
+        expect(
+            requested.map((url) => new URL(url).searchParams.get('start-index'))
+        ).toEqual(['1', '3', '4']);
+    });
+});
+
+describe('fetchMedium', () => {
+    afterEach(() => {
+        vi.unstubAllGlobals();
+    });
+
+    it('rejects when the feed holds no items', async () => {
+        vi.stubGlobal('fetch', () =>
+            Promise.resolve({
+                ok: true,
+                text: () => Promise.resolve('<rss><channel></channel></rss>'),
+            })
+        );
+        await expect(fetchMedium()).rejects.toThrow(
+            /medium feed returned 0 items/
+        );
     });
 });

@@ -77,7 +77,16 @@ export async function fetchBlogger(): Promise<BloggerEntry[]> {
             feed: { entry?: BloggerEntry[] };
         };
         const entries = body.feed.entry ?? [];
-        if (entries.length === 0) return all;
+        // A later empty page is how pagination ends; an empty first page
+        // means the feed carried no posts at all, which cannot be real.
+        if (entries.length === 0) {
+            if (all.length === 0) {
+                throw new Error(
+                    'blogger feed returned 0 entries on the first page'
+                );
+            }
+            return all;
+        }
         all.push(...entries);
         start += entries.length;
     }

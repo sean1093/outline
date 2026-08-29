@@ -54,5 +54,9 @@ export async function fetchMedium(): Promise<MediumItem[]> {
     if (!response.ok) {
         throw new Error(`medium feed responded ${response.status}`);
     }
-    return parseMediumXml(await response.text());
+    const items = parseMediumXml(await response.text());
+    if (items.length === 0) {
+        throw new Error('medium feed returned 0 items');
+    }
+    return items;
 }
