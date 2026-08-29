@@ -156,7 +156,7 @@ curl -s 'https://travel-sean.blogspot.com/feeds/posts/default?alt=json&max-resul
 curl -s 'https://medium.com/feed/@sean1093' -o tests/fixtures/medium.xml
 ```
 
-`max-results=150` 一次就會回全部 134 篇，fixture 不需要分頁。
+`max-results=150` **不會**一次回全部 134 篇——Task 1 實測發現 Blogger 把回應截在約 2.6MB，單次只回 74 筆。fixture 是 `start-index=1`（74 筆）與 `start-index=75`（60 筆）兩頁合併後的文件，`feed.entry` 換成兩頁串接的 134 筆，其餘欄位保留第一頁原樣。
 
 - [ ] **Step 7: 從舊 config 抽出 55 筆人工分類答案**
 
@@ -592,6 +592,8 @@ git commit -m "feat: split blogger labels into countries and places"
   - `scripts/lib/medium.ts`：`MediumItem`、`normalizeMedium(item: MediumItem): Post`、`fetchMedium(): Promise<MediumItem[]>`
 
 實測依據：Blogger 的 `title.$t` 已是解碼過的純文字（134 篇中 0 個 HTML entity），不需要 unescape。縮圖 134/134 都含**恰好一個** `s72` 尺寸 token（三種形態：`=s72-w640-h512-c`、同樣式加 `?authuser=2`、路徑式 `/s72-w640-h512-c/`），把它換成 `s640` 四種形態實測都回 200，且檔案從 3–12KB 變成 106–140KB。`?authuser=` 對匿名請求無妨，不需要移除。
+
+**`fetchBlogger` 的分頁迴圈是必要的，不要「簡化」成單次請求。** Task 1 實測：Blogger 會把回應主體截在約 2.6MB，`max-results=150` 與 `max-results=500` 回傳位元組相同的內容，都只有 **74** 筆，且 feed 不提供 `rel="next"`。實際分頁行為是 `start-index=1` → 74 筆、`start-index=75` → 60 筆、再往後 → 0 筆。迴圈以「該頁回 0 筆就結束」為終止條件，這對上述行為是正確的。另外 `feed.openSearch$itemsPerPage` 會回報 `500` 這種與實際筆數不符的值，**不可**用它推算數量。
 
 - [ ] **Step 1: 寫失敗的測試**
 

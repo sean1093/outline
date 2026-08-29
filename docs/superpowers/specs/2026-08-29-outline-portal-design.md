@@ -47,7 +47,7 @@
 
 ### Blogger：`https://travel-sean.blogspot.com/feeds/posts/default?alt=json&max-results=150&start-index=N`
 
-- 全歷史可抓：**134 篇**（單次上限 150，需 `start-index` 分頁；實測一次取滿 134）。
+- 全歷史可抓：**134 篇**，但**必須分頁**。Blogger 把回應主體截在約 2.6MB，`max-results=150` 與 `max-results=500` 回傳位元組相同的內容、都只有 74 筆，且不提供 `rel="next"`。實際行為：`start-index=1` → 74 筆、`start-index=75` → 60 筆、再往後 → 0 筆。`openSearch$itemsPerPage` 會回報與實際筆數不符的值，不可用來推算數量。
 - 欄位：`published` / `updated` / `category[].term`（label）/ `content` / `media$thumbnail`（134/134）/ `link[rel=alternate]` / `georss$point`（133/134）。
 - **40 個 label：39 個全部是地名，加一個 `英文版本`（4 篇）。** 地名 label 的覆蓋率足以獨力支撐地點維度：
   - **130/134 篇有國家層級 label**（日本 50、台灣 44、澳洲 24、馬來西亞 11、泰國 4）。缺的 4 篇正是那 4 篇 `英文版本`，它們**只有** `英文版本` 一個 label。
