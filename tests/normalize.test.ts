@@ -6,7 +6,11 @@ import {
     upgradeThumb,
     type BloggerEntry,
 } from '../scripts/lib/blogger.ts';
-import { normalizeMedium, type MediumItem } from '../scripts/lib/medium.ts';
+import {
+    normalizeMedium,
+    parseMediumXml,
+    type MediumItem,
+} from '../scripts/lib/medium.ts';
 import bloggerFeed from './fixtures/blogger.json';
 
 const entries = bloggerFeed.feed.entry as unknown as BloggerEntry[];
@@ -143,8 +147,7 @@ describe('normalizeMedium', () => {
         expect(post.tags).toEqual(['leetcode']);
     });
 
-    it('parses the real rss snapshot', async () => {
-        const { parseMediumXml } = await import('../scripts/lib/medium.ts');
+    it('parses the real rss snapshot', () => {
         const items = parseMediumXml(
             readFileSync('tests/fixtures/medium.xml', 'utf8')
         );
@@ -155,5 +158,26 @@ describe('normalizeMedium', () => {
         expect(
             posts.filter((post) => post.topic === 'algo').length
         ).toBeGreaterThan(0);
+    });
+
+    it('keeps numeric-looking titles and tags as strings', () => {
+        const items = parseMediumXml(
+            '<rss><channel><item>' +
+                '<title>2026</title>' +
+                '<guid>https://medium.com/p/00ff</guid>' +
+                '<pubDate>Wed, 04 Mar 2026 12:00:00 GMT</pubDate>' +
+                '<category>2026</category>' +
+                '<category>ai</category>' +
+                '</item></channel></rss>'
+        );
+        expect(items).toHaveLength(1);
+        const post = normalizeMedium(items[0]);
+        expect(post.tags).toEqual(['2026', 'ai']);
+        expect(post.tags.map((tag) => typeof tag)).toEqual([
+            'string',
+            'string',
+        ]);
+        expect(post.title).toBe('2026');
+        expect(typeof post.title).toBe('string');
     });
 });

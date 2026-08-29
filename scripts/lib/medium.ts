@@ -14,7 +14,10 @@ export interface MediumItem {
 }
 
 export function parseMediumXml(xml: string): MediumItem[] {
-    const parsed = new XMLParser({ ignoreAttributes: true }).parse(xml) as {
+    const parsed = new XMLParser({
+        ignoreAttributes: true,
+        parseTagValue: false,
+    }).parse(xml) as {
         rss?: { channel?: { item?: MediumItem | MediumItem[] } };
     };
     const item = parsed.rss?.channel?.item;
