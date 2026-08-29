@@ -35,7 +35,15 @@ export function mergePosts(
         // Mark, never drop: posts.json is this script's own prior state, so
         // filtering here would erase the record from the accumulated archive
         // rather than hide it. src/lib/posts.ts drops hidden posts at read time.
-        if (override?.hidden === true) post.hidden = true;
+        //
+        // Assigned unconditionally, and this is the one place an explicit
+        // `undefined` is correct. A record hidden by a past override comes back
+        // in `existing` still carrying the flag, and an incoming feed record has
+        // no `hidden` key to overwrite it with, so `{ ...previous, ...post }`
+        // would carry it forward forever and removing the override would never
+        // un-hide the post. `JSON.stringify` drops undefined, so the artefact
+        // stays clean.
+        post.hidden = override?.hidden === true ? true : undefined;
         if (override?.topic !== undefined) post.topic = override.topic;
         if (override?.addTags !== undefined) {
             post.tags = [...new Set([...post.tags, ...override.addTags])];

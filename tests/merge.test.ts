@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Post } from '../src/types/post.ts';
 import { mergePosts } from '../scripts/lib/merge.ts';
+import { filterPosts, posts } from '../src/lib/posts.ts';
 
 const post = (over: Partial<Post> & Pick<Post, 'id'>): Post => ({
     source: 'medium',
@@ -82,6 +83,39 @@ describe('mergePosts', () => {
             'p/plain': { topic: 'travel' },
         });
         expect(merged[0].hidden).toBeUndefined();
+    });
+
+    it('clears a hidden flag carried in from the previous artefact', () => {
+        // sync.ts reads posts.json back as prior state, so a post hidden by a
+        // past override arrives in `existing` still carrying the flag, and the
+        // incoming feed record has no `hidden` key to overwrite it with. The
+        // merge has to clear it, or removing the override would never un-hide
+        // the post and the reversibility the docs promise would not exist.
+        const merged = mergePosts(
+            [{ ...post({ id: 'p/was-hidden' }), hidden: true }],
+            [post({ id: 'p/was-hidden' })]
+        );
+        expect(merged).toHaveLength(1);
+        expect(merged[0].hidden).toBeUndefined();
+
+        // Assert against what sync.ts actually writes and reads back, and
+        // assert absence of the key rather than falsiness: a carried-over
+        // `true`, a `"hidden": null` or a `"hidden": false` would all survive
+        // serialisation and fail here, while an explicit `undefined` — which is
+        // what the merge assigns — is dropped by JSON.stringify.
+        const written = JSON.parse(JSON.stringify(merged[0])) as Post;
+        expect('hidden' in written).toBe(false);
+
+        // Feeding that artefact back in on the next run keeps it un-hidden.
+        expect(mergePosts([written], [])[0].hidden).toBeUndefined();
+
+        // ...and the front end lists it again.
+        posts.push(written);
+        try {
+            expect(filterPosts({})).toContain(written);
+        } finally {
+            posts.pop();
+        }
     });
 
     it('sorts dated posts first, newest first, undated by title', () => {

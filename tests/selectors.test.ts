@@ -182,7 +182,11 @@ describe('hidden posts', () => {
         )!.count;
         const travelBefore = countsByTopic().travel;
 
-        posts.push(hidden);
+        // Inserted at the head, which is where a post dated 2099 really lands
+        // in the sorted artefact. `latest` slices `filterPosts({})` without
+        // sorting, so appending at the tail instead would make the `latest`
+        // assertion below pass no matter what the filter did.
+        posts.unshift(hidden);
         try {
             expect(posts).toContain(hidden);
             expect(filterPosts({})).not.toContain(hidden);
@@ -190,8 +194,8 @@ describe('hidden posts', () => {
                 filterPosts({ topic: 'travel', place: '曼谷' })
             ).not.toContain(hidden);
             expect(filterPosts({ q: '測試用隱藏文章' })).toEqual([]);
-            // Dated 2099, so an unfiltered `latest` would put it first.
             expect(latest(10)).not.toContain(hidden);
+            expect(latest(10)).toHaveLength(10);
             expect(
                 countryFacets().find((facet) => facet.value === '泰國')!.count
             ).toBe(thaiBefore);
@@ -201,7 +205,7 @@ describe('hidden posts', () => {
             ).toBe(bangkokBefore);
             expect(countsByTopic().travel).toBe(travelBefore);
         } finally {
-            posts.pop();
+            posts.shift();
         }
         expect(posts).not.toContain(hidden);
     });
