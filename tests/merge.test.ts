@@ -64,9 +64,24 @@ describe('mergePosts', () => {
                 c: { hidden: true },
             }
         );
-        expect(merged.map((entry) => entry.id)).toEqual(['a', 'b']);
+        expect(merged.map((entry) => entry.id)).toEqual(['a', 'b', 'c']);
         expect(merged[0].tags).toEqual(['英文版本-less', '台灣', '台北']);
         expect(merged[1].topic).toBe('travel');
+    });
+
+    it('marks a hidden post instead of erasing it from the archive', () => {
+        const merged = mergePosts([post({ id: 'p/keep' })], [], {
+            'p/keep': { hidden: true },
+        });
+        expect(merged.map((entry) => entry.id)).toEqual(['p/keep']);
+        expect(merged[0].hidden).toBe(true);
+    });
+
+    it('leaves posts unmarked when no override hides them', () => {
+        const merged = mergePosts([], [post({ id: 'p/plain' })], {
+            'p/plain': { topic: 'travel' },
+        });
+        expect(merged[0].hidden).toBeUndefined();
     });
 
     it('sorts dated posts first, newest first, undated by title', () => {

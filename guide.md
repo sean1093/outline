@@ -6,9 +6,10 @@
 以 tech / algo / travel 三個主題呈現，目的在於有一個集中的地方能依主題找到自己寫過
 的東西。
 
-feed 是 metadata 的事實來源：沒有任何一篇文章的標題或連結是手寫進 repo 的。但
-「有哪些文章」的事實來源是 committed 的 `data/posts.json`——索引是累積的，feed
-撈不到的舊文只存在那裡。
+feed 是標題、日期、摘要、縮圖的事實來源：沒有任何一篇文章的標題或連結是手寫進 repo
+的。但「有哪些文章」的事實來源是 committed 的 `data/posts.json`——索引是累積的，feed
+撈不到的舊文只存在那裡。**tags 不在 feed 的權威範圍內**：合併時一律取聯集，所以標籤
+只會累積、不會消失（見下面「資料怎麼更新」）。
 
 ## 架構
 
@@ -18,7 +19,9 @@ feed 是 metadata 的事實來源：沒有任何一篇文章的標題或連結�
 的輸入之一（見下面「資料怎麼更新」），是 app 唯一讀取的資料來源（build 時
 import，沒有 runtime fetch）——**不能砍掉重練**。`seed.medium.json` 是 Medium RSS
 已經撈不到的舊文備份，每次 sync 都會讀，只讀不寫。`overrides.json` 是唯一需要
-人工維護的檔案，用來補 feed 給不了的資訊（`addTags`、`topic`、`hidden`）。
+人工維護的檔案，用來補 feed 給不了的資訊（`addTags`、`topic`、`hidden`）。`hidden`
+只是隱藏：該筆仍會帶著 `hidden: true` 寫進 `posts.json`，由前端 `filterPosts` 在讀取
+時排除，所以不會從累積索引裡少掉資料，移除 override 再 sync 就會回來。
 
 `posts.json` 列在 `.prettierignore` 裡，不要對它跑 formatter。
 
@@ -74,6 +77,14 @@ sync 會安靜地生出一份**變少**的索引：Medium RSS 只給最新 10 �
 
 合併以文章 id 為鍵，後來的來源逐欄位覆寫、tags 一律取聯集。所以 feed 負責更新
 它還提供的那些文章的 metadata，`posts.json` 負責保住 feed 已經不提供的那些。
+
+**但 tags 只會加、不會減。** 因為 `posts.json` 本身也是 merge 的輸入，而每次 id
+撞到就取聯集，所以在 Blogger 上把某個 label 改名或刪掉，舊 tag 會永遠留在索引裡：
+那篇文章會同時出現在舊 tag 與新 tag 底下，而且再 sync 幾次都修不掉。`addTags` 也
+一樣是單向的——刪掉 override 那一列並不會收回它加過的 tag。要讓 tags 能跟著來源縮
+回去，需要「每個 tag 記錄來自哪個來源」的 provenance，那是 schema 變更，屬於另一
+件工作。在那之前唯一的修法是手改 `data/posts.json`，或把受影響的幾筆從裡面刪掉，
+讓下一次 `yarn sync` 從 feed 重新補回來。
 
 `yarn sync` 是 idempotent 的：來源沒變就寫出位元完全相同的檔案，所以 Action 只在
 真的有變動時才 commit。feed 掛掉或回空時 fetcher 會 throw，job 紅燈且不會寫檔，

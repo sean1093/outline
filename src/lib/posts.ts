@@ -23,6 +23,11 @@ const normalize = (value: string) => value.normalize('NFKC').toLowerCase();
 export function filterPosts(filter: PostFilter): Post[] {
     const query = filter.q === undefined ? '' : normalize(filter.q.trim());
     return posts.filter((post) => {
+        // Hiding is applied here, not in scripts/sync.ts: the merge keeps the
+        // record so the archive stays append-only. Every selector and every
+        // facet count goes through filterPosts, so they all inherit both of
+        // these exclusions from this one place.
+        if (post.hidden === true) return false;
         const wantsEnglish = filter.lang === 'en';
         if (wantsEnglish !== (post.lang === 'en')) return false;
         if (filter.topic !== undefined && post.topic !== filter.topic)
@@ -59,6 +64,11 @@ function tally(values: string[]): FacetValue[] {
         .sort((a, b) => b.count - a.count || a.value.localeCompare(b.value));
 }
 
+// The counts overlap: a post tagged with several countries is counted under
+// each one, so summing the chips overcounts. Measured 2026-08-30: the chips
+// total 133 against 130 visible travel posts, because one round-the-world bar
+// list carries four country tags. A travel total must come from
+// `filterPosts({ topic: 'travel' }).length`, never from summing these.
 export function countryFacets(): FacetValue[] {
     return tally(
         filterPosts({ topic: 'travel' }).flatMap(

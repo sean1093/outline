@@ -73,7 +73,7 @@ graph LR
 
 - **來源 feed**：文章是否存在、標題、日期、tags、縮圖。
 - **`seed.medium.json`**：Medium RSS 拿不到的歷史（凍結，只在 backfill 時寫）。
-- **`overrides.json`**：例外修正，形狀 `Record<PostId, { topic?: Topic; addTags?: string[]; hidden?: true }>`。`hidden` 在 sync 階段就把該筆排除、不寫進 `posts.json`（因此 `Post` 不需要 `hidden` 欄位）。**已知後果（Task 7 審查發現）**：因為 `posts.json` 同時是 sync 的輸入與輸出，`hidden` 不只是隱藏，而是把該筆從累積archive中抹除——對於落在 Medium RSS 10 篇視窗外、又不在 seed 裡的文章，即使日後移除 override 也救不回來。若要用 `hidden`，先改成「寫入未過濾的 merge 結果，由 `src/lib/posts.ts` 在讀取時過濾」。預期長度接近 0；不是常態工作流，也不提供置頂功能。
+- **`overrides.json`**：例外修正，形狀 `Record<PostId, { topic?: Topic; addTags?: string[]; hidden?: true }>`。`hidden` **只影響呈現，不影響持久化**：`mergePosts` 把該筆標記為 `hidden: true` 後照常寫進 `posts.json`，由 `src/lib/posts.ts` 的 `filterPosts` 在讀取時排除（因此 §6 的 `Post` 帶 `hidden?: true` 欄位）。**這是刻意推翻本節原本的規定**：原本要求在 sync 階段就把該筆排除，但因為 `posts.json` 同時是 sync 的輸入與輸出，那等於把文章從累積 archive 中抹除，而對落在 Medium RSS 10 篇視窗外、又不在 seed 裡的文章，那是不可回復的。改成讀取時過濾之後，archive 真正 append-only——沒有任何寫入路徑會從累積索引中減去資料，移除 override 再跑一次 sync 就會讓文章重新出現。所有 selector 與分面計數都經過 `filterPosts`，因此一律從同一處繼承這個排除。預期長度接近 0；不是常態工作流，也不提供置頂功能。
 - **`posts.json`**：生成物，commit 進 repo。可審、可回溯、build 不依賴網路。
 
 `merge` 為 **append-only**：以 `id` 為 key，feed 有的覆寫欄位，feed 沒有的既有項目保留。這讓 Medium 的 10 篇上限、平台暫時性故障都不會造成資料消失，最壞情況是「停止更新」。
@@ -96,6 +96,7 @@ export interface Post {
   image?: string;      // media$thumbnail 或 content 首張 img
   geo?: [number, number];  // Blogger georss，保留給未來地圖視圖，本次不渲染
   lang?: 'en';         // 只在英文版本標記；未標記即中文
+  hidden?: true;       // overrides.json 標記；只在讀取時過濾，見 §5
 }
 ```
 

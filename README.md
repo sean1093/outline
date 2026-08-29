@@ -25,9 +25,10 @@ Live at <https://sean1093.github.io/outline>.
 ## 🔄 How the index is built
 
 **`yarn sync` merges the feeds into `data/posts.json`; it does not regenerate
-it.** The feeds are authoritative for what a post's metadata says, but the
-committed `posts.json` is authoritative for _which posts exist_. The index
-accumulates, so deleting the file loses articles permanently.
+it.** The feeds are authoritative for a post's title, date, summary and image,
+but the committed `posts.json` is authoritative for _which posts exist_ — and,
+because tags are unioned rather than replaced, for tags too (see below). The
+index accumulates, so deleting the file loses articles permanently.
 
 ```
 Medium + Blogger feeds ──┐
@@ -61,6 +62,16 @@ data/overrides.json ─────┘
 - Merging is by post id: later sources win field by field, and tags are always
   unioned. So the feeds refresh metadata for the posts they still serve, while
   `posts.json` carries the ones they no longer do.
+- **Tags only ever accumulate, so a source-side tag removal does not
+  propagate.** `posts.json` is an input to its own merge and tags are unioned
+  on every id collision (`scripts/lib/merge.ts`), so renaming or deleting a
+  Blogger label leaves the old tag in the index forever — the post then shows
+  under both the old and the new tag, and re-syncing never corrects it. The same
+  applies to `addTags`: removing an override row does not remove the tags it
+  added. Making tags non-monotone needs per-source tag provenance, which is a
+  schema change and a separate piece of work. Until then the only repairs are to
+  edit `data/posts.json` by hand, or to delete the affected records from it so
+  the next `yarn sync` re-adds them from the feed.
 - `yarn sync` is idempotent: unchanged sources produce a byte-identical file,
   which is what lets the daily job commit only real changes.
 - The app imports `data/posts.json` at build time. There is no server and no
@@ -85,9 +96,14 @@ us:
 }
 ```
 
-- `addTags` — add country/place tags the post was published without
+- `addTags` — add country/place tags the post was published without. One-way:
+  removing the row does not remove the tags (see the tag note above)
 - `topic` — force `tech`, `algo` or `travel` when the classifier guesses wrong
-- `hidden` — drop a post from the index
+- `hidden` — hide a post from the site. The record stays in `data/posts.json`,
+  marked `"hidden": true`; `filterPosts` in `src/lib/posts.ts` drops it at read
+  time, so it disappears from every list, search and facet count. Nothing is
+  deleted, so this is reversible: remove the override, run `yarn sync`, and the
+  post comes back
 
 Edit it, run `yarn sync`, commit both files. Nothing else in `data/` is written
 by hand — but nothing else in `data/` is disposable either, since `posts.json`

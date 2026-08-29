@@ -32,7 +32,10 @@ export function mergePosts(
     const merged: Post[] = [];
     for (const post of byId.values()) {
         const override = overrides[post.id];
-        if (override?.hidden === true) continue;
+        // Mark, never drop: posts.json is this script's own prior state, so
+        // filtering here would erase the record from the accumulated archive
+        // rather than hide it. src/lib/posts.ts drops hidden posts at read time.
+        if (override?.hidden === true) post.hidden = true;
         if (override?.topic !== undefined) post.topic = override.topic;
         if (override?.addTags !== undefined) {
             post.tags = [...new Set([...post.tags, ...override.addTags])];

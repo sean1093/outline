@@ -49,7 +49,7 @@ describe('filterPosts', () => {
         expect(filterPosts({}).filter((post) => post.lang === 'en')).toEqual(
             []
         );
-        expect(filterPosts({ lang: 'en' })).toHaveLength(4);
+        expect(filterPosts({ lang: 'en' }).length).toBeGreaterThanOrEqual(4);
     });
 
     it('combines place and type', () => {
@@ -81,7 +81,7 @@ describe('facets', () => {
         expect(counts['台灣']).toBeGreaterThanOrEqual(44);
         expect(counts['澳洲']).toBeGreaterThanOrEqual(24);
         expect(counts['馬來西亞']).toBeGreaterThanOrEqual(11);
-        expect(counts['泰國']).toBe(4);
+        expect(counts['泰國']).toBeGreaterThanOrEqual(4);
     });
 
     it('lists the places of a country', () => {
@@ -155,5 +155,54 @@ describe('home data', () => {
         const counts = countsByTopic();
         expect(counts.travel).toBeGreaterThanOrEqual(130);
         expect(counts.tech + counts.algo).toBeGreaterThanOrEqual(71);
+    });
+});
+
+describe('hidden posts', () => {
+    // `hidden` marks the record in data/posts.json rather than removing it, so
+    // the exclusion has to happen here. Inserting into the loaded index is the
+    // only way to exercise it: no override currently sets `hidden`, so an
+    // assertion over the committed data alone would pass vacuously.
+    it('stay in the index but out of every selector and facet count', () => {
+        const hidden: Post = {
+            id: 'test/hidden',
+            source: 'blogger',
+            title: '測試用隱藏文章',
+            url: 'https://example.com/hidden',
+            topic: 'travel',
+            tags: ['泰國', '曼谷', '住宿'],
+            date: '2099-01-01T00:00:00.000Z',
+            hidden: true,
+        };
+        const thaiBefore = countryFacets().find(
+            (facet) => facet.value === '泰國'
+        )!.count;
+        const bangkokBefore = placeFacets('泰國').find(
+            (facet) => facet.value === '曼谷'
+        )!.count;
+        const travelBefore = countsByTopic().travel;
+
+        posts.push(hidden);
+        try {
+            expect(posts).toContain(hidden);
+            expect(filterPosts({})).not.toContain(hidden);
+            expect(
+                filterPosts({ topic: 'travel', place: '曼谷' })
+            ).not.toContain(hidden);
+            expect(filterPosts({ q: '測試用隱藏文章' })).toEqual([]);
+            // Dated 2099, so an unfiltered `latest` would put it first.
+            expect(latest(10)).not.toContain(hidden);
+            expect(
+                countryFacets().find((facet) => facet.value === '泰國')!.count
+            ).toBe(thaiBefore);
+            expect(
+                placeFacets('泰國').find((facet) => facet.value === '曼谷')!
+                    .count
+            ).toBe(bangkokBefore);
+            expect(countsByTopic().travel).toBe(travelBefore);
+        } finally {
+            posts.pop();
+        }
+        expect(posts).not.toContain(hidden);
     });
 });

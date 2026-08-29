@@ -14,6 +14,10 @@ export interface Post {
     image?: string;
     geo?: [number, number];
     lang?: 'en';
+    // Set from overrides.json. Hiding is a presentation concern: the record
+    // stays in data/posts.json so the accumulated archive is append-only, and
+    // src/lib/posts.ts filters it out at read time.
+    hidden?: true;
 }
 
 export interface Override {
