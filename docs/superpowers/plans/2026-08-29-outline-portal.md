@@ -1646,11 +1646,11 @@ function tally(values: string[]): FacetValue[] {
 }
 
 export function countryFacets(): FacetValue[] {
-    const travel = filterPosts({ topic: 'travel' });
-    return COUNTRIES.map((country) => ({
-        value: country,
-        count: travel.filter((post) => post.tags.includes(country)).length,
-    })).filter((facet) => facet.count > 0);
+    return tally(
+        filterPosts({ topic: 'travel' }).flatMap(
+            (post) => splitPlaces(post.tags).countries
+        )
+    );
 }
 
 export function placeFacets(country: string): FacetValue[] {
