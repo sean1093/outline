@@ -175,7 +175,7 @@ export interface Post {
 `place`／`type`／`tag`／`lang` 全部存在 URL query，可分享、可收藏、可上一頁。過濾一律是 tag 比對，`place=日本` 與 `place=京都` 在資料層沒有差別——兩層只存在於呈現，資料層不做特例。
 
 - 搜尋：前端比對 `title + tags + summary`，大小寫與全半角正規化後 `includes`。205 筆不需任何 library。
-- Router：`HashRouter` → `BrowserRouter`，`basename="/outline"`（對齊 `vite.config.ts:6` 的 `base`）；gh-pages 需 `public/404.html` 轉址 fallback。
+- Router：`HashRouter` → `BrowserRouter`，`basename="/outline"`（對齊 `vite.config.ts:6` 的 `base`）；gh-pages 的 SPA fallback 用建置後 `cp dist/index.html dist/404.html`，不是 `public/404.html`——後者是靜態複製，拿不到 build 後的資產雜湊，不會生效。
 - 外連：`new URL()` 組出 utm，取代 `List.tsx:37` 的字串拼接。
 - `index.html`：補 `description`、`og:*`、`twitter:card`，換掉 GitHub CDN favicon。
 - 樣式：沿用 `styles/theme.ts` ＋ `index.css` 的 CSS 變數，不引入新樣式方案。`Outline.tsx` 那一整頁 inline 裝飾隨頁面刪除而消失。
@@ -207,9 +207,10 @@ export interface Post {
 - `data/posts.json`、`data/seed.medium.json`、`data/overrides.json`
 - `src/lib/posts.ts`（載入與推導：topics、tags、latest、search）
 - `src/pages/Home.tsx`、`src/pages/Topic.tsx`
-- `public/404.html`
+- `tsconfig.scripts.json`（型別檢查 `scripts/` 與 `tests/`；`tsconfig.app.json` 只涵蓋 `src`）
+- `public/favicon.svg`
 - `tests/` 與 fixtures（見 §12）
-- `package.json` 新增 script：`sync`（跑 `scripts/sync.ts`）、`test`（vitest）
+- `package.json` 新增 script：`sync`（跑 `scripts/sync.ts`）、`test`（vitest）；`predeploy` 加上 `cp dist/index.html dist/404.html`
 
 刪除：
 
@@ -228,6 +229,8 @@ export interface Post {
 
 - `fast-xml-parser`（devDependency，只在 sync script 用，不進 bundle）。手刻正則解析 XML 不可接受。
 - `vitest`（devDependency）。repo 目前沒有測試框架。
+- `@types/node`（devDependency）。`scripts/` 用到 `node:fs`、`process`。
+- **不需要 tsx／ts-node**：本機 Node 24 原生執行 `.ts`（已實測 `node main.ts` 成功），`node scripts/sync.ts` 可直接跑。代價是 Node 載入的 `.ts` 檔 import 必須帶 `.ts` 副檔名、型別匯入必須用 `import type`、不得使用 enum／namespace／parameter properties。
 
 ## 12. 測試策略
 
