@@ -9,7 +9,13 @@ interface CardProps {
     style?: React.CSSProperties;
 }
 
-const Card: React.FC<CardProps> = ({ title, description, emoji, link, style }) => {
+const Card: React.FC<CardProps> = ({
+    title,
+    description,
+    emoji,
+    link,
+    style,
+}) => {
     const navigate = useNavigate();
 
     const cardStyle: React.CSSProperties = {
@@ -23,7 +29,7 @@ const Card: React.FC<CardProps> = ({ title, description, emoji, link, style }) =
         flexDirection: 'column',
         gap: '12px',
         height: '100%',
-        ...style
+        ...style,
     };
 
     const titleStyle: React.CSSProperties = {
@@ -58,7 +64,9 @@ const Card: React.FC<CardProps> = ({ title, description, emoji, link, style }) =
                 <span>{emoji}</span>
                 {title}
             </h2>
-            <p style={textStyle}>{description}</p>
+            <p className="topic-card-desc" style={textStyle}>
+                {description}
+            </p>
         </div>
     );
 };

@@ -33,16 +33,17 @@ const SubMenu: React.FC<SubMenuProps> = ({
                     width: '100%',
                     height: '100%',
                     background:
-                        'linear-gradient(to right, #f8f9fa 0%, transparent 9%, transparent 91%, #f8f9fa 100%)',
+                        'linear-gradient(to right, var(--border-light) 0%, transparent 9%, transparent 91%, var(--border-light) 100%)',
                     pointerEvents: 'none',
                     zIndex: 1,
                 }}
             />
             <Flex
+                className="chip-row"
                 justify="flex-start"
                 style={{
                     padding: '8px 0',
-                    backgroundColor: '#f8f9fa',
+                    backgroundColor: 'var(--border-light)',
                     borderRadius: '8px',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
                     overflowX: 'auto',
@@ -67,17 +68,17 @@ const SubMenu: React.FC<SubMenuProps> = ({
                             aria-pressed={activeItem === item.value}
                             onClick={() => onItemClick(item.value)}
                             style={{
-                                padding: '6px 12px',
+                                padding: '10px 14px',
                                 border: 'none',
                                 borderRadius: '20px',
                                 backgroundColor:
                                     activeItem === item.value
-                                        ? '#007bff'
+                                        ? 'var(--primary-color)'
                                         : 'transparent',
                                 color:
                                     activeItem === item.value
                                         ? 'white'
-                                        : '#333',
+                                        : 'var(--text-primary)',
                                 cursor: 'pointer',
                                 transition: 'all 0.3s ease',
                                 fontSize: '0.9rem',
@@ -92,13 +93,13 @@ const SubMenu: React.FC<SubMenuProps> = ({
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.backgroundColor =
                                     activeItem === item.value
-                                        ? '#0056b3'
-                                        : '#e9ecef';
+                                        ? 'var(--primary-hover)'
+                                        : 'var(--surface-hover)';
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.backgroundColor =
                                     activeItem === item.value
-                                        ? '#007bff'
+                                        ? 'var(--primary-color)'
                                         : 'transparent';
                             }}
                         >

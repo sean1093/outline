@@ -11,7 +11,8 @@ Live at <https://sean1093.github.io/outline>.
 - 📝 One index across Medium and Blogger, grouped by topic
 - 🔎 Search over titles, tags and summaries; faceted browsing per topic
 - 🔗 Shareable URLs — every filter lives in the query string
-- 🎨 Responsive design — the header collapses to a menu on phone widths
+- 🌓 Dark and light mode — follows the system, remembers an explicit choice
+- 📱 Mobile first — the layout is composed for a phone and adds back on wider screens
 
 ## 🛠 Tech Stack
 
@@ -175,8 +176,23 @@ tests/              # vitest: unit rules over fixtures, selectors over the real 
 `src/styles/theme.ts` holds colors, typography, spacing and breakpoints;
 `src/index.css` holds the CSS variables, base element styles, responsive
 breakpoints and keyframes. Components read tokens from the theme rather than
-hardcoding values. The palette is light-only — there is no
-`prefers-color-scheme` rule anywhere.
+hardcoding values.
+
+Two palettes: the light one on `:root`, the dark one on
+`:root[data-theme='dark']` plus a `prefers-color-scheme` block for visitors
+who have expressed no preference in this app. An inline script in
+`index.html` applies the stored choice before first paint, so the page never
+flashes the wrong palette; it reads the same storage key as
+`src/lib/themeMode.ts`, and a test asserts the two agree. Every colour a
+component uses is a variable — a hardcoded one shows up immediately as white
+text on white in dark mode.
+
+The CSS is mobile first: each rule states the phone case and a `min-width`
+query adds back what a larger screen can afford. On a 390px viewport the
+thumbnails are 72px rather than 112px, the topic-card descriptions are
+hidden, and the article stream is ordered above the topic cards — measured
+together, that moved the first article from 739px of an 844px viewport to
+304px.
 
 ## 🤝 Contributing
 

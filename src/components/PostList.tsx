@@ -50,8 +50,7 @@ const PostList: React.FC<{ posts: Post[] }> = ({ posts }) => {
                                 src={post.image}
                                 alt=""
                                 loading="lazy"
-                                width={112}
-                                height={84}
+                                className="post-thumb"
                                 style={{
                                     objectFit: 'cover',
                                     borderRadius: '8px',

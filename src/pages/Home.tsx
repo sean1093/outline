@@ -68,32 +68,34 @@ const Home = () => {
             />
 
             {trimmed === '' ? (
-                <>
-                    <div
-                        className="topic-grid"
-                        style={{ marginTop: theme.spacing.xl }}
-                    >
-                        {TOPICS.map((entry) => (
-                            <Card
-                                key={entry.topic}
-                                title={`${entry.title} (${counts[entry.topic]})`}
-                                description={entry.description}
-                                emoji={entry.emoji}
-                                link={`/t/${entry.topic}`}
-                            />
-                        ))}
-                    </div>
-                    <h2
-                        style={{
-                            ...theme.typography.h2,
-                            color: theme.colors.textPrimary,
-                            marginTop: theme.spacing.xxl,
-                        }}
-                    >
-                        最新文章
-                    </h2>
-                    <PostList posts={latest(10)} />
-                </>
+                <div className="home-body">
+                    <section className="home-topics">
+                        <div className="topic-grid">
+                            {TOPICS.map((entry) => (
+                                <Card
+                                    key={entry.topic}
+                                    title={`${entry.title} (${counts[entry.topic]})`}
+                                    description={entry.description}
+                                    emoji={entry.emoji}
+                                    link={`/t/${entry.topic}`}
+                                />
+                            ))}
+                        </div>
+                    </section>
+                    <section className="home-latest">
+                        <h2
+                            style={{
+                                ...theme.typography.h2,
+                                color: theme.colors.textPrimary,
+                                marginTop: 0,
+                                marginBottom: theme.spacing.md,
+                            }}
+                        >
+                            最新文章
+                        </h2>
+                        <PostList posts={latest(10)} />
+                    </section>
+                </div>
             ) : (
                 <>
                     <h2

@@ -10,24 +10,93 @@
     --background-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     --surface-color: #ffffff;
     --surface-hover: #f9fafb;
+    --header-bg: rgba(255, 255, 255, 0.95);
     --text-primary: #1e293b;
     --text-secondary: #64748b;
     --text-muted: #94a3b8;
     --border-color: #e2e8f0;
     --border-light: #f1f5f9;
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -1px rgb(0 0 0 / 0.06);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -2px rgb(0 0 0 / 0.05);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+        0 10px 10px -5px rgb(0 0 0 / 0.04);
 
     /* 字體設定 */
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family:
+        'Inter',
+        system-ui,
+        -apple-system,
+        sans-serif;
     line-height: 1.5;
     font-weight: 400;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------------------------------------------------------------------
+   Dark mode. `data-theme` is set on <html> by the inline script in index.html
+   before first paint, so there is no flash of the wrong palette. The media
+   query below covers the case where the visitor has expressed no preference
+   in this app and their system asks for dark.
+   --------------------------------------------------------------------------- */
+
+:root {
+    color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        color-scheme: dark;
+        --primary-color: #60a5fa;
+        --primary-hover: #93c5fd;
+        --primary-light: #1e3a8a;
+        --secondary-color: #94a3b8;
+        --background-color: #0f172a;
+        --background-gradient: linear-gradient(
+            135deg,
+            #0f172a 0%,
+            #111c33 100%
+        );
+        --surface-color: #1e293b;
+        --surface-hover: #334155;
+        --header-bg: rgba(15, 23, 42, 0.95);
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+        --border-color: #334155;
+        --border-light: #1e293b;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55);
+        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6);
+    }
+}
+
+:root[data-theme='dark'] {
+    color-scheme: dark;
+    --primary-color: #60a5fa;
+    --primary-hover: #93c5fd;
+    --primary-light: #1e3a8a;
+    --secondary-color: #94a3b8;
+    --background-color: #0f172a;
+    --background-gradient: linear-gradient(135deg, #0f172a 0%, #111c33 100%);
+    --surface-color: #1e293b;
+    --surface-hover: #334155;
+    --header-bg: rgba(15, 23, 42, 0.95);
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border-color: #334155;
+    --border-light: #1e293b;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6);
 }
 
 * {
@@ -63,7 +132,9 @@ button {
     background-color: var(--surface-color);
     border-radius: 12px;
     box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .card:hover {
@@ -112,17 +183,17 @@ button {
     :root {
         font-size: 14px;
     }
-    
+
     .container {
         padding: 0 16px;
     }
-    
+
     /* 移動端卡片優化 */
     .card {
         padding: 16px !important;
         margin-bottom: 16px;
     }
-    
+
     /* Hero 區塊背景圓圈在移動端隱藏 */
     .hero-decoration {
         display: none;
@@ -133,7 +204,7 @@ button {
     .container {
         padding: 0 12px;
     }
-    
+
     /* 更小螢幕的額外優化 */
     .card {
         padding: 12px !important;
@@ -202,7 +273,12 @@ button {
 }
 
 .shimmer {
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
     background-size: 200px 100%;
     animation: shimmer 1.5s infinite;
 }
@@ -216,16 +292,108 @@ button {
     color: var(--primary-color);
 }
 
+/* ---------------------------------------------------------------------------
+   Mobile first. Every rule states the phone case; a `min-width` query adds
+   back what a larger screen can afford. Measured at 390x844 before this
+   block: the first article on the home page began at 739px of an 844px
+   viewport, so 88% of the first screen was chrome.
+   --------------------------------------------------------------------------- */
+
+/* The content column. Lives here rather than as an inline style because the
+   inline `@media` keys it replaced were silently dropped by React. */
+.page {
+    flex: 1;
+    width: 100%;
+    margin: 0 auto;
+    padding: 8px 16px 24px;
+}
+
+@media (min-width: 768px) {
+    .page {
+        max-width: 90%;
+        padding: 40px 24px 32px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .page {
+        max-width: 1200px;
+    }
+}
+
 /* Three topic entries: stacked, or all three across. Never two with an
    orphan on a second row, which is what `auto-fit` produced around 750px. */
 .topic-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 12px;
 }
 
 @media (min-width: 900px) {
     .topic-grid {
         grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+}
+
+/* On a phone these three descriptions cost ~160px of the first screen to
+   restate what the headings already say, and the header nav offers the same
+   three destinations anyway. */
+.topic-card-desc {
+    display: none;
+}
+
+@media (min-width: 900px) {
+    .topic-card-desc {
+        display: block;
+    }
+}
+
+/* A 112px thumbnail took 30% of a 390px screen and squeezed the text column
+   to 190px, which is where the two- and three-line titles came from. */
+.post-thumb {
+    width: 72px;
+    height: 54px;
+}
+
+@media (min-width: 600px) {
+    .post-thumb {
+        width: 112px;
+        height: 84px;
+    }
+}
+
+/* Momentum scrolling for the filter rows: the place row for Japan holds
+   1232px of chips beyond the right edge. */
+.chip-row {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+}
+
+/* On a phone the three topic entries duplicate the header nav and pushed the
+   first article to 583px of an 844px viewport. Put the stream first there and
+   keep the orientation cards first on a desktop, where they cost nothing. */
+.home-body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 24px;
+}
+
+.home-topics {
+    order: 2;
+}
+
+.home-latest {
+    order: 1;
+}
+
+@media (min-width: 900px) {
+    .home-topics {
+        order: 1;
+    }
+
+    .home-latest {
+        order: 2;
     }
 }

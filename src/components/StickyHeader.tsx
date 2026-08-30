@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 import { theme } from '../styles/theme';
 
 const StickyHeader: React.FC = () => {
@@ -25,7 +26,7 @@ const StickyHeader: React.FC = () => {
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        backgroundColor: 'var(--header-bg)',
         backdropFilter: 'blur(10px)',
         padding: `${theme.spacing.md} ${theme.spacing.lg}`,
         display: 'flex',
@@ -82,7 +83,7 @@ const StickyHeader: React.FC = () => {
         top: '72px',
         left: 0,
         right: 0,
-        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        backgroundColor: 'var(--header-bg)',
         backdropFilter: 'blur(10px)',
         padding: theme.spacing.lg,
         display: isMenuOpen ? 'flex' : 'none',
@@ -140,19 +141,33 @@ const StickyHeader: React.FC = () => {
             <Link to="/" style={titleStyle}>
                 <span>📚</span> Sean 的文章索引
             </Link>
-            {isMobile ? (
-                <>
-                    <button
-                        style={menuButtonStyle}
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    >
-                        {isMenuOpen ? '✕' : '☰'}
-                    </button>
-                    {renderNav(mobileNavStyle)}
-                </>
-            ) : (
-                renderNav(navStyle)
-            )}
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: theme.spacing.sm,
+                }}
+            >
+                {isMobile ? (
+                    <>
+                        <ThemeToggle />
+                        <button
+                            style={menuButtonStyle}
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            aria-label={isMenuOpen ? '關閉選單' : '開啟選單'}
+                            aria-expanded={isMenuOpen}
+                        >
+                            {isMenuOpen ? '✕' : '☰'}
+                        </button>
+                        {renderNav(mobileNavStyle)}
+                    </>
+                ) : (
+                    <>
+                        {renderNav(navStyle)}
+                        <ThemeToggle />
+                    </>
+                )}
+            </div>
         </header>
     );
 };

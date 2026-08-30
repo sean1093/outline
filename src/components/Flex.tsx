@@ -12,6 +12,7 @@ type FlexProps = {
     gap?: number;
     height?: string | number;
     width?: string | number;
+    className?: string;
     style?: React.CSSProperties;
     children: React.ReactNode;
 };
@@ -23,6 +24,7 @@ const Flex: React.FC<FlexProps> = ({
     gap = 20,
     height = 'inherit',
     width = 'inherit',
+    className,
     style,
     children,
 }) => {
@@ -37,7 +39,11 @@ const Flex: React.FC<FlexProps> = ({
         ...style,
     };
 
-    return <div style={flexStyle}>{children}</div>;
+    return (
+        <div className={className} style={flexStyle}>
+            {children}
+        </div>
+    );
 };
 
 export default Flex;

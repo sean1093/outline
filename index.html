@@ -3,6 +3,18 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="color-scheme" content="light dark" />
+        <script>
+            // Before first paint, so the page never flashes the wrong palette.
+            // The key matches THEME_STORAGE_KEY in src/lib/themeMode.ts; no
+            // attribute means "follow the system", handled in index.css.
+            try {
+                var stored = localStorage.getItem('outline-theme');
+                if (stored === 'light' || stored === 'dark') {
+                    document.documentElement.dataset.theme = stored;
+                }
+            } catch (e) {}
+        </script>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <title>Sean 的文章索引</title>
         <meta
