@@ -138,7 +138,7 @@ const StickyHeader: React.FC = () => {
     return (
         <header style={headerStyle}>
             <Link to="/" style={titleStyle}>
-                <span>📚</span> Sean's Notes
+                <span>📚</span> Sean 的文章索引
             </Link>
             {isMobile ? (
                 <>

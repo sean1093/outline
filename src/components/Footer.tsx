@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
 
     return (
         <footer style={footerStyle}>
-            © {currentYear} Sean's Notes. All rights reserved.
+            © {currentYear} Sean 的文章索引
         </footer>
     );
 };

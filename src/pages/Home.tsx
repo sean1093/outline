@@ -70,13 +70,8 @@ const Home = () => {
             {trimmed === '' ? (
                 <>
                     <div
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns:
-                                'repeat(auto-fit, minmax(240px, 1fr))',
-                            gap: theme.spacing.lg,
-                            marginTop: theme.spacing.xl,
-                        }}
+                        className="topic-grid"
+                        style={{ marginTop: theme.spacing.xl }}
                     >
                         {TOPICS.map((entry) => (
                             <Card

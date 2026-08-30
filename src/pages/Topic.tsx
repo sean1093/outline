@@ -106,38 +106,46 @@ const Topic = () => {
                 />
             )}
 
-            <p
+            <div
                 style={{
-                    ...theme.typography.small,
-                    color: theme.colors.textSecondary,
-                    marginTop: theme.spacing.md,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: theme.spacing.md,
+                    flexWrap: 'wrap',
+                    marginTop: theme.spacing.lg,
+                    marginBottom: theme.spacing.sm,
                 }}
             >
-                {results.length} 篇
+                <span
+                    style={{
+                        ...theme.typography.body,
+                        color: theme.colors.textSecondary,
+                    }}
+                >
+                    {results.length} 篇
+                </span>
                 {topic === 'travel' && (
-                    <>
-                        {/* Textual separator, not just a margin: without it the
-                            line reads "130 篇看英文版 (4)" to a screen reader. */}
-                        {' · '}
-                        <button
-                            onClick={() =>
-                                setParam('lang', lang === 'en' ? null : 'en')
-                            }
-                            style={{
-                                border: 'none',
-                                background: 'none',
-                                color: theme.colors.primary,
-                                cursor: 'pointer',
-                                ...theme.typography.small,
-                            }}
-                        >
-                            {lang === 'en'
-                                ? '看中文版'
-                                : `看英文版 (${filterPosts({ topic: 'travel', lang: 'en' }).length})`}
-                        </button>
-                    </>
+                    <button
+                        onClick={() =>
+                            setParam('lang', lang === 'en' ? null : 'en')
+                        }
+                        style={{
+                            border: `1px solid ${theme.colors.border}`,
+                            borderRadius: '20px',
+                            padding: '4px 12px',
+                            background: theme.colors.surface,
+                            color: theme.colors.primary,
+                            cursor: 'pointer',
+                            ...theme.typography.small,
+                        }}
+                    >
+                        {lang === 'en'
+                            ? '看中文版'
+                            : `看英文版 (${filterPosts({ topic: 'travel', lang: 'en' }).length})`}
+                    </button>
                 )}
-            </p>
+            </div>
 
             <PostList posts={results} />
         </Section>

@@ -6,6 +6,7 @@ export const theme = {
         surface: 'var(--surface-color)',
         textPrimary: 'var(--text-primary)',
         textSecondary: 'var(--text-secondary)',
+        textMuted: 'var(--text-muted)',
         border: 'var(--border-color)',
     },
     spacing: {

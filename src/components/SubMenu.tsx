@@ -11,27 +11,36 @@ interface SubMenuProps {
     onItemClick: (value: string) => void;
 }
 
-const SubMenu: React.FC<SubMenuProps> = ({ items, activeItem, onItemClick }) => {
+const SubMenu: React.FC<SubMenuProps> = ({
+    items,
+    activeItem,
+    onItemClick,
+}) => {
     return (
-        <div style={{ 
-            width: '100%',
-            maxWidth: '100%',
-            position: 'relative',
-            marginBottom: '12px'
-        }}>
-            <div style={{
-                position: 'absolute',
-                left: 0,
-                top: 0,
+        <div
+            style={{
                 width: '100%',
-                height: '100%',
-                background: 'linear-gradient(to right, #f8f9fa 0%, transparent 5%, transparent 95%, #f8f9fa 100%)',
-                pointerEvents: 'none',
-                zIndex: 1
-            }} />
+                maxWidth: '100%',
+                position: 'relative',
+                marginBottom: '12px',
+            }}
+        >
+            <div
+                style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    width: '100%',
+                    height: '100%',
+                    background:
+                        'linear-gradient(to right, #f8f9fa 0%, transparent 9%, transparent 91%, #f8f9fa 100%)',
+                    pointerEvents: 'none',
+                    zIndex: 1,
+                }}
+            />
             <Flex
                 justify="flex-start"
-                style={{ 
+                style={{
                     padding: '8px 0',
                     backgroundColor: '#f8f9fa',
                     borderRadius: '8px',
@@ -41,15 +50,17 @@ const SubMenu: React.FC<SubMenuProps> = ({ items, activeItem, onItemClick }) => 
                     scrollbarWidth: 'none',
                     msOverflowStyle: 'none',
                     position: 'relative',
-                    zIndex: 0
+                    zIndex: 0,
                 }}
             >
-                <div style={{ 
-                    display: 'flex',
-                    gap: '8px',
-                    padding: '0 16px',
-                    minWidth: 'min-content'
-                }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        gap: '8px',
+                        padding: '0 16px',
+                        minWidth: 'min-content',
+                    }}
+                >
                     {items.map((item) => (
                         <button
                             key={item.value}
@@ -59,23 +70,36 @@ const SubMenu: React.FC<SubMenuProps> = ({ items, activeItem, onItemClick }) => 
                                 padding: '6px 12px',
                                 border: 'none',
                                 borderRadius: '20px',
-                                backgroundColor: activeItem === item.value ? '#007bff' : 'transparent',
-                                color: activeItem === item.value ? 'white' : '#333',
+                                backgroundColor:
+                                    activeItem === item.value
+                                        ? '#007bff'
+                                        : 'transparent',
+                                color:
+                                    activeItem === item.value
+                                        ? 'white'
+                                        : '#333',
                                 cursor: 'pointer',
                                 transition: 'all 0.3s ease',
                                 fontSize: '0.9rem',
-                                fontWeight: activeItem === item.value ? '600' : '400',
+                                fontWeight:
+                                    activeItem === item.value ? '600' : '400',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '6px',
                                 whiteSpace: 'nowrap',
-                                flexShrink: 0
+                                flexShrink: 0,
                             }}
                             onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = activeItem === item.value ? '#0056b3' : '#e9ecef';
+                                e.currentTarget.style.backgroundColor =
+                                    activeItem === item.value
+                                        ? '#0056b3'
+                                        : '#e9ecef';
                             }}
                             onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = activeItem === item.value ? '#007bff' : 'transparent';
+                                e.currentTarget.style.backgroundColor =
+                                    activeItem === item.value
+                                        ? '#007bff'
+                                        : 'transparent';
                             }}
                         >
                             {item.icon && <span>{item.icon}</span>}
@@ -88,4 +112,4 @@ const SubMenu: React.FC<SubMenuProps> = ({ items, activeItem, onItemClick }) => 
     );
 };
 
-export default SubMenu; 
+export default SubMenu;

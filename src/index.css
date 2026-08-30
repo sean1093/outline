@@ -215,3 +215,17 @@ button {
 .list-link:hover {
     color: var(--primary-color);
 }
+
+/* Three topic entries: stacked, or all three across. Never two with an
+   orphan on a second row, which is what `auto-fit` produced around 750px. */
+.topic-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 900px) {
+    .topic-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
