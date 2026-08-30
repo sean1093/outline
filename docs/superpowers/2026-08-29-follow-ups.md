@@ -54,3 +54,13 @@
 - `latest` 沒有斷言排序——它的順序來自 artefact，所以在函式裡加一個 sort 也不會變紅。
 - `placeFacets` 與 `tagFacets` 沒有被「換成原始陣列」的測試保護；每種 facet 各有一個代表被保護。
 - 反空洞守衛依賴英文版那組文章持續涵蓋 `台灣` 與 `住宿`（餘裕 4/4/3）。若哪天不再涵蓋，測試會因資料變動而變紅——是安全方向的失敗。
+
+## UX 修正後新發現的兩件事（2026-08-30）
+
+**1. tech 的 tag 嚴重碎片化，這是內容端的問題。** 同一個「前端」概念被拆成 8 個 tag：`frontend`(17)、`前端`(11)、`front-end-development`(10)、`frontend-development`(3)、`前端筆記`(3)、`前端開發`(1)、`前端工程師`(1)、`front`(1)。tag chip 列只顯示前 20 名，所以這 47 篇被切碎後有幾個永遠排不進去。
+
+修法只能在 Medium 端重新打 tag——`overrides.json` 的 `addTags` 只能加不能減，而移除需要 tag 來源標記那個 schema 變更。挑一個正規名稱（建議 `frontend`），把其餘的在 Medium 上改掉，下次 sync 後舊 tag 仍會留在索引裡（見上面的單調性限制），屆時要手動編輯 `data/posts.json` 一次。
+
+**2. 深連結回 HTTP 404（但畫面正常）。** `https://sean1093.github.io/outline/t/travel` 的狀態碼是 404，內容卻是正確的 SPA shell，所以瀏覽器正常渲染、React Router 正常接手。這是 gh-pages 用 `404.html` 當 SPA fallback 的固有行為。
+
+影響範圍限於「把狀態碼當真」的消費者：爬蟲、部分聊天軟體的連結預覽、連結檢查工具會把分享出去的分類頁當成不存在。真要修得改成 SSG（Astro/Next 靜態輸出）或換到會回 200 的 host（Cloudflare Pages / Netlify 的 SPA rewrite）。首頁 `/outline/` 本身回 200，不受影響。
