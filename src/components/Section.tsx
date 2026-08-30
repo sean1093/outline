@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from './Footer';
-import { SectionProps } from '../types/common';
+import type { SectionProps } from '../types/common';
 
 /**
  * The page shell. `main` exists so the skip link has somewhere to land and so
