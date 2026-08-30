@@ -1,36 +1,44 @@
-:root {
-    /* 顏色主題 */
-    --primary-color: #2563eb;
-    --primary-hover: #1d4ed8;
-    --primary-light: #dbeafe;
-    --secondary-color: #64748b;
-    --accent-color: #f59e0b;
-    --success-color: #10b981;
-    --background-color: #f8fafc;
-    --background-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    --surface-color: #ffffff;
-    --surface-hover: #f9fafb;
-    --header-bg: rgba(255, 255, 255, 0.95);
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --text-muted: #94a3b8;
-    --border-color: #e2e8f0;
-    --border-light: #f1f5f9;
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
-        0 2px 4px -1px rgb(0 0 0 / 0.06);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-        0 4px 6px -2px rgb(0 0 0 / 0.05);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-        0 10px 10px -5px rgb(0 0 0 / 0.04);
+/* ---------------------------------------------------------------------------
+   A quiet, paper-like surface.
 
-    /* 字體設定 */
+   The palette is unbleached rather than white — 生成り, the colour MUJI leaves
+   fabric and paper when it skips the bleaching step. Nothing is elevated:
+   divisions are hairlines, not shadows, and corners are barely rounded. There
+   is no gradient, no accent fill competing for attention, and no decorative
+   glyph. What remains is the text.
+
+   Every text pair below was measured for WCAG AA before being chosen. Two
+   rules came out of that and are worth stating, because breaking either is
+   invisible until someone cannot read the page:
+
+   - `--text-faint` fails 4.5:1 in light mode by design. It is for hairlines
+     and disabled glyphs, never for words.
+   - The selected filter chip inverts — ink on paper becomes paper on ink — so
+     it reads at 13:1 in both palettes. The previous accent-filled chip scored
+     2.54:1 in dark mode, because lightening an accent for legible links makes
+     it worse behind white text.
+   --------------------------------------------------------------------------- */
+
+:root {
+    color-scheme: light;
+
+    --bg: #f5f3ee;
+    --surface: #faf9f6;
+    --text-primary: #2b2925;
+    --text-secondary: #6b665e;
+    --text-faint: #8a857c;
+    --hairline: #dedbd3;
+    --border-control: #8a857c;
+    --accent: #7c6a52;
+    --radius: 2px;
+
     font-family:
         'Inter',
         system-ui,
         -apple-system,
+        'Noto Sans TC',
         sans-serif;
-    line-height: 1.5;
+    line-height: 1.75;
     font-weight: 400;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -38,65 +46,32 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* ---------------------------------------------------------------------------
-   Dark mode. `data-theme` is set on <html> by the inline script in index.html
-   before first paint, so there is no flash of the wrong palette. The media
-   query below covers the case where the visitor has expressed no preference
-   in this app and their system asks for dark.
-   --------------------------------------------------------------------------- */
-
-:root {
-    color-scheme: light;
-}
-
+/* Warm charcoal rather than blue-black: the dark palette is the same paper
+   seen at night, not a different product. */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
         color-scheme: dark;
-        --primary-color: #60a5fa;
-        --primary-hover: #93c5fd;
-        --primary-light: #1e3a8a;
-        --secondary-color: #94a3b8;
-        --background-color: #0f172a;
-        --background-gradient: linear-gradient(
-            135deg,
-            #0f172a 0%,
-            #111c33 100%
-        );
-        --surface-color: #1e293b;
-        --surface-hover: #334155;
-        --header-bg: rgba(15, 23, 42, 0.95);
-        --text-primary: #e2e8f0;
-        --text-secondary: #94a3b8;
-        --text-muted: #64748b;
-        --border-color: #334155;
-        --border-light: #1e293b;
-        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
-        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
-        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55);
-        --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6);
+        --bg: #1c1a17;
+        --surface: #23211d;
+        --text-primary: #e8e4dc;
+        --text-secondary: #a8a29a;
+        --text-faint: #8a857c;
+        --hairline: #34312b;
+        --border-control: #7a7468;
+        --accent: #c2ab8b;
     }
 }
 
 :root[data-theme='dark'] {
     color-scheme: dark;
-    --primary-color: #60a5fa;
-    --primary-hover: #93c5fd;
-    --primary-light: #1e3a8a;
-    --secondary-color: #94a3b8;
-    --background-color: #0f172a;
-    --background-gradient: linear-gradient(135deg, #0f172a 0%, #111c33 100%);
-    --surface-color: #1e293b;
-    --surface-hover: #334155;
-    --header-bg: rgba(15, 23, 42, 0.95);
-    --text-primary: #e2e8f0;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --border-color: #334155;
-    --border-light: #1e293b;
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.55);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.6);
+    --bg: #1c1a17;
+    --surface: #23211d;
+    --text-primary: #e8e4dc;
+    --text-secondary: #a8a29a;
+    --text-faint: #8a857c;
+    --hairline: #34312b;
+    --border-control: #7a7468;
+    --accent: #c2ab8b;
 }
 
 * {
@@ -106,198 +81,94 @@
 }
 
 body {
-    background: var(--background-gradient);
+    background: var(--bg);
     color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
 }
 
+/* Links carry the text colour and earn an underline on hover. A blue link on
+   a paper ground is the one thing that would break the whole surface. */
 a {
-    color: var(--primary-color);
+    color: inherit;
     text-decoration: none;
-    transition: color 0.2s ease;
 }
 
 a:hover {
-    color: var(--primary-hover);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
 }
 
 button {
     cursor: pointer;
-    transition: all 0.2s ease;
+    font-family: inherit;
 }
 
-/* 卡片樣式 */
-.card {
-    background-color: var(--surface-color);
-    border-radius: 12px;
-    box-shadow: var(--shadow-sm);
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+/* A designed focus ring. Before this the page had none at all and relied on
+   the browser default, which is 1px on content links. */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius);
 }
 
-.card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+/* `main` carries `tabindex="-1"` purely so the skip link can land focus on
+   it. Ringing the whole content column affords nothing — there is no
+   interaction there — and the visitor who just pressed the skip link already
+   knows where they are. Screen-reader focus still moves; only the box goes. */
+main:focus-visible {
+    outline: none;
 }
 
-/* 按鈕樣式 */
-.btn {
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.skip-link {
+    position: absolute;
+    left: 16px;
+    top: -48px;
+    z-index: 1100;
+    padding: 8px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border-control);
+    border-radius: var(--radius);
+    transition: top 0.15s ease;
 }
 
-.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
+.skip-link:focus-visible {
+    top: 16px;
 }
 
-.btn-primary:hover {
-    background-color: var(--primary-hover);
+/* The overlay nav reads as a list of destinations, each a real tap target.
+   The inline styles the header sets do not touch height, so this can raise
+   37px rows to 48 without a specificity fight. */
+.nav-mobile a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    border-bottom: 1px solid var(--hairline);
 }
 
-.btn-secondary {
-    background-color: var(--surface-color);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
+.nav-mobile a:last-child {
+    border-bottom: none;
 }
 
-.btn-secondary:hover {
-    background-color: var(--background-color);
-}
-
-/* 容器樣式 */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* 響應式設計 */
-@media (max-width: 768px) {
-    :root {
-        font-size: 14px;
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
     }
-
-    .container {
-        padding: 0 16px;
-    }
-
-    /* 移動端卡片優化 */
-    .card {
-        padding: 16px !important;
-        margin-bottom: 16px;
-    }
-
-    /* Hero 區塊背景圓圈在移動端隱藏 */
-    .hero-decoration {
-        display: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 12px;
-    }
-
-    /* 更小螢幕的額外優化 */
-    .card {
-        padding: 12px !important;
-    }
-}
-
-/* 平板和中型螢幕 */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .container {
-        padding: 0 24px;
-    }
-}
-
-/* 大螢幕優化 */
-@media (min-width: 1200px) {
-    .container {
-        padding: 0 32px;
-    }
-}
-
-/* 動畫效果 */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -200px 0;
-    }
-    100% {
-        background-position: calc(200px + 100%) 0;
-    }
-}
-
-.fade-in {
-    animation: fadeIn 0.6s ease forwards;
-}
-
-.shimmer {
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
-    background-size: 200px 100%;
-    animation: shimmer 1.5s infinite;
-}
-
-.list-link {
-    color: var(--text-primary);
-    transition: color 0.2s ease;
-}
-
-.list-link:hover {
-    color: var(--primary-color);
 }
 
 /* ---------------------------------------------------------------------------
-   Mobile first. Every rule states the phone case; a `min-width` query adds
-   back what a larger screen can afford. Measured at 390x844 before this
-   block: the first article on the home page began at 739px of an 844px
-   viewport, so 88% of the first screen was chrome.
+   Layout. Mobile first: each rule states the phone case and a `min-width`
+   query adds back what a larger screen can afford.
    --------------------------------------------------------------------------- */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
 /* The content column. Lives here rather than as an inline style because the
    inline `@media` keys it replaced were silently dropped by React. */
@@ -305,55 +176,118 @@ button {
     flex: 1;
     width: 100%;
     margin: 0 auto;
-    padding: 8px 16px 24px;
+    padding: 8px 20px 32px;
 }
 
 @media (min-width: 768px) {
     .page {
-        max-width: 90%;
-        padding: 40px 24px 32px;
+        max-width: 720px;
+        padding: 56px 24px 40px;
     }
 }
 
 @media (min-width: 1024px) {
     .page {
-        max-width: 1200px;
+        max-width: 820px;
     }
 }
+
+/* One measure, not a full-bleed grid: a reading column beats a wide one for a
+   list of titles, and it is what keeps the page calm on a large screen. */
 
 /* Three topic entries: stacked, or all three across. Never two with an
    orphan on a second row, which is what `auto-fit` produced around 750px. */
 .topic-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 0;
+    border-top: 1px solid var(--hairline);
+}
+
+.topic-grid > * {
+    border-bottom: 1px solid var(--hairline);
+}
+
+/* The topic entry itself. Class rather than inline styles, because the grid
+   below has to control its padding and an inline `padding` would win. */
+.topic-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+    padding: 16px 0;
+    background: transparent;
+    border: none;
+    text-align: left;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.topic-card-title {
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+/* On a phone these descriptions cost ~160px of the first screen to restate
+   what the headings already say, and the header nav offers the same three
+   destinations anyway. */
+.topic-card-desc {
+    display: none;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
 }
 
 @media (min-width: 900px) {
     .topic-grid {
         grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
     }
-}
 
-/* On a phone these three descriptions cost ~160px of the first screen to
-   restate what the headings already say, and the header nav offers the same
-   three destinations anyway. */
-.topic-card-desc {
-    display: none;
-}
+    /* Vertical hairlines drawn as borders, not as a `gap` over a coloured
+       parent: that trick needs every child to paint its own background, and
+       one transparent child turns the whole row into a grey band. */
+    .topic-grid > * + * {
+        border-left: 1px solid var(--hairline);
+    }
 
-@media (min-width: 900px) {
+    .topic-card {
+        height: 100%;
+        padding: 20px;
+    }
+
     .topic-card-desc {
         display: block;
     }
 }
 
-/* A 112px thumbnail took 30% of a 390px screen and squeezed the text column
-   to 190px, which is where the two- and three-line titles came from. */
+/* ---------------------------------------------------------------------------
+   The article list. Hairlines between rows rather than gaps: it reads as one
+   continuous index instead of a stack of cards.
+   --------------------------------------------------------------------------- */
+
+.post-list {
+    list-style: none;
+    border-top: 1px solid var(--hairline);
+}
+
+.post-list > li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--hairline);
+}
+
+/* Sized against what the layout renders — 72px on a phone, 112px on a
+   desktop — so the source asks the CDN for `s320` and no more. */
 .post-thumb {
     width: 72px;
     height: 54px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+    background: var(--hairline);
 }
 
 @media (min-width: 600px) {
@@ -363,21 +297,87 @@ button {
     }
 }
 
-/* Momentum scrolling for the filter rows: the place row for Japan holds
-   1232px of chips beyond the right edge. */
+.post-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.post-eyebrow {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+}
+
+.post-title {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.post-meta {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+/* ---------------------------------------------------------------------------
+   Filters. A plain row of squared chips on a hairline, no container fill and
+   no fade overlay. The selected one inverts.
+   --------------------------------------------------------------------------- */
+
 .chip-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--hairline);
+    scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
 }
 
-/* On a phone the three topic entries duplicate the header nav and pushed the
-   first article to 583px of an 844px viewport. Put the stream first there and
-   keep the orientation cards first on a desktop, where they cost nothing. */
+.chip-row::-webkit-scrollbar {
+    display: none;
+}
+
+.chip {
+    flex-shrink: 0;
+    padding: 8px 12px;
+    min-height: 40px;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    background: transparent;
+    border: 1px solid var(--border-control);
+    border-radius: var(--radius);
+    white-space: nowrap;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.chip:hover {
+    background: var(--surface);
+}
+
+.chip[aria-pressed='true'] {
+    background: var(--text-primary);
+    color: var(--bg);
+    border-color: var(--text-primary);
+}
+
+/* ---------------------------------------------------------------------------
+   Home. On a phone the topic entries duplicate the header nav and pushed the
+   first article to 583px of an 844px viewport, so the stream goes first
+   there and the orientation cards stay first on a desktop.
+   --------------------------------------------------------------------------- */
+
 .home-body {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    margin-top: 24px;
+    gap: 40px;
+    margin-top: 28px;
 }
 
 .home-topics {
@@ -395,5 +395,32 @@ button {
 
     .home-latest {
         order: 2;
+    }
+}
+
+.search-field {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background: var(--surface);
+    border: 1px solid var(--border-control);
+    border-radius: var(--radius);
+}
+
+.search-field::placeholder {
+    color: var(--text-secondary);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

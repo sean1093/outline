@@ -12,6 +12,9 @@ import Topic from './pages/Topic';
 const App: React.FC = () => {
     return (
         <Router basename="/outline">
+            <a className="skip-link" href="#content">
+                跳到主要內容
+            </a>
             <StickyHeader />
             <Routes>
                 <Route path="/" element={<Home />} />

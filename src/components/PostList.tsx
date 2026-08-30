@@ -24,81 +24,32 @@ const PostList: React.FC<{ posts: Post[] }> = ({ posts }) => {
         );
     }
     return (
-        <ul
-            style={{
-                listStyle: 'none',
-                padding: 0,
-                margin: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: theme.spacing.lg,
-            }}
-        >
+        <ul className="post-list">
             {posts.map((post) => {
                 const { eyebrow, name } = splitTitle(post.title);
                 return (
-                    <li
-                        key={post.id}
-                        style={{
-                            display: 'flex',
-                            gap: theme.spacing.md,
-                            alignItems: 'flex-start',
-                        }}
-                    >
+                    <li key={post.id}>
                         {post.image !== undefined && (
                             <img
+                                className="post-thumb"
                                 src={post.image}
                                 alt=""
                                 loading="lazy"
-                                className="post-thumb"
-                                style={{
-                                    objectFit: 'cover',
-                                    borderRadius: '8px',
-                                    flexShrink: 0,
-                                    background: theme.colors.border,
-                                }}
                             />
                         )}
-                        <div
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: theme.spacing.xs,
-                            }}
-                        >
+                        <div className="post-body">
                             {eyebrowAddsInformation(eyebrow, post.tags) && (
-                                <span
-                                    style={{
-                                        ...theme.typography.small,
-                                        color: theme.colors.textMuted,
-                                    }}
-                                >
-                                    {eyebrow}
-                                </span>
+                                <span className="post-eyebrow">{eyebrow}</span>
                             )}
                             <a
-                                className="list-link"
+                                className="post-title"
                                 href={withUtm(post.url)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                style={{
-                                    ...theme.typography.body,
-                                    fontWeight: '600',
-                                    // No `color` here on purpose: `.list-link` in
-                                    // index.css sets the identical resting colour,
-                                    // and an inline one would outrank
-                                    // `.list-link:hover`.
-                                    textDecoration: 'none',
-                                }}
                             >
                                 {name}
                             </a>
-                            <span
-                                style={{
-                                    ...theme.typography.small,
-                                    color: theme.colors.textSecondary,
-                                }}
-                            >
+                            <span className="post-meta">
                                 {post.date?.slice(0, 10) ?? '日期不明'} ·{' '}
                                 {SOURCE_LABEL[post.source]}
                                 {post.tags.length > 0 &&

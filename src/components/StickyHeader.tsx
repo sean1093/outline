@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import { theme } from '../styles/theme';
+
+const NAV_ITEMS = [
+    { to: '/', label: 'Home' },
+    { to: '/t/travel', label: 'Travel' },
+    { to: '/t/tech', label: 'Tech' },
+    { to: '/t/algo', label: 'Algorithm' },
+];
 
 const StickyHeader: React.FC = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,115 +17,94 @@ const StickyHeader: React.FC = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            const newIsMobile = window.innerWidth <= 768;
-            setIsMobile(newIsMobile);
-            if (!newIsMobile) {
-                setIsMenuOpen(false);
-            }
+            const mobile = window.innerWidth <= 768;
+            setIsMobile(mobile);
+            if (!mobile) setIsMenuOpen(false);
         };
-
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // Escape closed nothing before, which is the one keyboard expectation an
+    // overlay menu has to meet.
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        const onKey = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') setIsMenuOpen(false);
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [isMenuOpen]);
 
     const headerStyle: React.CSSProperties = {
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
-        backgroundColor: 'var(--header-bg)',
-        backdropFilter: 'blur(10px)',
-        padding: `${theme.spacing.md} ${theme.spacing.lg}`,
+        zIndex: 1000,
+        background: theme.colors.background,
+        borderBottom: `1px solid ${theme.colors.hairline}`,
+        padding: `${theme.spacing.sm} ${theme.spacing.md}`,
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        zIndex: 1000,
-        borderBottom: `1px solid ${theme.colors.border}`,
-        boxShadow:
-            '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06)',
-        transition: 'all 0.3s ease',
+        gap: theme.spacing.md,
     };
 
     const titleStyle: React.CSSProperties = {
-        fontSize: '1.5rem',
-        fontWeight: '700',
-        background: 'linear-gradient(135deg, var(--primary-color), #3b82f6)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        backgroundClip: 'text',
-        textDecoration: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        gap: theme.spacing.sm,
-        transition: 'all 0.3s ease',
-    };
-
-    const navStyle: React.CSSProperties = {
-        display: 'flex',
-        gap: theme.spacing.md,
-        alignItems: 'center',
+        fontSize: '0.9375rem',
+        fontWeight: '500',
+        letterSpacing: '0.06em',
+        color: theme.colors.textPrimary,
     };
 
     const linkStyle: React.CSSProperties = {
-        color: theme.colors.textPrimary,
-        textDecoration: 'none',
-        padding: `${theme.spacing.xs} ${theme.spacing.md}`,
-        borderRadius: '8px',
-        fontSize: '0.95rem',
-        fontWeight: '500',
-        transition: 'all 0.3s ease',
-        position: 'relative',
-        overflow: 'hidden',
+        ...theme.typography.small,
+        color: theme.colors.textSecondary,
+        padding: `${theme.spacing.sm} 0`,
+        letterSpacing: '0.04em',
     };
 
     const activeLinkStyle: React.CSSProperties = {
         ...linkStyle,
-        background: 'linear-gradient(135deg, var(--primary-color), #3b82f6)',
-        color: 'white',
-        boxShadow: '0 2px 8px rgba(37, 99, 235, 0.3)',
+        color: theme.colors.textPrimary,
+        textDecoration: 'underline',
+        textDecorationThickness: '1px',
+        textUnderlineOffset: '5px',
+    };
+
+    const navStyle: React.CSSProperties = {
+        display: 'flex',
+        gap: theme.spacing.lg,
+        alignItems: 'center',
     };
 
     const mobileNavStyle: React.CSSProperties = {
-        position: 'fixed',
-        top: '72px',
+        position: 'absolute',
+        top: '100%',
         left: 0,
         right: 0,
-        backgroundColor: 'var(--header-bg)',
-        backdropFilter: 'blur(10px)',
-        padding: theme.spacing.lg,
         display: isMenuOpen ? 'flex' : 'none',
         flexDirection: 'column',
-        gap: theme.spacing.md,
-        borderBottom: `1px solid ${theme.colors.border}`,
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-        animation: isMenuOpen ? 'slideDown 0.3s ease' : 'slideUp 0.3s ease',
+        gap: 0,
+        padding: `0 ${theme.spacing.md}`,
+        background: theme.colors.background,
+        borderBottom: `1px solid ${theme.colors.hairline}`,
+        animation: 'slideDown 0.15s ease',
     };
 
     const menuButtonStyle: React.CSSProperties = {
-        display: isMobile ? 'flex' : 'none',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'none',
-        border: 'none',
+        minWidth: '44px',
+        minHeight: '40px',
+        background: 'transparent',
         color: theme.colors.textPrimary,
-        fontSize: '1.5rem',
-        cursor: 'pointer',
-        padding: theme.spacing.sm,
-        borderRadius: '8px',
-        transition: 'all 0.3s ease',
-        width: '44px',
-        height: '44px',
+        border: `1px solid ${theme.colors.borderControl}`,
+        borderRadius: theme.radius,
+        ...theme.typography.small,
     };
 
-    const NAV_ITEMS = [
-        { to: '/', label: 'Home' },
-        { to: '/t/travel', label: 'Travel' },
-        { to: '/t/tech', label: 'Tech' },
-        { to: '/t/algo', label: 'Algorithm' },
-    ];
-
-    const renderNav = (style: React.CSSProperties) => (
-        <nav style={style}>
+    const renderNav = (style: React.CSSProperties, className?: string) => (
+        <nav style={style} className={className} aria-label="主要導覽">
             {NAV_ITEMS.map((item) => (
                 <Link
                     key={item.to}
@@ -127,6 +113,9 @@ const StickyHeader: React.FC = () => {
                         location.pathname === item.to
                             ? activeLinkStyle
                             : linkStyle
+                    }
+                    aria-current={
+                        location.pathname === item.to ? 'page' : undefined
                     }
                     onClick={() => setIsMenuOpen(false)}
                 >
@@ -139,7 +128,7 @@ const StickyHeader: React.FC = () => {
     return (
         <header style={headerStyle}>
             <Link to="/" style={titleStyle}>
-                <span>📚</span> Sean 的文章索引
+                Sean 的文章索引
             </Link>
             <div
                 style={{
@@ -152,14 +141,15 @@ const StickyHeader: React.FC = () => {
                     <>
                         <ThemeToggle />
                         <button
+                            type="button"
                             style={menuButtonStyle}
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             aria-label={isMenuOpen ? '關閉選單' : '開啟選單'}
                             aria-expanded={isMenuOpen}
                         >
-                            {isMenuOpen ? '✕' : '☰'}
+                            選單
                         </button>
-                        {renderNav(mobileNavStyle)}
+                        {renderNav(mobileNavStyle, 'nav-mobile')}
                     </>
                 ) : (
                     <>

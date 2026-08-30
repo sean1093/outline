@@ -173,26 +173,63 @@ tests/              # vitest: unit rules over fixtures, selectors over the real 
 
 ## 🎨 Design System
 
-`src/styles/theme.ts` holds colors, typography, spacing and breakpoints;
-`src/index.css` holds the CSS variables, base element styles, responsive
-breakpoints and keyframes. Components read tokens from the theme rather than
-hardcoding values.
+The surface is deliberately quiet: an unbleached paper ground (生成り) rather
+than white, hairlines instead of shadows, 2px corners, and no decorative
+glyph anywhere. There is no accent fill competing with the text — the accent
+colour appears only in focus rings. Links inherit the text colour and earn an
+underline on hover, because a blue link on a paper ground would break the
+whole surface.
+
+`src/styles/theme.ts` names the tokens the remaining inline styles need;
+`src/index.css` owns the palette, base element styles, responsive breakpoints
+and keyframes. Components read tokens rather than hardcoding values, and
+anything the CSS needs to control — the topic card's padding, the nav's tap
+targets — lives in a class, since an inline style would win the specificity
+fight.
 
 Two palettes: the light one on `:root`, the dark one on
 `:root[data-theme='dark']` plus a `prefers-color-scheme` block for visitors
-who have expressed no preference in this app. An inline script in
+who have expressed no preference in this app. The dark palette is warm
+charcoal, not blue-black — the same paper seen at night. An inline script in
 `index.html` applies the stored choice before first paint, so the page never
 flashes the wrong palette; it reads the same storage key as
 `src/lib/themeMode.ts`, and a test asserts the two agree. Every colour a
 component uses is a variable — a hardcoded one shows up immediately as white
 text on white in dark mode.
 
+Three rules came out of measuring contrast rather than eyeballing it, and
+each is invisible until someone cannot read the page:
+
+- **`--text-faint` never carries text.** It scores 3.31:1 on the light
+  ground. It is for hairlines and disabled glyphs. The post eyebrow used to
+  use it and failed AA in both themes; it now uses `--text-secondary`
+  (5.14:1 light, 6.86:1 dark).
+- **The selected filter chip inverts** — ink on paper becomes paper on ink,
+  13.09:1 light and 13.69:1 dark. An accent-filled chip scored 2.54:1 in dark
+  mode, because lightening an accent so links stay legible is the wrong
+  direction for white text sitting on it.
+- **Interactive borders get their own token.** WCAG 1.4.11 wants 3:1 for a
+  control boundary and the decorative `--hairline` is only 1.25:1, so
+  `--border-control` exists at 3.31:1 light / 3.74:1 dark.
+
 The CSS is mobile first: each rule states the phone case and a `min-width`
 query adds back what a larger screen can afford. On a 390px viewport the
 thumbnails are 72px rather than 112px, the topic-card descriptions are
 hidden, and the article stream is ordered above the topic cards — measured
 together, that moved the first article from 739px of an 844px viewport to
-304px.
+300px. Tap targets are 40px on the filter chips and 48px in the overlay nav.
+
+Thumbnails ask the Blogger CDN for its `s320` size rather than `s640`. Both
+render into a box that is at most 112px wide, and the smaller token cut a
+mobile `/t/travel` view from 6,432KB across 58 images to 1,885KB across 46.
+
+A skip link (`跳到主要內容`) precedes the header and lands on
+`<main id="content" tabindex="-1">`. The `tabindex` is what makes focus
+actually move rather than only relocating the sequential-focus starting
+point, and `main:focus-visible { outline: none }` keeps that from drawing a
+ring around the entire content column. Each filter row is a
+`role="group"` with an `aria-label` naming what it filters, and Escape closes
+the mobile menu.
 
 ## 🤝 Contributing
 

@@ -23,7 +23,7 @@ describe('upgradeThumb', () => {
             upgradeThumb(
                 'https://lh3.googleusercontent.com/pw/AAA=s72-w640-h512-c'
             )
-        ).toBe('https://lh3.googleusercontent.com/pw/AAA=s640-w640-h512-c');
+        ).toBe('https://lh3.googleusercontent.com/pw/AAA=s320-w640-h512-c');
     });
 
     it('upgrades a path-style size token', () => {
@@ -31,7 +31,7 @@ describe('upgradeThumb', () => {
             upgradeThumb(
                 'https://blogger.googleusercontent.com/img/x/s72-w640-h512-c/'
             )
-        ).toBe('https://blogger.googleusercontent.com/img/x/s640-w640-h512-c/');
+        ).toBe('https://blogger.googleusercontent.com/img/x/s320-w640-h512-c/');
     });
 
     it('rewrites exactly one token per url', () => {
@@ -39,7 +39,7 @@ describe('upgradeThumb', () => {
             upgradeThumb(entry['media$thumbnail']!.url)
         );
         expect(upgraded.filter((url) => url.includes('s72'))).toEqual([]);
-        expect(upgraded.filter((url) => url.includes('s640'))).toHaveLength(
+        expect(upgraded.filter((url) => url.includes('s320'))).toHaveLength(
             entries.length
         );
     });

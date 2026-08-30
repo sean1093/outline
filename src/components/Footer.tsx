@@ -1,28 +1,20 @@
 import React from 'react';
 import { theme } from '../styles/theme';
 
-const Footer: React.FC = () => {
-    const currentYear = new Date().getFullYear();
+const Footer: React.FC = () => (
+    <footer
+        style={{
+            width: '100%',
+            maxWidth: '820px',
+            margin: '0 auto',
+            padding: `${theme.spacing.lg} ${theme.spacing.md}`,
+            borderTop: `1px solid ${theme.colors.hairline}`,
+            ...theme.typography.small,
+            color: theme.colors.textSecondary,
+        }}
+    >
+        © {new Date().getFullYear()} Sean 的文章索引
+    </footer>
+);
 
-    const footerStyle: React.CSSProperties = {
-        backgroundColor: theme.colors.surface,
-        padding: theme.spacing.lg,
-        textAlign: 'center',
-        borderTop: `1px solid ${theme.colors.border}`,
-        color: theme.colors.textSecondary,
-        ...theme.typography.small,
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        width: '100%',
-    };
-
-    return (
-        <footer style={footerStyle}>
-            © {currentYear} Sean 的文章索引
-        </footer>
-    );
-};
-
-export default Footer; 
+export default Footer;

@@ -7,10 +7,10 @@ import {
 import { theme } from '../styles/theme';
 
 const NEXT: Record<ThemeMode, ThemeMode> = { light: 'dark', dark: 'light' };
-const LABEL: Record<ThemeMode, string> = {
-    light: '切換至深色模式',
-    dark: '切換至淺色模式',
-};
+
+/** The word names what the button does, rather than a sun or a moon whose
+ *  direction the visitor has to infer. */
+const LABEL: Record<ThemeMode, string> = { light: '深色', dark: '淺色' };
 
 const ThemeToggle: React.FC = () => {
     const [mode, setMode] = useState<ThemeMode>('light');
@@ -48,25 +48,20 @@ const ThemeToggle: React.FC = () => {
                 }
                 setMode(next);
             }}
-            aria-label={LABEL[mode]}
-            title={LABEL[mode]}
+            aria-label={`切換至${LABEL[mode]}模式`}
             style={{
-                width: '44px',
-                height: '44px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: `1px solid ${theme.colors.border}`,
-                borderRadius: '50%',
+                minWidth: '44px',
+                minHeight: '40px',
+                padding: `0 ${theme.spacing.sm}`,
                 background: 'transparent',
                 color: theme.colors.textPrimary,
-                cursor: 'pointer',
-                fontSize: '1.1rem',
-                lineHeight: 1,
+                border: `1px solid ${theme.colors.borderControl}`,
+                borderRadius: theme.radius,
+                ...theme.typography.small,
                 flexShrink: 0,
             }}
         >
-            <span aria-hidden="true">{mode === 'dark' ? '☀️' : '🌙'}</span>
+            {LABEL[mode]}
         </button>
     );
 };

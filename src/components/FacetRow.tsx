@@ -4,6 +4,8 @@ import type { FacetValue } from '../lib/posts.ts';
 
 interface FacetRowProps {
     allLabel: string;
+    /** Names what the row filters, for the `role="group"` in `SubMenu`. */
+    label: string;
     facets: FacetValue[];
     active: string | null;
     onSelect: (value: string | null) => void;
@@ -11,11 +13,13 @@ interface FacetRowProps {
 
 const FacetRow: React.FC<FacetRowProps> = ({
     allLabel,
+    label,
     facets,
     active,
     onSelect,
 }) => (
     <SubMenu
+        label={label}
         items={[
             { label: allLabel, value: '' },
             ...facets.map((facet) => ({

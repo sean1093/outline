@@ -75,6 +75,7 @@ const Topic = () => {
             {topic === 'travel' ? (
                 <>
                     <FacetRow
+                        label="依地區篩選"
                         allLabel="全部地區"
                         facets={countryFacets()}
                         active={activeCountry}
@@ -82,6 +83,7 @@ const Topic = () => {
                     />
                     {activeCountry !== null && (
                         <FacetRow
+                            label={`${activeCountry}的地點`}
                             allLabel={`${activeCountry} 全部`}
                             facets={placeFacets(activeCountry)}
                             active={activePlace}
@@ -91,6 +93,7 @@ const Topic = () => {
                         />
                     )}
                     <FacetRow
+                        label="依類型篩選"
                         allLabel="全部類型"
                         facets={typeFacets()}
                         active={type}
@@ -99,6 +102,7 @@ const Topic = () => {
                 </>
             ) : (
                 <FacetRow
+                    label="依標籤篩選"
                     allLabel="全部標籤"
                     facets={tagFacets(topic)}
                     active={tag}
@@ -127,16 +131,17 @@ const Topic = () => {
                 </span>
                 {topic === 'travel' && (
                     <button
+                        type="button"
                         onClick={() =>
                             setParam('lang', lang === 'en' ? null : 'en')
                         }
                         style={{
-                            border: `1px solid ${theme.colors.border}`,
-                            borderRadius: '20px',
-                            padding: '4px 12px',
-                            background: theme.colors.surface,
-                            color: theme.colors.primary,
-                            cursor: 'pointer',
+                            minHeight: '40px',
+                            padding: `0 ${theme.spacing.md}`,
+                            border: `1px solid ${theme.colors.borderControl}`,
+                            borderRadius: theme.radius,
+                            background: 'transparent',
+                            color: theme.colors.textPrimary,
                             ...theme.typography.small,
                         }}
                     >
