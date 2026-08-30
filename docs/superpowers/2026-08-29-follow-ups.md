@@ -5,6 +5,12 @@
 
 實作日期 2026-08-29 / 08-30。
 
+## 合併時實際踩到的一個陷阱
+
+**`.worktrees/` 底下有 worktree 時，`yarn test` 會跑兩遍。** 合併驗證時測試數是 14 files / 126 tests，正好是 7 / 63 的兩倍——vitest 從 repo 根目錄 glob，預設的 exclude 只涵蓋 `node_modules`、`dist` 之類，不看 `.gitignore`，所以 `.worktrees/<branch>/tests/` 也被掃進去。移除 worktree 後立刻回到 7 / 63。
+
+這次沒有造成誤判（兩份都是綠的），但下一個功能分支會再踩到，而且如果 worktree 裡的資料較舊，會出現「同一個測試同時綠與紅」這種難查的狀況。要根治就加一份 vitest 設定排除 `.worktrees/**`；在那之前，跑測試前先確認測試數是不是預期的。
+
 ## 需要你決定的四件事（不是缺陷）
 
 **1. Pages 來源設定。** 第一次手動觸發 workflow **之前**，先確認 repo 的 GitHub Pages source 設為 `gh-pages` branch。若設成「GitHub Actions」，`peaceiris/actions-gh-pages` 會跑成功但畫面不會有任何變化。
