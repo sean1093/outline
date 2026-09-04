@@ -124,23 +124,35 @@ describe('facets', () => {
         const tagged = (corpus: Post[], tag: string) =>
             corpus.filter((post) => post.tags.includes(tag)).length;
 
-        const stayVisible = tagged(visibleTravel, '住宿');
-        const stayRaw = tagged(rawTravel, '住宿');
-        expect(stayRaw).toBeGreaterThan(stayVisible);
+        // The English half of the blog names its facets in English. Those rows
+        // are in the index but invisible in the default Chinese view, so a
+        // facet built from the raw index would leak them into the Chinese
+        // chips — which is exactly what these selectors must not do.
+        expect(tagged(rawTravel, 'Accommodation')).toBeGreaterThan(0);
+        expect(tagged(visibleTravel, 'Accommodation')).toBe(0);
+        expect(countryFacets('en')).toEqual([]);
+
         const types = Object.fromEntries(
             typeFacets().map((facet) => [facet.value, facet.count])
         );
-        expect(types['住宿']).toBe(stayVisible);
-        expect(types['住宿']).not.toBe(stayRaw);
+        expect(types['Accommodation']).toBeUndefined();
+        expect(types['住宿']).toBe(tagged(visibleTravel, '住宿'));
 
-        const taiwanVisible = tagged(visibleTravel, '台灣');
-        const taiwanRaw = tagged(rawTravel, '台灣');
-        expect(taiwanRaw).toBeGreaterThan(taiwanVisible);
         const countries = Object.fromEntries(
             countryFacets().map((facet) => [facet.value, facet.count])
         );
-        expect(countries['台灣']).toBe(taiwanVisible);
-        expect(countries['台灣']).not.toBe(taiwanRaw);
+        expect(countries['Taiwan']).toBeUndefined();
+        expect(countries['台灣']).toBe(tagged(visibleTravel, '台灣'));
+    });
+
+    it('builds the english facets from the english corpus alone', () => {
+        const english = filterPosts({ topic: 'travel', lang: 'en' });
+        expect(english.length).toBeGreaterThan(0);
+        const chinese = /[\u4e00-\u9fff]/;
+        const leaked = english.flatMap((post) =>
+            post.tags.filter((tag) => chinese.test(tag))
+        );
+        expect(leaked).toEqual([]);
     });
 });
 

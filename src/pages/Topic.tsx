@@ -46,7 +46,7 @@ const Topic = () => {
             ? null
             : COUNTRIES.includes(place)
               ? place
-              : (countryOfPlace(place) ?? null);
+              : (countryOfPlace(place, lang) ?? null);
     const activePlace =
         place !== null && !COUNTRIES.includes(place) ? place : null;
 
@@ -77,7 +77,7 @@ const Topic = () => {
                     <FacetRow
                         label="依地區篩選"
                         allLabel="全部地區"
-                        facets={countryFacets()}
+                        facets={countryFacets(lang)}
                         active={activeCountry}
                         onSelect={(value) => setParam('place', value)}
                     />
@@ -85,7 +85,7 @@ const Topic = () => {
                         <FacetRow
                             label={`${activeCountry}的地點`}
                             allLabel={`${activeCountry} 全部`}
-                            facets={placeFacets(activeCountry)}
+                            facets={placeFacets(activeCountry, lang)}
                             active={activePlace}
                             onSelect={(value) =>
                                 setParam('place', value ?? activeCountry)
@@ -95,7 +95,7 @@ const Topic = () => {
                     <FacetRow
                         label="依類型篩選"
                         allLabel="全部類型"
-                        facets={typeFacets()}
+                        facets={typeFacets(lang)}
                         active={type}
                         onSelect={(value) => setParam('type', value)}
                     />
@@ -132,9 +132,17 @@ const Topic = () => {
                 {topic === 'travel' && (
                     <button
                         type="button"
-                        onClick={() =>
-                            setParam('lang', lang === 'en' ? null : 'en')
-                        }
+                        onClick={() => {
+                            // The two halves tag in different languages, so a
+                            // place or type carried across the switch matches
+                            // nothing and strands the reader on an empty list.
+                            const next = new URLSearchParams(params);
+                            next.delete('place');
+                            next.delete('type');
+                            if (lang === 'en') next.delete('lang');
+                            else next.set('lang', 'en');
+                            setParams(next);
+                        }}
                         style={{
                             minHeight: '40px',
                             padding: `0 ${theme.spacing.md}`,

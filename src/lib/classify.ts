@@ -1,8 +1,11 @@
 import type { Source, Topic } from '../types/post.ts';
 
+// Only the Chinese posts carry place labels. The English half is published
+// with the `en` label and nothing else, so it contributes no countries — its
+// one tag is the type derived from the title below.
 export const COUNTRIES = ['台灣', '日本', '泰國', '澳洲', '馬來西亞'];
 
-export const LANG_LABEL = '英文版本';
+export const LANG_LABEL = 'en';
 
 const TRAVEL_TYPE_RULES: [string, RegExp][] = [
     ['住宿', /住宿|飯店|旅館|民宿|hotel|accommodation|hostel|ryokan|resort/i],
@@ -13,16 +16,35 @@ const TRAVEL_TYPE_RULES: [string, RegExp][] = [
     ['行程', /自由行|自助旅行|旅遊|行程|懶人包|攻略|itinerary/i],
 ];
 
-export const TRAVEL_TYPES = TRAVEL_TYPE_RULES.map(([type]) => type);
+// Same six buckets, named in English, for the `en` posts. Kept as a parallel
+// table rather than a translation of the result so a Chinese post can never
+// pick up an English type tag, or the reverse.
+const EN_TRAVEL_TYPE_RULES: [string, RegExp][] = [
+    ['Accommodation', /hotel|accommodation|hostel|ryokan|resort|stay\b/i],
+    ['Bar', /\bbars?\b|izakaya|cocktail|speakeasy|nightlife/i],
+    ['Attractions', /attraction|sightseeing|park\b/i],
+    ['Food', /\bfood\b|restaurant|cafe|coffee|dessert|breakfast|dining/i],
+    ['Transport', /airlines|airport|railway|shinkansen|car rental|\bjr\b|flight/i],
+    ['Itinerary', /itinerary|independent travel|travel guide|trip\b/i],
+];
+
+export const ZH_TRAVEL_TYPES = TRAVEL_TYPE_RULES.map(([type]) => type);
+export const EN_TRAVEL_TYPES = EN_TRAVEL_TYPE_RULES.map(([type]) => type);
+export const TRAVEL_TYPES = [...ZH_TRAVEL_TYPES, ...EN_TRAVEL_TYPES];
 
 export function classifyTravelType(
     title: string,
     labels: string[]
 ): string | undefined {
-    const fromLabel = labels.find((label) => TRAVEL_TYPES.includes(label));
+    // An `en` post is classified against the English table only, so the type
+    // tag it gains is in the same language as the rest of its facets.
+    const english = labels.includes(LANG_LABEL);
+    const types = english ? EN_TRAVEL_TYPES : ZH_TRAVEL_TYPES;
+    const rules = english ? EN_TRAVEL_TYPE_RULES : TRAVEL_TYPE_RULES;
+    const fromLabel = labels.find((label) => types.includes(label));
     if (fromLabel !== undefined) return fromLabel;
     const head = title.split('|').slice(0, 2).join(' | ');
-    return TRAVEL_TYPE_RULES.find(([, pattern]) => pattern.test(head))?.[0];
+    return rules.find(([, pattern]) => pattern.test(head))?.[0];
 }
 
 const ALGO_TAGS = ['algorithms', 'leetcode', '演算法'];

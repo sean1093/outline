@@ -11,25 +11,29 @@ interface FacetRowProps {
     onSelect: (value: string | null) => void;
 }
 
+// A row with no facets offers only "all", which filters nothing — the English
+// half of the travel index carries no place labels and would otherwise render
+// a dead chip row above every list.
 const FacetRow: React.FC<FacetRowProps> = ({
     allLabel,
     label,
     facets,
     active,
     onSelect,
-}) => (
-    <SubMenu
-        label={label}
-        items={[
-            { label: allLabel, value: '' },
-            ...facets.map((facet) => ({
-                label: `${facet.value} (${facet.count})`,
-                value: facet.value,
-            })),
-        ]}
-        activeItem={active ?? ''}
-        onItemClick={(value) => onSelect(value === '' ? null : value)}
-    />
-);
+}) =>
+    facets.length === 0 ? null : (
+        <SubMenu
+            label={label}
+            items={[
+                { label: allLabel, value: '' },
+                ...facets.map((facet) => ({
+                    label: `${facet.value} (${facet.count})`,
+                    value: facet.value,
+                })),
+            ]}
+            activeItem={active ?? ''}
+            onItemClick={(value) => onSelect(value === '' ? null : value)}
+        />
+    );
 
 export default FacetRow;

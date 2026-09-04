@@ -87,24 +87,37 @@ describe('normalizeBlogger', () => {
 
     it('never emits the language label as a tag', () => {
         const english = entries.filter((entry) =>
-            (entry.category ?? []).some(
-                (category) => category.term === '英文版本'
-            )
+            (entry.category ?? []).some((category) => category.term === 'en')
         );
-        expect(english).toHaveLength(4);
+        expect(english.length).toBeGreaterThan(0);
         for (const entry of english) {
             const normalized = normalizeBlogger(entry);
             expect(normalized.lang).toBe('en');
-            expect(normalized.tags).not.toContain('英文版本');
+            expect(normalized.tags).not.toContain('en');
         }
+    });
+
+    it('keeps the english posts on english facets', () => {
+        const english = entries
+            .filter((entry) =>
+                (entry.category ?? []).some(
+                    (category) => category.term === 'en'
+                )
+            )
+            .map(normalizeBlogger);
+        const chinese = /[\u4e00-\u9fff]/;
+        const leaked = english.flatMap((post) =>
+            post.tags.filter((tag) => chinese.test(tag))
+        );
+        expect(leaked).toEqual([]);
     });
 
     it('normalizes every entry in the feed', () => {
         const posts = entries.map(normalizeBlogger);
-        expect(posts).toHaveLength(134);
+        expect(posts).toHaveLength(260);
         expect(posts.filter((post) => post.date === undefined)).toEqual([]);
         expect(posts.filter((post) => post.image === undefined)).toEqual([]);
-        expect(new Set(posts.map((post) => post.id)).size).toBe(134);
+        expect(new Set(posts.map((post) => post.id)).size).toBe(260);
     });
 
     it('reads the geo point when present', () => {

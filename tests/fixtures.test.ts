@@ -10,7 +10,7 @@ const mediumFeed = new XMLParser().parse(
 
 describe('fixtures', () => {
     it('blogger snapshot holds the whole blog', () => {
-        expect(bloggerFeed.feed.entry).toHaveLength(134);
+        expect(bloggerFeed.feed.entry).toHaveLength(260);
     });
 
     it('medium snapshot holds the whole feed page with joinable guids', () => {

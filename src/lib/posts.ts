@@ -69,25 +69,30 @@ function tally(values: string[]): FacetValue[] {
 // total 133 against 130 visible travel posts, because one round-the-world bar
 // list carries four country tags. A travel total must come from
 // `filterPosts({ topic: 'travel' }).length`, never from summing these.
-export function countryFacets(): FacetValue[] {
+//
+// `lang` has to reach every one of these. The two halves of the blog name
+// their facets in their own language, so a chip row built from the Chinese
+// corpus is unusable above an English post list: selecting 日本 would filter
+// English posts by a tag none of them carry and empty the page.
+export function countryFacets(lang?: 'en'): FacetValue[] {
     return tally(
-        filterPosts({ topic: 'travel' }).flatMap(
+        filterPosts({ topic: 'travel', lang }).flatMap(
             (post) => splitPlaces(post.tags).countries
         )
     );
 }
 
-export function placeFacets(country: string): FacetValue[] {
+export function placeFacets(country: string, lang?: 'en'): FacetValue[] {
     return tally(
-        filterPosts({ topic: 'travel', place: country }).flatMap(
+        filterPosts({ topic: 'travel', place: country, lang }).flatMap(
             (post) => splitPlaces(post.tags).places
         )
     );
 }
 
-export function typeFacets(): FacetValue[] {
+export function typeFacets(lang?: 'en'): FacetValue[] {
     return tally(
-        filterPosts({ topic: 'travel' }).flatMap((post) =>
+        filterPosts({ topic: 'travel', lang }).flatMap((post) =>
             post.tags.filter((tag) => TRAVEL_TYPES.includes(tag))
         )
     );
@@ -100,8 +105,8 @@ export function tagFacets(topic: Topic, limit = 20): FacetValue[] {
     );
 }
 
-export function countryOfPlace(place: string): string | undefined {
-    for (const post of filterPosts({ topic: 'travel', place })) {
+export function countryOfPlace(place: string, lang?: 'en'): string | undefined {
+    for (const post of filterPosts({ topic: 'travel', place, lang })) {
         const country = post.tags.find((tag) => COUNTRIES.includes(tag));
         if (country !== undefined) return country;
     }
