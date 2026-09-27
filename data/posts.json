@@ -1,5 +1,22 @@
 [
     {
+        "id": "p/27dec870fb69",
+        "source": "medium",
+        "title": "AI 學習筆記 — Declarative Schema 的規格層：json-render、A2UI 與 OpenUI Lang",
+        "url": "https://medium.com/p/27dec870fb69",
+        "topic": "tech",
+        "tags": [
+            "ai-agent",
+            "ai",
+            "artificial-intelligence",
+            "agentic-ai",
+            "generative-ui"
+        ],
+        "date": "2026-09-27T13:53:57.000Z",
+        "summary": "created by AI 這篇筆記接續著前面討論過的 Generative UI 三種實現方式與 Agentic Protocols，重點放在 Generation 層級的 Declarative Schema。 前情提要： AI 學習筆記 — Generative UI 的起…",
+        "image": "https://cdn-images-1.medium.com/max/695/1*5T20FU2J-Mt7i6PU5CFW8g.png"
+    },
+    {
         "id": "p/88389217ebd0",
         "source": "medium",
         "title": "AI 學習筆記 — Agentic Protocols 與傳輸層級的 AG-UI 協定",
